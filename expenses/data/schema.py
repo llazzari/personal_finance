@@ -1,0 +1,11 @@
+class DataSchema:
+    AMOUNT = "amount"
+    CATEGORY = "category"
+    SUBCATEGORY = "subcategory"
+    DATE = "date"
+    DESCRIPTION = "description"
+    YEAR = "year"
+    MONTH = "month"
+    BANK = "bank"
+    RECURRENT = "recurrent"
+    CLEANED_DESCRIPTION = "cleaned_description"

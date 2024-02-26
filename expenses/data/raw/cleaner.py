@@ -1,0 +1,208 @@
+from unidecode import unidecode
+import i18n
+import pandas as pd
+import nltk
+from functools import reduce
+from typing import Callable, Protocol
+
+from data.raw.reader import Reader
+from data.schema import DataSchema
+
+Preprocessor = Callable[[pd.DataFrame], pd.DataFrame]
+
+
+class Bank(Protocol):
+    @property
+    def reader(self) -> Reader:
+        ...
+
+    @property
+    def cleaner(self) -> Preprocessor:
+        ...
+
+
+def compose(*functions: Preprocessor) -> Preprocessor:
+    return reduce(lambda f, g: lambda x: g(f(x)), functions)
+
+
+def tokenize(text) -> str:
+    """Tokenizes text into a list of tokens (words)."""
+
+    # Tokenize into words
+    words = nltk.word_tokenize(text)
+
+    def set_unimportant_words() -> list[str]:
+        stop_words: list[str] = nltk.corpus.stopwords.words('portuguese')
+        unimportant_words: list[str] = [
+            'pix',
+            'enviado',
+            'enviada',
+            'transferencia',
+            'cobranca',
+            'referente',
+            'pacote',
+            'servicos',
+            'pagamento',
+            # 'fatura',
+            'boleto',
+            'banco',
+            'bol',
+            'ltda',
+            'conta',
+            'compra',
+            'cartao',
+            'pagto',
+            'pgto',
+            'estabelecimento',
+            'cp',
+            'bra',
+            'sa',
+            'pag',
+            'pelotas',
+            'ifd',
+            'marketplace',
+            '6produto',
+            'br'
+        ]
+        for word in stop_words:
+            unimportant_words.append(word)
+        return unimportant_words
+
+    words = [word for word in words if word not in set_unimportant_words()]
+    unique_words = list(dict.fromkeys(words))
+    return " ".join(unique_words)
+
+
+def clean_descriptions(
+    patterns: list[str],
+    df: pd.DataFrame
+) -> pd.DataFrame:
+    df[DataSchema.CLEANED_DESCRIPTION] = df[
+        DataSchema.DESCRIPTION
+    ].str.lower().str.strip()
+
+    df[DataSchema.CLEANED_DESCRIPTION] = df[
+        DataSchema.CLEANED_DESCRIPTION
+    ].apply(unidecode)  # removes accents from description
+
+    for p in patterns:
+        df[DataSchema.CLEANED_DESCRIPTION] = df[
+            DataSchema.CLEANED_DESCRIPTION
+        ].str.replace(p, '', regex=True, case=False)
+
+    general_patterns = [
+        '[^a-z0-9 ]+',  # removes punctuation
+        '[ ]{2,}',  # removes 2 or more whitespaces
+        '\\s{1}\\w{1}(\\s{0}$|\\s{1})',  # removes single letter
+        '\\s{0,}\\d{3,}\\s{1}'  # removes 3 or more numbers
+    ]
+    for gp in general_patterns:
+        df[DataSchema.CLEANED_DESCRIPTION] = df[
+            DataSchema.CLEANED_DESCRIPTION
+        ].str.replace(gp, ' ', regex=True)
+
+    df[DataSchema.CLEANED_DESCRIPTION] = df[
+        DataSchema.CLEANED_DESCRIPTION
+    ].str.strip()
+
+    df[DataSchema.CLEANED_DESCRIPTION] = df[
+        DataSchema.CLEANED_DESCRIPTION
+    ].apply(tokenize)
+
+    return df
+
+
+def correct_amount_sign(df: pd.DataFrame) -> pd.DataFrame:
+    """Correct amount sign for credit cards."""
+    df.loc[:, DataSchema.AMOUNT] *= -1
+    return df
+
+
+def rename_columns(reader: Reader, df: pd.DataFrame) -> pd.DataFrame:
+    df.rename(
+        columns={
+            reader.amount: DataSchema.AMOUNT,
+            reader.date: DataSchema.DATE,
+            reader.description: DataSchema.DESCRIPTION
+        },
+        inplace=True
+    )
+    return df
+
+
+def extract_incomes(df: pd.DataFrame) -> pd.DataFrame:
+    return df[df[DataSchema.AMOUNT] > 0]
+
+
+def extract_expenses(df: pd.DataFrame) -> pd.DataFrame:
+    df = df[df[DataSchema.AMOUNT] < 0]
+    df.loc[:, DataSchema.AMOUNT] *= -1
+    return df
+
+
+def create_category_column(df: pd.DataFrame) -> pd.DataFrame:
+    df[DataSchema.CATEGORY] = i18n.t('category.miscellaneous')  # type: ignore
+    return df
+
+
+def create_subcategory_column(df: pd.DataFrame) -> pd.DataFrame:
+    df[DataSchema.SUBCATEGORY] = None
+    return df
+
+
+def create_year_column(df: pd.DataFrame) -> pd.DataFrame:
+    df[DataSchema.YEAR] = df[DataSchema.DATE].dt.year.astype(int)
+    return df
+
+
+def create_month_column(df: pd.DataFrame) -> pd.DataFrame:
+    df[DataSchema.MONTH] = df[DataSchema.DATE].dt.month.astype(int)
+    return df
+
+
+def create_bank_column(bank_name: str, df: pd.DataFrame) -> pd.DataFrame:
+    df[DataSchema.BANK] = bank_name
+    return df
+
+
+def create_recurrent_column(df: pd.DataFrame) -> pd.DataFrame:
+    df[DataSchema.RECURRENT] = i18n.t('general.recurrent_no')
+    return df
+
+
+def correct_installments_date(descript: str, df: pd.DataFrame) -> pd.DataFrame:
+    """Sets the installment month to the month where it is charged,
+    that is, the month after the previous payment."""
+    previous_payment_date: pd.Series = df[
+        df[DataSchema.DESCRIPTION] == descript
+    ][DataSchema.DATE]
+    if not previous_payment_date.empty:
+        # for _, correct_date in previous_payment_date.items():
+        correct_date = previous_payment_date.iloc[0]
+        correct_month: int = correct_date.month + 1
+
+        df[DataSchema.MONTH] = correct_installments_month(
+            correct_month
+        )
+
+        df[DataSchema.YEAR] = correct_installments_year(
+            correct_month, correct_date.year
+        )
+    return df
+
+
+def correct_installments_month(month: int) -> int:
+    if month > 12:
+        month -= 12
+    return month
+
+
+def correct_installments_year(month: int, year: int) -> int:
+    if month > 12:
+        year += 1
+    return year
+
+
+def remove_ccbill_payment(description: str, df: pd.DataFrame) -> pd.DataFrame:
+    df = df[df[DataSchema.DESCRIPTION] != description]
+    return df
