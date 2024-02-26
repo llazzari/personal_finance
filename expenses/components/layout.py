@@ -6,8 +6,7 @@ from components import (
     ids,
     save_btn,
     confirm_dialog,
-    dropdown_menus,
-    predict_btn
+    upper_buttons
 )
 from components.tables import expenses_table, input_table
 from components.modals import (
@@ -31,23 +30,7 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
             html.H1(app.title),
 
             html.Hr(),
-            dbc.Row(
-                [
-                    dbc.Col(
-                        dropdown_menus.upload(),
-                        width='auto',
-                        style={'margin-right': '10px'}
-                    ),
-                    dbc.Col(
-                        dropdown_menus.add_data_manually(),
-                        width='auto',
-                        style={'margin-right': '10px'}
-                    ),
-                    dbc.Col(predict_btn.render(app),  width='auto'),
-                ],
-                justify='end',
-                style={'margin': '10px'},
-            ),
+            upper_buttons.render(app),
             expenses_table.render(app),
             save_btn.render(app),
 
