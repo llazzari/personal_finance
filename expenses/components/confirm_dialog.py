@@ -1,12 +1,9 @@
-from typing import Any, Hashable
 from dash import Dash, html, Input, Output, State, dcc
 import i18n
 import pandas as pd
 
 from components import ids
 from data.loader import DATA_PATH
-
-DashData = list[dict[Hashable, Any]]
 
 
 def render(app: Dash) -> html.Div:
@@ -18,11 +15,11 @@ def render(app: Dash) -> html.Div:
         ],
         [
             State(ids.SAVE_MODAL, 'is_open'),
-            State(ids.EXPENSES_TABLE, 'data'),
+            State(ids.EXPENSES_TABLE, 'rowData'),
         ],
         prevent_initial_call=True
     )
-    def confirm_save(n1: int, n2: int, is_open: bool, data: DashData) -> bool:
+    def confirm_save(n1: int, n2: int, is_open: bool, data: dict) -> bool:
         if n1:
             df = pd.DataFrame.from_records(data)
             df.to_csv(DATA_PATH, index=False, float_format='%.2f')

@@ -12,7 +12,7 @@ def render(app: Dash) -> html.Div:
             Output(ids.YEAR_DROPDOWN, 'options'),
             Output(ids.YEAR_DROPDOWN, 'value'),
         ],
-        Input(ids.EXPENSES_TABLE, 'data')
+        Input(ids.EXPENSES_TABLE, 'rowData')
     )
     def update_dropdown(data: dict) -> tuple[list[int] | None, int | None]:
         df = pd.DataFrame.from_records(data)

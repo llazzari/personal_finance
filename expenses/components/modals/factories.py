@@ -80,8 +80,7 @@ def toggle_modal(inputs) -> bool:
 def upload_bank_files(app: Dash, modal_builder: ModalBuilder) -> html.Div:
     @app.callback(
         Output(modal_builder.modal_id, 'is_open'),
-        # Output(modal_builder.data_id, 'data'),
-        Output(ids.TABLE_DATA, 'data', allow_duplicate=True),
+        Output(ids.EXPENSES_TABLE, 'rowData', allow_duplicate=True),
         [
             Input(modal_builder.open_id, 'n_clicks'),
             Input(modal_builder.close_id, 'n_clicks'),

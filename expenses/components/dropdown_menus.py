@@ -15,7 +15,8 @@ def create_dropdown_menu(label: str, options: list[str]) -> html.Div:
             ],
             label=i18n.t(f'general.{label}'),
             align_end=True,
-            size='lg'
+            size='lg',
+            color='secondary',
         )
     ])
 

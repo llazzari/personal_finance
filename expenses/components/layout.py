@@ -1,14 +1,12 @@
-from dash import html, Dash, dcc
+from dash import html, Dash
 import dash_bootstrap_components as dbc
-# import i18n
 
 from components import (
-    ids,
     save_btn,
     confirm_dialog,
     upper_buttons
 )
-from components.tables import expenses_table, input_table
+from components.tables import expenses_aggrid, input_table
 from components.modals import (
     statement_modal,
     credit_card_modal,
@@ -23,32 +21,15 @@ from components import collapsed_graphs
 def render(app: Dash, source: DataSource) -> dbc.Container:
     return dbc.Container(
         [
-            dcc.Store(
-                id=ids.TABLE_DATA,
-                data=source.table_data
-            ),
             html.H1(app.title),
 
             html.Hr(),
             upper_buttons.render(app),
-            expenses_table.render(app),
+            expenses_aggrid.render(app, source.table_data),
             save_btn.render(app),
 
             html.Hr(),
             collapsed_graphs.render(app),
-            # html.H4(i18n.t('general.bar_chart_title')),
-            # dbc.Row(
-            #     [
-            #         dbc.Col(
-            #             years_dropdown.render(app),
-            #             width=2,
-            #             style={'margin-right': '10px'}
-            #         ),
-            #         dbc.Col(months_dropdown.render(app), width=2),
-            #     ],
-            #     style={'margin': '10px'}
-            # ),
-            # bar_chart.render(app),
 
             html.Hr(),
 

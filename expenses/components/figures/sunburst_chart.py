@@ -13,7 +13,7 @@ def render(app: Dash) -> html.Div:
     @app.callback(
         Output(ids.SUNBURST_CHART, 'children'),
         [
-            Input(ids.EXPENSES_TABLE, 'data'),
+            Input(ids.EXPENSES_TABLE, 'rowData'),
             Input(ids.MONTH_DROPDOWN, 'value'),
             Input(ids.YEAR_DROPDOWN, 'value'),
         ],

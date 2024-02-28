@@ -11,8 +11,8 @@ from components import expenses_card
 
 def render(app: Dash) -> dbc.Collapse:
     @app.callback(
-        Output(ids.COLLAPSE_GRAPHS, "is_open"),
-        Input(ids.EXPENSES_TABLE, "data"),
+        Output(ids.COLLAPSE_GRAPHS, 'is_open'),
+        Input(ids.EXPENSES_TABLE, 'rowData'),
     )
     def toggle_collapse(data: dict):
         df = pd.DataFrame.from_records(data)

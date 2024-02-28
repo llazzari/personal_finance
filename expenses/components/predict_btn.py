@@ -6,14 +6,13 @@ import pandas as pd
 
 from components import ids
 from data.predictor import predict_subcategories, separate_uncategorized_data
-from data.processor import sort_by_date
 
 
 def render(app: Dash) -> html.Div:
     @app.callback(
-        Output(ids.TABLE_DATA, 'data', allow_duplicate=True),
+        Output(ids.EXPENSES_TABLE, 'rowData', allow_duplicate=True),
         Input(ids.PREDICT_BTN, 'n_clicks'),
-        State(ids.TABLE_DATA, 'data'),
+        State(ids.EXPENSES_TABLE, 'rowData'),
         prevent_initial_call=True
     )
     def on_click(_, data: dict) -> list[dict]:
@@ -30,5 +29,10 @@ def render(app: Dash) -> html.Div:
         return df.to_dict('records')
 
     return html.Div(
-        dbc.Button(i18n.t('general.predict'), id=ids.PREDICT_BTN, size='lg')
+        dbc.Button(
+            i18n.t('general.predict'),
+            id=ids.PREDICT_BTN,
+            size='lg',
+            color='secondary',
+        )
     )

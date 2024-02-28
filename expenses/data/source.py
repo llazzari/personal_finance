@@ -1,9 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Hashable
 import pandas as pd
-
-
-DashData = list[dict[Hashable, Any]]
 
 
 @dataclass
@@ -11,5 +7,5 @@ class DataSource:
     _data: pd.DataFrame
 
     @property
-    def table_data(self) -> DashData:
+    def table_data(self) -> list[dict]:
         return self._data.to_dict('records')

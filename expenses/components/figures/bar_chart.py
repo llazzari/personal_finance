@@ -13,10 +13,12 @@ from data.schema import DataSchema
 def render(app: Dash) -> html.Div:
     @app.callback(
         Output(ids.BAR_CHART, 'children'),
-        Input(ids.EXPENSES_TABLE, 'data')
+        Input(ids.EXPENSES_TABLE, 'rowData')
     )
     def update_chart(data: dict) -> html.Div:
         df = pd.DataFrame.from_records(data)
+        if df.empty:
+            return html.Div(id=ids.BAR_CHART)
 
         dff = df.groupby(
             [DataSchema.YEAR, DataSchema.MONTH, DataSchema.RECURRENT]

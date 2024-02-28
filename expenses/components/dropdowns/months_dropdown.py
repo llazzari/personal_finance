@@ -14,7 +14,7 @@ def render(app: Dash) -> html.Div:
         ],
         [
             Input(ids.YEAR_DROPDOWN, 'value'),
-            Input(ids.EXPENSES_TABLE, 'data'),
+            Input(ids.EXPENSES_TABLE, 'rowData'),
         ],
     )
     def update_dropdown(year: int, data: dict) -> tuple[list[int], int]:
