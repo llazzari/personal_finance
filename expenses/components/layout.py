@@ -7,6 +7,7 @@ from components import (
     upper_buttons,
     collapsed_graphs,
     remove_rows_btn,
+    bank_error_alert,
 )
 from components.tables import expenses_aggrid
 from components.modals import (
@@ -23,6 +24,7 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
             html.H1(app.title),
 
             html.Hr(),
+            bank_error_alert.render(app),
             upper_buttons.render(app),
             expenses_aggrid.render(app, source.table_data),
             dbc.Row(

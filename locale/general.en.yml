@@ -29,3 +29,4 @@ en:
   monthly_expenses: Month expenses by category and subcategories 
   expenses_evolution: Expenses evolution
   delete_rows: Remove selected data
+  bank_error: Incompatible data!

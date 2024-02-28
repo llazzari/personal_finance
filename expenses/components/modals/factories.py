@@ -81,6 +81,7 @@ def upload_bank_files(app: Dash, modal_builder: ModalBuilder) -> html.Div:
     @app.callback(
         Output(modal_builder.modal_id, 'is_open'),
         Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
+        Output(ids.BANK_ERROR_ALERT, 'is_open', allow_duplicate=True),
         [
             Input(modal_builder.open_id, 'n_clicks'),
             Input(modal_builder.close_id, 'n_clicks'),
@@ -93,14 +94,14 @@ def upload_bank_files(app: Dash, modal_builder: ModalBuilder) -> html.Div:
         State(modal_builder.modal_id, 'is_open'),
         prevent_initial_call=True
     )
-    def toggle(*inputs) -> tuple[bool, dict | Any]:
+    def toggle(*inputs) -> tuple[bool, dict | Any, bool]:
         triggered = ctx.triggered[0]
         bank_name: str = triggered['prop_id'].split('.')[0].split('_')[0]
 
         is_open: bool = toggle_modal(inputs)
 
         if bank_name not in modal_builder.options.keys():
-            return is_open, no_update
+            return is_open, no_update, False
 
         uploaded_contents: list[str] = triggered['value']
         bank = BANKS[modal_builder.modal_id][bank_name]
@@ -108,12 +109,16 @@ def upload_bank_files(app: Dash, modal_builder: ModalBuilder) -> html.Div:
         old_data: list[dict] = inputs[-2]
         old_data_id: int = max([data['id'] for data in old_data])
 
-        new_df: pd.DataFrame = upload_bank_data(bank, uploaded_contents)
-        new_df['id'] = range(old_data_id+1, old_data_id+1+len(new_df))
+        try:
+            new_df: pd.DataFrame = upload_bank_data(bank, uploaded_contents)
+        except ValueError:
+            return False, no_update, True
+        else:
+            new_df['id'] = range(old_data_id+1, old_data_id+1+len(new_df))
+            data: list[dict] = new_df.to_dict('records')
+            add_data = {'add': data, 'addIndex': 0}
 
-        data: list[dict] = new_df.to_dict('records')
-
-        return is_open, {'add': data, 'addIndex': 0}
+        return is_open, add_data, False
 
     return build_modal(modal_builder)
 

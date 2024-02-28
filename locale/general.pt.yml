@@ -29,3 +29,4 @@ pt:
   monthly_expenses: Despesas do mês separadas por categorias e subcategorias 
   expenses_evolution: Evolução das despesas
   delete_rows: Remover dados selecionados
+  bank_error: Dados incompatíveis! Talvez você tenha selecionado o banco errado...

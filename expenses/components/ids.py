@@ -51,3 +51,5 @@ COLLAPSE_GRAPHS = 'collapse-graphs'
 PREDICT_BTN = 'predict-btn'
 
 DELETE_ROWS_BTN = 'delete-rows-btn'
+
+BANK_ERROR_ALERT = 'bank-error-alert'
