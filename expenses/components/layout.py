@@ -5,7 +5,8 @@ from components import (
     save_btn,
     confirm_dialog,
     upper_buttons,
-    collapsed_graphs
+    collapsed_graphs,
+    remove_rows_btn,
 )
 from components.tables import expenses_aggrid
 from components.modals import (
@@ -14,7 +15,6 @@ from components.modals import (
     save_modal
 )
 from data.source import DataSource
-from expenses.components import remove_rows_btn
 
 
 def render(app: Dash, source: DataSource) -> dbc.Container:
