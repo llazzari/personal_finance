@@ -1,5 +1,8 @@
 .venv
-data
+data/despesas_Nicki.csv
+data/ml/
+data/bank_statements/
+data/expenses_1.csv
 
 *.png
 

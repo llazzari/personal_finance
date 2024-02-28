@@ -1,9 +1,8 @@
 from dash import Dash, html, dcc, Input, Output
 import i18n
-import pandas as pd
 
 from components import ids
-from data.schema import DataSchema
+from data.source import DataSource
 
 
 def render(app: Dash) -> html.Div:
@@ -14,18 +13,16 @@ def render(app: Dash) -> html.Div:
         ],
         Input(ids.EXPENSES_TABLE, 'rowData')
     )
-    def update_dropdown(data: dict) -> tuple[list[int] | None, int | None]:
-        df = pd.DataFrame.from_records(data)
-        if df.empty:
-            return [], 1
-        years: list[int] = df[DataSchema.YEAR].unique().tolist()
+    def update_dropdown(data: list[dict]) -> tuple[list[int], int]:
+        source = DataSource(data)
+        years: list[int] = source.unique_years
         return years, years[0]
     return html.Div(
         [
-            html.H6(i18n.t("general.year")),
+            html.H6(i18n.t("general.year")),  # type: ignore
             dcc.Dropdown(
                 id=ids.YEAR_DROPDOWN,
-                placeholder=i18n.t("general.year"),
+                placeholder=i18n.t("general.year"),  # type: ignore
             ),
         ],
     )

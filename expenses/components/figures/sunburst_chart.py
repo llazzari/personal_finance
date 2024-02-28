@@ -1,12 +1,11 @@
 from dash import Dash, html, dcc, Output, Input
 import plotly.express as px
-import pandas as pd
 import i18n
 
 from components import ids
 from components.figures import styles
 from data.schema import DataSchema
-from data.categorize.finder import find_category
+from data.source import DataSource
 
 
 def render(app: Dash) -> html.Div:
@@ -18,19 +17,9 @@ def render(app: Dash) -> html.Div:
             Input(ids.YEAR_DROPDOWN, 'value'),
         ],
     )
-    def update_chart(data: dict, month: int, year: int) -> html.Div:
-        df = pd.DataFrame.from_records(data)
-        if df.empty:
-            return html.Div(i18n.t('general.no_data'))
-        df_year = df.loc[df[DataSchema.YEAR] == year, :]
-        df_month = df_year.loc[df_year[DataSchema.MONTH] == month, :]
-
-        df_month_sum = df_month.groupby(
-            by=DataSchema.SUBCATEGORY
-        ).sum().reset_index().sort_values(by=DataSchema.AMOUNT)
-        df_month_sum.loc[:, DataSchema.CATEGORY] = df_month_sum[
-            DataSchema.SUBCATEGORY
-        ].apply(find_category)
+    def update_chart(data: list[dict], month: int, year: int) -> html.Div:
+        source = DataSource(data)
+        df_month_sum = source.month_expense_by_category(year, month)
 
         fig = px.sunburst(
             df_month_sum,

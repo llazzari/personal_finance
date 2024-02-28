@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Hashable, Optional
+from typing import Any, Optional
 from dash import Dash, html, Output, Input, State, dcc, ctx, no_update
 import dash_bootstrap_components as dbc
 import i18n
@@ -50,7 +50,7 @@ def build_modal(modal_builder: ModalBuilder) -> html.Div:
     ])
 
 
-def bank_buttons_row(options: dict[str, str], upload: bool = False) -> html.Div:
+def buttons_row(options: dict[str, str], upload: bool = False) -> html.Div:
     def create_button(label: str, id: str, upload: bool) -> html.Div:
         if upload:
             return html.Div(
@@ -92,7 +92,7 @@ def upload_bank_files(app: Dash, modal_builder: ModalBuilder) -> html.Div:
         State(modal_builder.modal_id, 'is_open'),
         prevent_initial_call=True
     )
-    def toggle(*inputs) -> tuple[bool, list[dict[Hashable, Any]] | Any]:
+    def toggle(*inputs) -> tuple[bool, list[dict] | Any]:
         triggered = ctx.triggered[0]
         bank_name: str = triggered['prop_id'].split('.')[0].split('_')[0]
 
@@ -100,10 +100,11 @@ def upload_bank_files(app: Dash, modal_builder: ModalBuilder) -> html.Div:
 
         if bank_name not in modal_builder.options.keys():
             return is_open, no_update
-        contents: list[str] = triggered['value']
-        bank = BANKS[modal_builder.modal_id][bank_name]
-        new_df: pd.DataFrame = upload_bank_data(bank, contents)
 
+        uploaded_contents: list[str] = triggered['value']
+        bank = BANKS[modal_builder.modal_id][bank_name]
+
+        new_df: pd.DataFrame = upload_bank_data(bank, uploaded_contents)
         df: pd.DataFrame = set_table_data(new_df)
 
         return is_open, df.to_dict('records')

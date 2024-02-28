@@ -2,7 +2,6 @@ import os
 from typing import Any
 from dash import Dash, html
 import dash_ag_grid as dag
-# import pandas as pd
 import i18n
 
 from components import ids

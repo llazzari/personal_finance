@@ -1,9 +1,8 @@
 from dash import Dash, html, Input, Output, State, dcc
 import i18n
-import pandas as pd
 
 from components import ids
-from data.loader import DATA_PATH
+from data.source import DataSource
 
 
 def render(app: Dash) -> html.Div:
@@ -19,10 +18,10 @@ def render(app: Dash) -> html.Div:
         ],
         prevent_initial_call=True
     )
-    def confirm_save(n1: int, n2: int, is_open: bool, data: dict) -> bool:
+    def save(n1: int, n2: int, is_open: bool, data: list[dict]) -> bool:
         if n1:
-            df = pd.DataFrame.from_records(data)
-            df.to_csv(DATA_PATH, index=False, float_format='%.2f')
+            source = DataSource(data)
+            source.save_data()
             return not is_open
         if n2:
             return not is_open

@@ -1,12 +1,12 @@
 from dash import Dash, html, Output, Input
 import dash_bootstrap_components as dbc
-import pandas as pd
 import i18n
 
 from components import ids
 from components.dropdowns import months_dropdown, years_dropdown
 from components.figures import sunburst_chart, bar_chart
 from components import expenses_card
+from data.source import DataSource
 
 
 def render(app: Dash) -> dbc.Collapse:
@@ -14,9 +14,9 @@ def render(app: Dash) -> dbc.Collapse:
         Output(ids.COLLAPSE_GRAPHS, 'is_open'),
         Input(ids.EXPENSES_TABLE, 'rowData'),
     )
-    def toggle_collapse(data: dict):
-        df = pd.DataFrame.from_records(data)
-        if df.empty:
+    def toggle_collapse(data: list[dict]):
+        source = DataSource(data)
+        if source.is_empty:
             return False
         return True
     return dbc.Collapse(
@@ -36,7 +36,9 @@ def _monthly_sunburst_chart(app: Dash) -> html.Div:
             [
                 dbc.Col(
                     html.Div([
-                        html.H4(html.B(i18n.t('general.monthly_expenses'))),
+                        html.H4(html.B(i18n.t(  # type: ignore
+                            'general.monthly_expenses'
+                        ))),
                         dbc.Row(
                             [
                                 dbc.Col(
@@ -44,8 +46,10 @@ def _monthly_sunburst_chart(app: Dash) -> html.Div:
                                     width='auto',
                                     style={'margin-right': '10px'}
                                 ),
-                                dbc.Col(months_dropdown.render(
-                                        app), width='auto'),
+                                dbc.Col(
+                                    months_dropdown.render(app),
+                                    width='auto'
+                                ),
                             ],
                             style={'margin': '10px'},
                         ),
@@ -69,7 +73,9 @@ def _monthly_sunburst_chart(app: Dash) -> html.Div:
 def _evolution_bar_chart(app: Dash) -> html.Div:
     return html.Div(
         [
-            html.H4(html.B(i18n.t('general.expenses_evolution'))),
+            html.H4(html.B(i18n.t(  # type: ignore
+                'general.expenses_evolution'
+            ))),
             bar_chart.render(app),
         ],
     )

@@ -1,13 +1,10 @@
-import os
 from dash import Dash, html, Input, Output, dcc
-import pandas as pd
 import plotly.express as px
 import i18n
-import babel.dates
-from datetime import datetime
 
 from components import ids
 from data.schema import DataSchema
+from data.source import DataSource
 
 
 def render(app: Dash) -> html.Div:
@@ -15,20 +12,12 @@ def render(app: Dash) -> html.Div:
         Output(ids.BAR_CHART, 'children'),
         Input(ids.EXPENSES_TABLE, 'rowData')
     )
-    def update_chart(data: dict) -> html.Div:
-        df = pd.DataFrame.from_records(data)
-        if df.empty:
-            return html.Div(id=ids.BAR_CHART)
+    def update_chart(data: list[dict]) -> html.Div:
+        source = DataSource(data)
+        df = source.expense_evolution()
 
-        dff = df.groupby(
-            [DataSchema.YEAR, DataSchema.MONTH, DataSchema.RECURRENT]
-        ).sum(numeric_only=True)
-        dff.reset_index(inplace=True)
-        dff[DataSchema.MONTH] = dff[DataSchema.MONTH].apply(
-            convert_month_locale
-        )
         fig = px.bar(
-            dff,
+            df,
             x=DataSchema.MONTH,
             y=DataSchema.AMOUNT,
             color=DataSchema.RECURRENT,
@@ -53,10 +42,3 @@ def render(app: Dash) -> html.Div:
             id=ids.BAR_CHART,
         )
     return html.Div(id=ids.BAR_CHART)
-
-
-def convert_month_locale(month_number: float) -> str:
-    date = datetime(2000, int(month_number), 1)
-    locale: str = os.environ['LOCALE']
-    month: str = babel.dates.format_date(date, format='MMM', locale=locale)
-    return month.capitalize().strip('.')

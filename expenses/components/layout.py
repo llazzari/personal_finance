@@ -25,6 +25,7 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
             upper_buttons.render(app),
             expenses_aggrid.render(app, source.table_data),
             save_btn.render(app),
+            confirm_dialog.render(app),
 
             html.Hr(),
             collapsed_graphs.render(app),
@@ -32,7 +33,6 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
             html.Hr(),
 
             save_modal.render(),
-            confirm_dialog.render(app),
             statement_modal.render(app),
             credit_card_modal.render(app),
             # add_data_manually_modal.render(app),

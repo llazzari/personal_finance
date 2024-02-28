@@ -22,7 +22,8 @@ def main() -> None:
     locale_path = Path.cwd() / "locale"
     i18n.load_path.append(locale_path)  # type: ignore
 
-    data: pd.DataFrame = load_data()
+    df: pd.DataFrame = load_data()
+    data: list[dict] = df.to_dict('records')
     source = DataSource(data)
 
     dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
