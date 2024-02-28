@@ -7,7 +7,7 @@ import pandas as pd
 
 from components import ids
 from data.raw.banks import BANKS
-from data.loader import set_table_data
+# from data.loader import set_table_data
 from data.raw.uploader import upload_bank_data
 
 
@@ -80,7 +80,7 @@ def toggle_modal(inputs) -> bool:
 def upload_bank_files(app: Dash, modal_builder: ModalBuilder) -> html.Div:
     @app.callback(
         Output(modal_builder.modal_id, 'is_open'),
-        Output(ids.EXPENSES_TABLE, 'rowData', allow_duplicate=True),
+        Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
         [
             Input(modal_builder.open_id, 'n_clicks'),
             Input(modal_builder.close_id, 'n_clicks'),
@@ -89,10 +89,11 @@ def upload_bank_files(app: Dash, modal_builder: ModalBuilder) -> html.Div:
                 for option in modal_builder.options.values()
             ],
         ],
+        State(ids.EXPENSES_TABLE, 'rowData'),
         State(modal_builder.modal_id, 'is_open'),
         prevent_initial_call=True
     )
-    def toggle(*inputs) -> tuple[bool, list[dict] | Any]:
+    def toggle(*inputs) -> tuple[bool, dict | Any]:
         triggered = ctx.triggered[0]
         bank_name: str = triggered['prop_id'].split('.')[0].split('_')[0]
 
@@ -104,10 +105,16 @@ def upload_bank_files(app: Dash, modal_builder: ModalBuilder) -> html.Div:
         uploaded_contents: list[str] = triggered['value']
         bank = BANKS[modal_builder.modal_id][bank_name]
 
-        new_df: pd.DataFrame = upload_bank_data(bank, uploaded_contents)
-        df: pd.DataFrame = set_table_data(new_df)
+        old_data: list[dict] = inputs[-2]
+        old_data_id: int = max([data['id'] for data in old_data])
 
-        return is_open, df.to_dict('records')
+        new_df: pd.DataFrame = upload_bank_data(bank, uploaded_contents)
+        new_df['id'] = range(old_data_id+1, old_data_id+1+len(new_df))
+
+        data: list[dict] = new_df.to_dict('records')
+
+        return is_open, {'add': data, 'addIndex': 0}
+
     return build_modal(modal_builder)
 
 

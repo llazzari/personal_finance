@@ -14,20 +14,22 @@ def expenses_file_exists() -> bool:
 def load_data() -> pd.DataFrame:
     if not expenses_file_exists():
         return pd.DataFrame()
+    dtype: dict[str, type] = {
+        DataSchema.YEAR: int,
+        DataSchema.MONTH: int,
+        DataSchema.AMOUNT: float,
+        DataSchema.BANK: str,
+        DataSchema.CATEGORY: str,
+        DataSchema.SUBCATEGORY: str,
+        DataSchema.RECURRENT: str,
+        DataSchema.DESCRIPTION: str,
+    }
     df = pd.read_csv(
         DATA_PATH,
-        dtype={
-            DataSchema.YEAR: int,
-            DataSchema.MONTH: int,
-            DataSchema.AMOUNT: float,
-            DataSchema.BANK: str,
-            DataSchema.CATEGORY: str,
-            DataSchema.SUBCATEGORY: str,
-            DataSchema.RECURRENT: str,
-            DataSchema.DESCRIPTION: str,
-            DataSchema.CLEANED_DESCRIPTION: str,
-        },
+        dtype=dtype,
+        usecols=list(dtype.keys()),
     )
+    df['id'] = df.index
     return sort_by_date(df)
 
 

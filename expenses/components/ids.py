@@ -49,3 +49,5 @@ COLLAPSE_GRAPHS = 'collapse-graphs'
 
 
 PREDICT_BTN = 'predict-btn'
+
+DELETE_ROWS_BTN = 'delete-rows-btn'

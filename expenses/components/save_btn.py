@@ -20,5 +20,5 @@ def render(app: Dash) -> html.Div:
             color='dark',
             size='lg',
         ),
-        style={'margin': '10px'}
+        # style={'margin': '10px'}
     )

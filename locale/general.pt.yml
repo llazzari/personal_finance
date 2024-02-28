@@ -28,3 +28,4 @@ pt:
   money: R$
   monthly_expenses: Despesas do mês separadas por categorias e subcategorias 
   expenses_evolution: Evolução das despesas
+  delete_rows: Remover dados selecionados

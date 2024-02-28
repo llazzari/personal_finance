@@ -21,7 +21,7 @@ class DataSource:
     def dataframe(self) -> pd.DataFrame:
         return pd.DataFrame.from_records(self.table_data)
 
-    def save_data(self) -> None:
+    def drop_columns(self) -> None:
         columns_to_drop: list[str] = [
             DataSchema.DATE,
             DataSchema.CLEANED_DESCRIPTION
@@ -31,6 +31,9 @@ class DataSource:
             inplace=True,
             errors='ignore'
         )
+
+    def save_data(self) -> None:
+        self.drop_columns()
         self.dataframe.to_csv(DATA_PATH, index=False, float_format='%.2f')
 
     @property
