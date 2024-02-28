@@ -6,12 +6,10 @@ from components import (
     confirm_dialog,
     upper_buttons
 )
-from components.tables import expenses_aggrid, input_table
+from components.tables import expenses_aggrid
 from components.modals import (
     statement_modal,
     credit_card_modal,
-    add_data_manually_modal,
-    input_table_modal,
     save_modal
 )
 from data.source import DataSource
@@ -37,9 +35,7 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
             confirm_dialog.render(app),
             statement_modal.render(app),
             credit_card_modal.render(app),
-            add_data_manually_modal.render(app),
-            input_table_modal.render(app),
-            input_table.save_data(app),
+            # add_data_manually_modal.render(app),
             html.Div(style={'margin': '20px'})
         ],
         class_name='dbc',

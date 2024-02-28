@@ -13,11 +13,11 @@ def render(app: Dash) -> html.Div:
                     width='auto',
                     style={'margin-right': '10px'}
                 ),
-                dbc.Col(
-                    dropdown_menus.add_data_manually(),
-                    width='auto',
-                    style={'margin-right': '10px'}
-                ),
+                # dbc.Col(
+                #     dropdown_menus.add_data_manually(),
+                #     width='auto',
+                #     style={'margin-right': '10px'}
+                # ),
                 dbc.Col(predict_btn.render(app),  width='auto'),
             ],
             justify='end',
