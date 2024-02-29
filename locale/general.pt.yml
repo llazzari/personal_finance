@@ -32,3 +32,4 @@ pt:
   bank_error: Dados incompatíveis! Talvez você tenha selecionado o banco errado...
   prediction_error: Não há dados para categorizar.
   remove_data_error: Nenhum dado foi selecionado para remoção.
+  expenses: Despesas

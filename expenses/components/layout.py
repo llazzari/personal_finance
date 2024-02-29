@@ -1,5 +1,6 @@
 from dash import html, Dash
 import dash_bootstrap_components as dbc
+import i18n
 
 from components import (
     save_btn,
@@ -25,9 +26,14 @@ from components.alerts import (
 def render(app: Dash, source: DataSource) -> dbc.Container:
     return dbc.Container(
         [
-            html.H1(app.title),
+            html.H1(html.B(app.title)),
 
             html.Hr(),
+            html.Div(
+                html.H2(html.B(i18n.t('general.expenses'))),
+                style={'text-align': 'right'},
+            ),
+
             bank_error_alert.render(app),
             prediction_alert.render(app),
             upper_buttons.render(app),
