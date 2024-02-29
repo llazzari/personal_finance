@@ -15,6 +15,7 @@ class Reader:
     encoding: str = 'utf-8'
     skiprows: Optional[int | list[int]] = None
     thousands: Optional[str] = None
+    bank: Optional[str] = None
 
     @property
     def date_parser(self) -> list[str]:
@@ -22,7 +23,9 @@ class Reader:
 
     @property
     def cols_to_use(self) -> list[str]:
-        cols_to_use = [self.date, self.description, self.amount]
+        cols_to_use: list[str] = [self.date, self.description, self.amount]
+        if self.bank is not None:
+            cols_to_use.append(self.bank)
         return cols_to_use
 
     @property
@@ -32,4 +35,6 @@ class Reader:
             self.description: str,
             self.amount: self.amount_type
         }
+        if self.bank is not None:
+            cols_dtypes[self.bank] = str
         return cols_dtypes

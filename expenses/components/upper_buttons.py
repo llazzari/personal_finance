@@ -1,7 +1,8 @@
 from dash import html, Dash
 import dash_bootstrap_components as dbc
 
-from components import dropdown_menus, predict_btn
+from components import predict_btn
+from components.dropdowns.menus import upload_dd_menu
 
 
 def render(app: Dash) -> html.Div:
@@ -9,7 +10,7 @@ def render(app: Dash) -> html.Div:
         dbc.Row(
             [
                 dbc.Col(
-                    dropdown_menus.upload(),
+                    upload_dd_menu.render(app),
                     width='auto',
                     style={'margin-right': '10px'}
                 ),

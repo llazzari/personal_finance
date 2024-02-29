@@ -123,9 +123,11 @@ def rename_columns(reader: Reader, df: pd.DataFrame) -> pd.DataFrame:
         columns={
             reader.amount: DataSchema.AMOUNT,
             reader.date: DataSchema.DATE,
-            reader.description: DataSchema.DESCRIPTION
+            reader.description: DataSchema.DESCRIPTION,
+            reader.bank: DataSchema.BANK
         },
-        inplace=True
+        inplace=True,
+        errors='ignore'
     )
     return df
 

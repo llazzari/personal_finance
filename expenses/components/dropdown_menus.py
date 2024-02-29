@@ -1,3 +1,4 @@
+from typing import Any
 from dash import html
 import dash_bootstrap_components as dbc
 import i18n
@@ -22,7 +23,7 @@ def create_dropdown_menu(label: str, options: list[str]) -> html.Div:
 
 
 def upload() -> html.Div:
-    options: list[str] = [ids.OPEN_STATEMENT, ids.OPEN_CCBILL]
+    options: list[str | Any] = [ids.OPEN_STATEMENT, ids.OPEN_CCBILL]
     return create_dropdown_menu('upload', options)
 
 

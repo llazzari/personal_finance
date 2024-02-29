@@ -16,7 +16,7 @@ pt:
   manual-add-exp-btn: Despesas
   manual-add-inc-btn: Receitas
   insert_data_manually: Ok
-  input_table: Insira suas despesas ou receitas na tabela abaixo
+  input_table: Sua tabela
   select_bank_statement: Selecione um banco do qual deseja importar seu(s) extrato(s)
   select_bank_ccbill: Selecione um banco do qual deseja importar sua(s) fatura(s)
   recurrent_no: Não

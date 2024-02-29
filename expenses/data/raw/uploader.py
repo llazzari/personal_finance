@@ -52,3 +52,19 @@ def upload_bank_data(bank: Bank, contents: list[str]) -> pd.DataFrame:
     return pd.concat([
         preprocessor(parse(content, bank.reader)) for content in contents
     ])
+
+
+def upload_personal_table_data(contents: list[str]) -> pd.DataFrame:
+    reader = Reader(bank='Banco')
+    preprocessor = compose(
+        create_category_column,
+        create_subcategory_column,
+        partial(rename_columns, reader),
+        create_year_column,
+        create_month_column,
+        create_recurrent_column,
+        extract_expenses,
+    )
+    return pd.concat([
+        preprocessor(parse(content, reader)) for content in contents
+    ])

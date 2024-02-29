@@ -16,7 +16,7 @@ en:
   manual-add-exp-btn: Expenses
   manual-add-inc-btn: Incomes
   insert_data_manually: Ok
-  input_table: Insert your expenses or incomes on the table below
+  input_table: Your table
   select_bank_statement: Choose a bank from which you want to import your statement(s)
   select_bank_ccbill: Choose a bank from which you want to import your credit card bill(s)
   recurrent_no: No
