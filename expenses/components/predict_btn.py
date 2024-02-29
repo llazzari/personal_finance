@@ -18,6 +18,8 @@ def render(app: Dash) -> html.Div:
     )
     def on_click(_, data: dict) -> tuple[list[dict] | Any, bool]:
         old_df = pd.DataFrame.from_records(data)
+        if old_df.empty:
+            return no_update, True
         categorized_df, uncategorized_df = separate_uncategorized_data(old_df)
 
         if uncategorized_df.empty:
