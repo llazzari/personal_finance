@@ -7,7 +7,6 @@ from components import (
     upper_buttons,
     collapsed_graphs,
     remove_rows_btn,
-    bank_error_alert,
 )
 from components.tables import expenses_aggrid
 from components.modals import (
@@ -16,6 +15,7 @@ from components.modals import (
     save_modal
 )
 from data.source import DataSource
+from components.alerts import bank_error_alert, prediction_alert
 
 
 def render(app: Dash, source: DataSource) -> dbc.Container:
@@ -25,6 +25,7 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
 
             html.Hr(),
             bank_error_alert.render(app),
+            prediction_alert.render(app),
             upper_buttons.render(app),
             expenses_aggrid.render(app, source.table_data),
             dbc.Row(

@@ -1,5 +1,5 @@
-from dash import Dash, html, Output, Input, State
-from dash.exceptions import PreventUpdate
+from typing import Any
+from dash import Dash, html, Output, Input, State, no_update
 import dash_bootstrap_components as dbc
 import i18n
 import pandas as pd
@@ -11,22 +11,23 @@ from data.predictor import predict_subcategories, separate_uncategorized_data
 def render(app: Dash) -> html.Div:
     @app.callback(
         Output(ids.EXPENSES_TABLE, 'rowData', allow_duplicate=True),
+        Output(ids.PREDICT_ERROR_ALERT, 'is_open'),
         Input(ids.PREDICT_BTN, 'n_clicks'),
         State(ids.EXPENSES_TABLE, 'rowData'),
         prevent_initial_call=True
     )
-    def on_click(_, data: dict) -> list[dict]:
+    def on_click(_, data: dict) -> tuple[list[dict] | Any, bool]:
         old_df = pd.DataFrame.from_records(data)
         categorized_df, uncategorized_df = separate_uncategorized_data(old_df)
 
         if uncategorized_df.empty:
-            raise PreventUpdate
+            return no_update, True
 
         newly_categorized_df = predict_subcategories(uncategorized_df)
 
         df = pd.concat([newly_categorized_df, categorized_df])
 
-        return df.to_dict('records')
+        return df.to_dict('records'), False
 
     return html.Div(
         dbc.Button(

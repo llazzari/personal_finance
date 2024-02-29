@@ -30,3 +30,4 @@ en:
   expenses_evolution: Expenses evolution
   delete_rows: Remove selected data
   bank_error: Incompatible data!
+  prediction_error: No data to categorize.
