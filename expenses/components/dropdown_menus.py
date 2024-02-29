@@ -22,11 +22,6 @@ def create_dropdown_menu(label: str, options: list[str]) -> html.Div:
     ])
 
 
-def upload() -> html.Div:
-    options: list[str | Any] = [ids.OPEN_STATEMENT, ids.OPEN_CCBILL]
-    return create_dropdown_menu('upload', options)
-
-
 def add_data_manually() -> html.Div:
     options: list[str] = [ids.OPEN_MANUAL_EXP]  # , ids.OPEN_MANUAL_INC]
     return create_dropdown_menu('add', options)
