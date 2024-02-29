@@ -18,7 +18,7 @@ def render(app: Dash) -> html.Div:
             i18n.t('general.save'),  # type: ignore
             id=ids.SAVE_BTN,
             color='dark',
-            size='lg',
+            # size='lg',
         ),
         # style={'margin': '10px'}
     )

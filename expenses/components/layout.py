@@ -27,10 +27,15 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
     return dbc.Container(
         [
             html.H1(html.B(app.title)),
+            # html.Hr(),
+            # html.Div(
+            #     html.H2(html.B(i18n.t('general.incomes'))),  # type: ignore
+            # ),
+
 
             html.Hr(),
             html.Div(
-                html.H2(html.B(i18n.t('general.expenses'))),
+                html.H2(html.B(i18n.t('general.expenses'))),  # type: ignore
                 style={'text-align': 'right'},
             ),
 
@@ -57,7 +62,6 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
             save_modal.render(),
             statement_modal.render(app),
             credit_card_modal.render(app),
-            # add_data_manually_modal.render(app),
             html.Div(style={'margin': '20px'})
         ],
         class_name='dbc',

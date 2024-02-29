@@ -43,7 +43,7 @@ def render(app: Dash) -> html.Div:
             ],
             label=i18n.t('general.upload'),
             align_end=True,
-            size='lg',
+            # size='lg',
             color='secondary',
         )
     ])

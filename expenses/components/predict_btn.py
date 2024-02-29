@@ -35,7 +35,7 @@ def render(app: Dash) -> html.Div:
         dbc.Button(
             i18n.t('general.predict'),
             id=ids.PREDICT_BTN,
-            size='lg',
+            # size='lg',
             color='secondary',
         )
     )

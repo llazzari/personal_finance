@@ -26,7 +26,7 @@ def render(app: Dash) -> html.Div:
             i18n.t('general.delete_rows'),
             id=ids.DELETE_ROWS_BTN,
             color='secondary',
-            size='lg',
+            # size='lg',
         ),
         style={'margin-left': '10px'}
     )
