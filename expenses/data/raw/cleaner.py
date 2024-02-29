@@ -81,12 +81,12 @@ def clean_descriptions(
         DataSchema.DESCRIPTION
     ].str.lower().str.strip()
 
-    df[DataSchema.CLEANED_DESCRIPTION] = df[
+    df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
         DataSchema.CLEANED_DESCRIPTION
     ].apply(unidecode)  # removes accents from description
 
     for p in patterns:
-        df[DataSchema.CLEANED_DESCRIPTION] = df[
+        df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
             DataSchema.CLEANED_DESCRIPTION
         ].str.replace(p, '', regex=True, case=False)
 
@@ -97,15 +97,15 @@ def clean_descriptions(
         '\\s{0,}\\d{3,}\\s{1}'  # removes 3 or more numbers
     ]
     for gp in general_patterns:
-        df[DataSchema.CLEANED_DESCRIPTION] = df[
+        df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
             DataSchema.CLEANED_DESCRIPTION
         ].str.replace(gp, ' ', regex=True)
 
-    df[DataSchema.CLEANED_DESCRIPTION] = df[
+    df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
         DataSchema.CLEANED_DESCRIPTION
     ].str.strip()
 
-    df[DataSchema.CLEANED_DESCRIPTION] = df[
+    df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
         DataSchema.CLEANED_DESCRIPTION
     ].apply(tokenize)
 

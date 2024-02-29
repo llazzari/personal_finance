@@ -13,6 +13,8 @@ def render(app: Dash) -> html.Div:
         Input(ids.EXPENSES_TABLE, 'rowData')
     )
     def update_chart(data: list[dict]) -> html.Div:
+        if not data:
+            return html.Div(id=ids.BAR_CHART)
         source = DataSource(data)
         df = source.expense_evolution()
 

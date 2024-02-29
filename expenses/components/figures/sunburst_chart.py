@@ -18,6 +18,8 @@ def render(app: Dash) -> html.Div:
         ],
     )
     def update_chart(data: list[dict], month: int, year: int) -> html.Div:
+        if not data:
+            return html.Div(id=ids.SUNBURST_CHART)
         source = DataSource(data)
         df_month_sum = source.month_expense_by_category(year, month)
 

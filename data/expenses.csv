@@ -1,8 +1,0 @@
-date,description,amount,category,subcategory,year,month,recurrent,cleaned_description,bank
-2024-02-04 00:00:00,Supermercado Guanabara,159.41,Alimentação,Mantimentos,2024,2,Sim,supermercado guanabara,Nubank
-2024-01-11 00:00:00,Dm*Spotify,34.90,Gastos Pessoais,Assinaturas,2024,2,Sim,dm spotify,Nubank
-2024-01-09 00:00:00,Pg *Intershop Intersho 7/10,299.90,Moradia,Compras para casa,2024,2,Não,pg intershop intersho 10,Nubank
-2024-01-10T00:00:00,Tarifa Pacote de Serviços - Cobrança referente 10/01/2024,14.55,Utilidades,Taxas Bancárias,2024,1,Sim,tarifa 10 01 2024,Banco do Brasil
-2024-01-15T00:00:00,Pix - Enviado - 15/01 14:21 Roger De Ávila Vega,18.00,Diversos,Despesas Diversas,2024,1,Não,15 01 14 21 roger avila vega,Banco do Brasil
-2024-01-15T00:00:00,Pagamento Fatura de Água - SANEP - PELOTAS,138.71,Utilidades,Água,2024,1,Sim,fatura agua sanep,Banco do Brasil
-2024-01-18T00:00:00,Pix - Enviado - 18/01 19:24 Lucas Da Silva Lazzari,10.00,Diversos,Despesas Diversas,2024,1,Não,18 01 19 24 lucas silva lazzari,Banco do Brasil

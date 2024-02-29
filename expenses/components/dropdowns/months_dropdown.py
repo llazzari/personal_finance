@@ -17,6 +17,8 @@ def render(app: Dash) -> html.Div:
         ],
     )
     def update_dropdown(year: int, data: list[dict]) -> tuple[list[int], int]:
+        if not data:
+            return [], 1
         source = DataSource(data)
         months: list[int] = source.unique_months_from_year(year)
         return months, max(months)

@@ -16,6 +16,8 @@ def render(app: Dash) -> html.Div:
         ],
     )
     def update_card(data: list[dict], month: int, year: int) -> html.Div:
+        if not data:
+            return html.Div(id=ids.EXP_CARD)
         source = DataSource(data)
         expenses: float = source.total_month_expense(year, month)
 

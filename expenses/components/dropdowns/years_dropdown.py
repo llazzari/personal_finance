@@ -14,6 +14,8 @@ def render(app: Dash) -> html.Div:
         Input(ids.EXPENSES_TABLE, 'rowData')
     )
     def update_dropdown(data: list[dict]) -> tuple[list[int], int]:
+        if not data:
+            return [], 1
         source = DataSource(data)
         years: list[int] = source.unique_years
         return years, years[0]
