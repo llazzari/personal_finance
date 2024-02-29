@@ -53,5 +53,5 @@ PREDICT_BTN = 'predict-btn'
 DELETE_ROWS_BTN = 'delete-rows-btn'
 
 BANK_ERROR_ALERT = 'bank-error-alert'
-
 PREDICT_ERROR_ALERT = 'prediction-error-alert'
+REMOVE_DATA_ERROR_ALERT = 'remove-data-error-alert'

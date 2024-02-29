@@ -15,7 +15,11 @@ from components.modals import (
     save_modal
 )
 from data.source import DataSource
-from components.alerts import bank_error_alert, prediction_alert
+from components.alerts import (
+    bank_error_alert,
+    prediction_alert,
+    remove_rows_alert
+)
 
 
 def render(app: Dash, source: DataSource) -> dbc.Container:
@@ -35,6 +39,7 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
                 ],
                 style={'margin': '10px'}
             ),
+            remove_rows_alert.render(app),
             confirm_dialog.render(app),
 
 

@@ -31,3 +31,4 @@ en:
   delete_rows: Remove selected data
   bank_error: Incompatible data!
   prediction_error: No data to categorize.
+  remove_data_error: No data selected to be removed.
