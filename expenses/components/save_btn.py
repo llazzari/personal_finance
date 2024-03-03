@@ -17,8 +17,6 @@ def render(app: Dash) -> html.Div:
         dbc.Button(
             i18n.t('general.save'),  # type: ignore
             id=ids.SAVE_BTN,
-            color='dark',
-            # size='lg',
+            class_name='main_buttons left_buttons'
         ),
-        # style={'margin': '10px'}
     )

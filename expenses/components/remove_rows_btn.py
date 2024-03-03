@@ -25,8 +25,6 @@ def render(app: Dash) -> html.Div:
         dbc.Button(
             i18n.t('general.delete_rows'),
             id=ids.DELETE_ROWS_BTN,
-            color='secondary',
-            # size='lg',
+            class_name='main_buttons'
         ),
-        style={'margin-left': '10px'}
     )

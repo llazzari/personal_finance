@@ -9,19 +9,10 @@ def render(app: Dash) -> html.Div:
     return html.Div(
         dbc.Row(
             [
-                dbc.Col(
-                    upload_dd_menu.render(app),
-                    width='auto',
-                    style={'margin-right': '10px'}
-                ),
-                # dbc.Col(
-                #     dropdown_menus.add_data_manually(),
-                #     width='auto',
-                #     style={'margin-right': '10px'}
-                # ),
+                dbc.Col(upload_dd_menu.render(app), width='auto'),
                 dbc.Col(predict_btn.render(app),  width='auto'),
             ],
             justify='end',
-            style={'margin': '10px'},
+            class_name='buttons_row',
         ),
     )

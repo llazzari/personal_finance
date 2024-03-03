@@ -48,7 +48,7 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
                     dbc.Col(save_btn.render(app), width='auto'),
                     dbc.Col(remove_rows_btn.render(app), width='auto'),
                 ],
-                style={'margin': '10px'}
+                class_name='buttons_row'
             ),
             remove_rows_alert.render(app),
             confirm_dialog.render(app),
