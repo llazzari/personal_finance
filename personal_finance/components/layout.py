@@ -39,23 +39,24 @@ def render(
 
 
             html.Hr(),
-            html.H2(html.B(i18n.t('general.expenses'))),  # type: ignore
 
             input_table_alert.render(),
             bank_error_alert.render(),
-            upload_dd_menu.render(),
-            expenses_aggrid.render(expenses),
-            dbc.Row(
-                [
-                    dbc.Col(save_btn.render(), width='auto'),
-                    dbc.Col(remove_rows_btn.render(), width='auto'),
-                    dbc.Col(predict_btn.render(), width='auto')
-                ],
-                class_name='buttons_row'
-            ),
             prediction_alert.render(),
             remove_rows_alert.render(),
             confirm_dialog.render(),
+
+            dbc.Row(
+                [
+                    dbc.Col(upload_dd_menu.render(), width='auto'),
+                    dbc.Col(save_btn.render(), width='auto'),
+                    dbc.Col(remove_rows_btn.render(), width='auto'),
+                    dbc.Col(predict_btn.render(), width='auto'),
+                ],
+                class_name='buttons_row'
+            ),
+            html.H2(html.B(i18n.t('general.expenses'))),
+            expenses_aggrid.render(expenses),
 
             html.H2(html.B(i18n.t('general.incomes'))),
             incomes_aggrid.render(incomes),
