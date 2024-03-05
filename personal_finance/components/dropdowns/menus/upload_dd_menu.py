@@ -51,6 +51,7 @@ def render() -> html.Div:
             label=i18n.t('general.upload'),
             align_end=True,
             color='secondary',
+            style={'margin-bottom': '10px'},
         ),
     ])
 
