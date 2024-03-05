@@ -32,10 +32,14 @@ class DataSource:
             errors='ignore'
         )
 
-    def save_data(self, file_path: str | Path) -> None:
+    def save_data(self, file_path: str) -> None:
         self.drop_columns()
         if not self.is_empty:
             self.dataframe.to_csv(file_path, index=False, float_format='%.2f')
+        else:
+            path = Path(file_path)
+            if path.exists():
+                path.unlink()
 
     @property
     def is_empty(self) -> bool:

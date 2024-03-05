@@ -6,7 +6,7 @@ from data.raw.cleaner import clean_descriptions
 from data.schema import DataSchema
 
 
-def separate_uncategorized_data(df: pd.DataFrame) -> list[pd.DataFrame]:
+def separate_data(df: pd.DataFrame) -> list[pd.DataFrame]:
     categorized_df = df.loc[df[DataSchema.SUBCATEGORY].notna(), :]
     uncategorized_df = df.loc[df[DataSchema.SUBCATEGORY].isna(), :]
     return [categorized_df, uncategorized_df]

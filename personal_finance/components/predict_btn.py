@@ -5,7 +5,8 @@ import i18n
 import pandas as pd
 
 from components import ids
-from data.predictor import predict_subcategories, separate_uncategorized_data
+from data.predictor import predict_subcategories, separate_data
+from data.source import DataSource
 
 
 def render() -> html.Div:
@@ -28,11 +29,12 @@ def render() -> html.Div:
     State(ids.EXPENSES_TABLE, 'rowData'),
     prevent_initial_call=True
 )
-def on_click(_, data: dict) -> tuple[list[dict] | Any, bool]:
-    old_df = pd.DataFrame.from_records(data)
-    if old_df.empty:
+def on_click(_, expenses: list[dict]) -> tuple[list[dict] | Any, bool]:
+    source_expenses = DataSource(expenses)
+    if source_expenses.is_empty:
         return no_update, True
-    categorized_df, uncategorized_df = separate_uncategorized_data(old_df)
+
+    categorized_df, uncategorized_df = separate_data(source_expenses.dataframe)
 
     if uncategorized_df.empty:
         return no_update, True
