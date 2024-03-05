@@ -1,0 +1,17 @@
+date,description,amount,category,subcategory,year,month,recurrent,cleaned_description,bank,id
+2024-01-29T00:00:00,Comercial Zaffari Ltda,60.56,Alimentação,Mantimentos,2024,1,Sim,comercial zaffari,Inter,6
+2024-01-27T00:00:00,Carlos Luiz Rodeghiero 169998860,10.00,Diversos,Despesas Diversas,2024,1,Não,carlos luiz rodeghiero 169998860,Inter,7
+2024-01-25T00:00:00,Fernando Antonio Reis Da Porciuncula,6.45,Alimentação,Mantimentos,2024,1,Sim,fernando antonio reis porciuncula,Inter,8
+2024-01-25T00:00:00,Liquidacao B3 *      23/01/2024,689.20,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,liquidacao b3 23 01 2024,Inter,9
+2024-01-18T00:00:00,Yuri Do Nascimento Lima,27.00,Gastos Pessoais,Hobbies e Recreação,2024,1,Não,yuri nascimento lima,Inter,10
+2024-01-18T00:00:00,Liquidacao B3 *      16/01/2024,589.00,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,liquidacao b3 16 01 2024,Inter,11
+2024-01-16T00:00:00,Clovis Helwig,3.70,Diversos,Despesas Diversas,2024,1,Não,clovis helwig,Inter,12
+2024-01-16T00:00:00,Liquidacao B3 *      12/01/2024,548.11,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,liquidacao b3 12 01 2024,Inter,13
+2024-01-14T00:00:00,Inter Pre 10gb Mensal,30.00,Utilidades,Celular/Telefone Móvel,2024,1,Sim,inter pre 10gb mensal,Inter,14
+2024-01-02T00:00:00,Liquidacao B3 *      27/12/2023,501.89,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,liquidacao b3 27 12 2023,Inter,17
+2024-01-02T00:00:00,Pagamento de boleto efetuado - OSIRNET INFO TELECOM EIRELI . EPP,110.13,Utilidades,Internet,2024,1,Sim,efetuado osirnet info telecom eireli epp,Nubank,2
+2024-01-04T00:00:00,Pagamento de boleto efetuado - F SOUTO IMOVEIS LTDA,1877.18,Moradia,Hipoteca/Aluguel,2024,1,Sim,efetuado souto imoveis,Nubank,3
+2024-01-05T00:00:00,Pagamento de boleto efetuado - CIA ESTADUAL DE DIST,173.89,Utilidades,Eletricidade,2024,1,Sim,efetuado cia estadual dist,Nubank,4
+2024-01-26T00:00:00,Pagamento de boleto efetuado - PROFIC EM LINGUA ESTRANGEIRA DLLE UFSC,100.00,Gastos Pessoais,Estudos,2024,1,Não,efetuado profic lingua estrangeira dlle ufsc,Nubank,5
+2024-01-10T00:00:00,Tarifa Pacote de Serviços - Cobrança referente 10/01/2024,14.55,Utilidades,Taxas Bancárias,2024,1,Sim,tarifa,Banco do Brasil,0
+2024-01-15T00:00:00,Pix - Enviado - 15/01 14:21 Roger De Ávila Vega,18.00,Gastos Pessoais,Hobbies e Recreação,2024,1,Não,roger avila vega,Banco do Brasil,1
