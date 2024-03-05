@@ -37,16 +37,16 @@ def render() -> html.Div:
                 dbc.DropdownMenuItem(
                     [
                         html.I(className='bi bi-filetype-csv'),
-                        i18n.t(f'general.{ids.OPEN_STATEMENT}')
+                        i18n.t(f'general.statement')
                     ],
-                    id=ids.OPEN_STATEMENT,
+                    id=ids.OPEN_STATEMENT_MODAL,
                 ),
                 dbc.DropdownMenuItem(
                     [
                         html.I(className='bi bi-filetype-csv'),
-                        i18n.t(f'general.{ids.OPEN_CCBILL}')
+                        i18n.t(f'general.credit-card-bill')
                     ],
-                    id=ids.OPEN_CCBILL,
+                    id=ids.OPEN_CCBILL_MODAL,
                 ),
             ],
             label=i18n.t('general.upload'),

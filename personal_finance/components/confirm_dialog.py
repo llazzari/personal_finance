@@ -20,7 +20,7 @@ def render() -> html.Div:
     # Output(ids.EXPENSES_TABLE, 'getRowStyle'),
     [
         Input(ids.CONFIRM_SAVE, 'submit_n_clicks'),
-        Input(ids.CLOSE_SAVE, 'n_clicks')
+        Input(ids.CLOSE_SAVE_MODAL, 'n_clicks')
     ],
     [
         State(ids.SAVE_MODAL, 'is_open'),

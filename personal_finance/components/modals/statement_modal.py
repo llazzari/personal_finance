@@ -20,7 +20,7 @@ def render() -> html.Div:
                 dbc.ModalHeader(i18n.t('general.select_bank_statement')),
                 dbc.ModalBody(buttons_row(BANK_OPTIONS, upload=True)),
                 dbc.ModalFooter(
-                    footer(i18n.t('general.close'), ids.CLOSE_STATEMENT)
+                    footer(i18n.t('general.close'), ids.CLOSE_STATEMENT_MODAL)
                 ),
             ],
             id=ids.STATEMENT_MODAL,
@@ -34,8 +34,8 @@ def render() -> html.Div:
     Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
     Output(ids.BANK_ERROR_ALERT, 'is_open', allow_duplicate=True),
     [
-        Input(ids.OPEN_STATEMENT, 'n_clicks'),
-        Input(ids.CLOSE_STATEMENT, 'n_clicks'),
+        Input(ids.OPEN_STATEMENT_MODAL, 'n_clicks'),
+        Input(ids.CLOSE_STATEMENT_MODAL, 'n_clicks'),
         *[
             Input(option, 'contents')
             for option in BANK_OPTIONS.values()

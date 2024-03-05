@@ -13,7 +13,7 @@ def render() -> html.Div:
                 dbc.ModalFooter(
                     dbc.Button(
                         i18n.t('general.close'),  # type: ignore
-                        id=ids.CLOSE_SAVE,
+                        id=ids.CLOSE_SAVE_MODAL,
                         className="ms-auto"
                     ),
                 ),
