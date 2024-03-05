@@ -5,7 +5,6 @@ import i18n
 from components import (
     save_btn,
     confirm_dialog,
-    upper_buttons,
     collapsed_graphs,
     remove_rows_btn,
 )
@@ -21,6 +20,8 @@ from components.alerts import (
     prediction_alert,
     remove_rows_alert
 )
+from components import predict_btn
+from components.dropdowns.menus import upload_dd_menu
 
 
 def render(app: Dash, source: DataSource) -> dbc.Container:
@@ -39,23 +40,24 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
                 style={'text-align': 'right'},
             ),
 
-            bank_error_alert.render(app),
-            prediction_alert.render(app),
-            upper_buttons.render(app),
-            expenses_aggrid.render(app, source.table_data),
+            bank_error_alert.render(),
+            upload_dd_menu.render(),
+            expenses_aggrid.render(source.table_data),
             dbc.Row(
                 [
-                    dbc.Col(save_btn.render(app), width='auto'),
-                    dbc.Col(remove_rows_btn.render(app), width='auto'),
+                    dbc.Col(save_btn.render(), width='auto'),
+                    dbc.Col(remove_rows_btn.render(), width='auto'),
+                    dbc.Col(predict_btn.render(), width='auto')
                 ],
                 class_name='buttons_row'
             ),
-            remove_rows_alert.render(app),
-            confirm_dialog.render(app),
+            prediction_alert.render(),
+            remove_rows_alert.render(),
+            confirm_dialog.render(),
 
 
             html.Hr(),
-            collapsed_graphs.render(app),
+            collapsed_graphs.render(),
 
             html.Hr(),
 

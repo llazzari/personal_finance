@@ -1,24 +1,13 @@
 from typing import Any
-from dash import html, Dash, Output, Input, State, dcc
+from dash import html, Output, Input, State, dcc, callback
 import dash_bootstrap_components as dbc
 import i18n
 
 from components import ids
-from data.raw.uploader import upload_personal_table_data
+from components.tables.uploader import upload_data
 
 
-def render(app: Dash) -> html.Div:
-    @app.callback(
-        Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
-        Input(ids.INPUT_TABLE_UPLOAD, 'contents'),
-        State(ids.EXPENSES_TABLE, 'rowData'),
-        prevent_initial_call=True
-    )
-    def add_input_table(contents: list[str], old_data: list[dict]) -> dict[str, Any]:
-        old_data_id: int = max([data['id'] for data in old_data])
-        new_df = upload_personal_table_data(contents)
-        new_df['id'] = range(old_data_id+1, old_data_id+1+len(new_df))
-        return {'add': new_df.to_dict('records'), 'addIndex': 0}
+def render() -> html.Div:
     return html.Div([
         dbc.DropdownMenu(
             [
@@ -62,6 +51,15 @@ def render(app: Dash) -> html.Div:
             label=i18n.t('general.upload'),
             align_end=True,
             color='secondary',
-            # class_name='bi bi-upload',
         ),
     ])
+
+
+@callback(
+    Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
+    Input(ids.INPUT_TABLE_UPLOAD, 'contents'),
+    State(ids.EXPENSES_TABLE, 'rowData'),
+    prevent_initial_call=True
+)
+def add_input_table(contents: list[str], old_data: list[dict]) -> dict[str, Any]:
+    return upload_data(old_data, contents)

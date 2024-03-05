@@ -1,18 +1,11 @@
-from dash import Dash, html, Output, Input
+from dash import callback, html, Output, Input
 import dash_bootstrap_components as dbc
 import i18n
 
 from components import ids
 
 
-def render(app: Dash) -> html.Div:
-    @app.callback(
-        Output(ids.CONFIRM_SAVE, 'displayed'),
-        Input(ids.SAVE_BTN, 'n_clicks'),
-        prevent_initial_call=True
-    )
-    def display_confirm(n: int) -> bool:
-        return True
+def render() -> html.Div:
     return html.Div(
         dbc.Button(
             [
@@ -23,3 +16,12 @@ def render(app: Dash) -> html.Div:
             class_name='main_buttons left_buttons'
         ),
     )
+
+
+@callback(
+    Output(ids.CONFIRM_SAVE, 'displayed'),
+    Input(ids.SAVE_BTN, 'n_clicks'),
+    prevent_initial_call=True
+)
+def display_confirm(n: int) -> bool:
+    return True

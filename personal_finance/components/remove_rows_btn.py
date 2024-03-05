@@ -1,26 +1,12 @@
 from typing import Any
-from dash import Dash, html, Output, Input, State, no_update
+from dash import callback, html, Output, Input, State, no_update
 import dash_bootstrap_components as dbc
 import i18n
 
 from components import ids
 
 
-def render(app: Dash) -> html.Div:
-    @app.callback(
-        Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
-        Output(ids.REMOVE_DATA_ERROR_ALERT, 'is_open'),
-        Input(ids.DELETE_ROWS_BTN, 'n_clicks'),
-        State(ids.EXPENSES_TABLE, 'selectedRows'),
-        prevent_initial_call=True
-    )
-    def remove(
-        _,
-        selection: list[dict]
-    ) -> tuple[dict[str, list[dict]] | Any, bool]:
-        if not selection:
-            return no_update, True
-        return {'remove': selection}, False
+def render() -> html.Div:
     return html.Div(
         dbc.Button(
             [
@@ -31,3 +17,19 @@ def render(app: Dash) -> html.Div:
             class_name='main_buttons'
         ),
     )
+
+
+@callback(
+    Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
+    Output(ids.REMOVE_DATA_ERROR_ALERT, 'is_open'),
+    Input(ids.DELETE_ROWS_BTN, 'n_clicks'),
+    State(ids.EXPENSES_TABLE, 'selectedRows'),
+    prevent_initial_call=True
+)
+def remove(
+    _,
+    selected: list[dict]
+) -> tuple[dict[str, list[dict]] | Any, bool]:
+    if not selected:
+        return no_update, True
+    return {'remove': selected}, False
