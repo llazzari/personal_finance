@@ -1,11 +1,11 @@
-from dash import Dash, html
+from dash import html
 import dash_ag_grid as dag
 
 from components import ids
 from components.tables import grid_options
 
 
-def render(app: Dash, data: list[dict]) -> html.Div:
+def render(data: list[dict]) -> html.Div:
 
     return html.Div(
         dag.AgGrid(

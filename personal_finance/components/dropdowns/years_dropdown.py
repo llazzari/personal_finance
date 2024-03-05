@@ -1,24 +1,11 @@
-from dash import Dash, html, dcc, Input, Output
+from dash import callback, html, dcc, Input, Output
 import i18n
 
 from components import ids
 from data.source import DataSource
 
 
-def render(app: Dash) -> html.Div:
-    @app.callback(
-        [
-            Output(ids.YEAR_DROPDOWN, 'options'),
-            Output(ids.YEAR_DROPDOWN, 'value'),
-        ],
-        Input(ids.EXPENSES_TABLE, 'rowData')
-    )
-    def update_dropdown(data: list[dict]) -> tuple[list[int], int]:
-        if not data:
-            return [], 1
-        source = DataSource(data)
-        years: list[int] = source.unique_years
-        return years, years[0]
+def render() -> html.Div:
     return html.Div(
         [
             html.H6(i18n.t("general.year")),  # type: ignore
@@ -28,3 +15,18 @@ def render(app: Dash) -> html.Div:
             ),
         ],
     )
+
+
+@callback(
+    [
+        Output(ids.YEAR_DROPDOWN, 'options'),
+        Output(ids.YEAR_DROPDOWN, 'value'),
+    ],
+    Input(ids.EXPENSES_TABLE, 'rowData')
+)
+def update_dropdown(data: list[dict]) -> tuple[list[int], int]:
+    if not data:
+        return [], 1
+    source = DataSource(data)
+    years: list[int] = source.unique_years
+    return years, years[0]

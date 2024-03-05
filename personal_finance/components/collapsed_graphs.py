@@ -1,4 +1,4 @@
-from dash import Dash, html, Output, Input
+from dash import callback, html, Output, Input
 import dash_bootstrap_components as dbc
 import i18n
 
@@ -9,28 +9,30 @@ from components import expenses_card
 from data.source import DataSource
 
 
-def render(app: Dash) -> dbc.Collapse:
-    @app.callback(
-        Output(ids.COLLAPSE_GRAPHS, 'is_open'),
-        Input(ids.EXPENSES_TABLE, 'rowData'),
-    )
-    def toggle_collapse(data: list[dict]):
-        source = DataSource(data)
-        if source.is_empty:
-            return False
-        return True
+def render() -> dbc.Collapse:
     return dbc.Collapse(
         [
-            _monthly_sunburst_chart(app),
+            _monthly_sunburst_chart(),
             html.Hr(),
-            _evolution_bar_chart(app),
+            _evolution_bar_chart(),
         ],
         is_open=False,
         id=ids.COLLAPSE_GRAPHS
     )
 
 
-def _monthly_sunburst_chart(app: Dash) -> html.Div:
+@callback(
+    Output(ids.COLLAPSE_GRAPHS, 'is_open'),
+    Input(ids.EXPENSES_TABLE, 'rowData'),
+)
+def toggle_collapse(data: list[dict]):
+    source = DataSource(data)
+    if source.is_empty:
+        return False
+    return True
+
+
+def _monthly_sunburst_chart() -> html.Div:
     return html.Div([
         dbc.Row(
             [
@@ -42,12 +44,12 @@ def _monthly_sunburst_chart(app: Dash) -> html.Div:
                         dbc.Row(
                             [
                                 dbc.Col(
-                                    years_dropdown.render(app),
+                                    years_dropdown.render(),
                                     width='auto',
                                     style={'margin-right': '10px'}
                                 ),
                                 dbc.Col(
-                                    months_dropdown.render(app),
+                                    months_dropdown.render(),
                                     width='auto'
                                 ),
                             ],
@@ -55,7 +57,7 @@ def _monthly_sunburst_chart(app: Dash) -> html.Div:
                         ),
                     ]),
                 ),
-                dbc.Col(expenses_card.render(app), width='auto')
+                dbc.Col(expenses_card.render(), width='auto')
             ],
             justify='between',
             style={'margin': '10px'},
@@ -63,19 +65,19 @@ def _monthly_sunburst_chart(app: Dash) -> html.Div:
         html.Div(
             [
                 # bar_polar_chart.render(app),
-                sunburst_chart.render(app),
+                sunburst_chart.render(),
             ],
             style={'justify': 'center'}
         ),
     ])
 
 
-def _evolution_bar_chart(app: Dash) -> html.Div:
+def _evolution_bar_chart() -> html.Div:
     return html.Div(
         [
             html.H4(html.B(i18n.t(  # type: ignore
                 'general.expenses_evolution'
             ))),
-            bar_chart.render(app),
+            bar_chart.render(),
         ],
     )

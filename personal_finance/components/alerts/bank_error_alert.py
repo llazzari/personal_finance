@@ -1,11 +1,11 @@
-from dash import Dash, html
+from dash import html
 import dash_bootstrap_components as dbc
 import i18n
 
 from components import ids
 
 
-def render(app: Dash) -> html.Div:
+def render() -> html.Div:
     return html.Div(
         dbc.Alert(
             [

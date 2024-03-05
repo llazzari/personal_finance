@@ -1,27 +1,11 @@
-from dash import Dash, html, dcc, Output, Input
+from dash import callback, html, dcc, Output, Input
 import i18n
 
 from components import ids
 from data.source import DataSource
 
 
-def render(app: Dash) -> html.Div:
-    @app.callback(
-        [
-            Output(ids.MONTH_DROPDOWN, 'options'),
-            Output(ids.MONTH_DROPDOWN, 'value'),
-        ],
-        [
-            Input(ids.YEAR_DROPDOWN, 'value'),
-            Input(ids.EXPENSES_TABLE, 'rowData'),
-        ],
-    )
-    def update_dropdown(year: int, data: list[dict]) -> tuple[list[int], int]:
-        if not data:
-            return [], 1
-        source = DataSource(data)
-        months: list[int] = source.unique_months_from_year(year)
-        return months, max(months)
+def render() -> html.Div:
     return html.Div([
         html.H6(i18n.t("general.month")),  # type: ignore
         dcc.Dropdown(
@@ -29,3 +13,21 @@ def render(app: Dash) -> html.Div:
             placeholder=i18n.t("general.month")  # type: ignore
         )
     ])
+
+
+@callback(
+    [
+        Output(ids.MONTH_DROPDOWN, 'options'),
+        Output(ids.MONTH_DROPDOWN, 'value'),
+    ],
+    [
+        Input(ids.YEAR_DROPDOWN, 'value'),
+        Input(ids.EXPENSES_TABLE, 'rowData'),
+    ],
+)
+def update_dropdown(year: int, data: list[dict]) -> tuple[list[int], int]:
+    if not data:
+        return [], 1
+    source = DataSource(data)
+    months: list[int] = source.unique_months_from_year(year)
+    return months, max(months)
