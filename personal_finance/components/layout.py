@@ -62,8 +62,8 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
             html.Hr(),
 
             save_modal.render(),
-            statement_modal.render(app),
-            credit_card_modal.render(app),
+            statement_modal.render(),
+            credit_card_modal.render(),
             html.Div(style={'margin': '20px'})
         ],
         class_name='dbc',
