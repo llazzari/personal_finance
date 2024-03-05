@@ -1,5 +1,5 @@
 from typing import Any
-from dash import html, Output, Input, State, dcc, callback
+from dash import html, Output, Input, State, dcc, callback, no_update
 import dash_bootstrap_components as dbc
 import i18n
 
@@ -63,7 +63,13 @@ def render() -> html.Div:
     State(ids.EXPENSES_TABLE, 'rowData'),
     prevent_initial_call=True
 )
-def input_table(contents: list[str], old_data: list[dict]) -> dict[str, Any]:
-    new_df = upload_personal_table_data(contents)
+def input_table(
+    contents: list[str],
+    old_data: list[dict]
+) -> dict[str, Any] | Any:
+    try:
+        new_df = upload_personal_table_data(contents)
+    except ValueError:
+        return no_update
 
     return upload_data(old_data, new_df)
