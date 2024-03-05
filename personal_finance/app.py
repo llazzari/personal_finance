@@ -8,11 +8,12 @@ from dash_bootstrap_templates import load_figure_template
 
 from components import layout
 from data.loader import load_data
-from data.source import DataSource
 
 
 EXPENSES_PATH = Path.cwd() / "data" / "expenses.csv"
 os.environ['EXPENSES_PATH'] = str(EXPENSES_PATH)
+INCOMES_PATH = Path.cwd() / 'data' / 'incomes.csv'
+os.environ['INCOMES_PATH'] = str(INCOMES_PATH)
 
 LOCALE = 'pt'
 os.environ['LOCALE'] = LOCALE
@@ -26,9 +27,10 @@ def main() -> None:
     locale_path = Path.cwd() / "locale"
     i18n.load_path.append(locale_path)  # type: ignore
 
-    df: pd.DataFrame = load_data(EXPENSES_PATH)
-    data: list[dict] = df.to_dict('records')
-    source = DataSource(data)
+    df_exp: pd.DataFrame = load_data(EXPENSES_PATH)
+    expenses: list[dict] = df_exp.to_dict('records')
+    df_inc: pd.DataFrame = load_data(INCOMES_PATH)
+    incomes: list[dict] = df_inc.to_dict('records')
 
     dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -41,7 +43,7 @@ def main() -> None:
         ]
     )
     app.title = i18n.t("general.app_title")  # type: ignore
-    app.layout = layout.render(app, source)
+    app.layout = layout.render(app, expenses, incomes)
     app.config['suppress_callback_exceptions'] = True
     app.scripts.config.serve_locally = True
     # server = app.server

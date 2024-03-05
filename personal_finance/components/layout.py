@@ -8,13 +8,12 @@ from components import (
     collapsed_graphs,
     remove_rows_btn,
 )
-from components.tables import expenses_aggrid
+from components.tables import expenses_aggrid, incomes_aggrid
 from components.modals import (
     statement_modal,
     credit_card_modal,
     save_modal
 )
-from data.source import DataSource
 from components.alerts import (
     bank_error_alert,
     prediction_alert,
@@ -25,7 +24,11 @@ from components import predict_btn
 from components.dropdowns.menus import upload_dd_menu
 
 
-def render(app: Dash, source: DataSource) -> dbc.Container:
+def render(
+    app: Dash,
+    expenses: list[dict],
+    incomes: list[dict]
+) -> dbc.Container:
     return dbc.Container(
         [
             html.H1(html.B(app.title)),
@@ -36,15 +39,12 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
 
 
             html.Hr(),
-            html.Div(
-                html.H2(html.B(i18n.t('general.expenses'))),  # type: ignore
-                style={'text-align': 'right'},
-            ),
+            html.H2(html.B(i18n.t('general.expenses'))),  # type: ignore
 
             input_table_alert.render(),
             bank_error_alert.render(),
             upload_dd_menu.render(),
-            expenses_aggrid.render(source.table_data),
+            expenses_aggrid.render(expenses),
             dbc.Row(
                 [
                     dbc.Col(save_btn.render(), width='auto'),
@@ -57,6 +57,8 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
             remove_rows_alert.render(),
             confirm_dialog.render(),
 
+            html.H2(html.B(i18n.t('general.incomes'))),
+            incomes_aggrid.render(incomes),
 
             html.Hr(),
             collapsed_graphs.render(),
