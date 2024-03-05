@@ -25,13 +25,22 @@ def render() -> html.Div:
     [
         State(ids.SAVE_MODAL, 'is_open'),
         State(ids.EXPENSES_TABLE, 'rowData'),
+        State(ids.INCOMES_TABLE, 'rowData'),
     ],
     prevent_initial_call=True
 )
-def save(n1: int, n2: int, is_open: bool, data: list[dict]) -> bool:
+def save(
+    n1: int,
+    n2: int,
+    is_open: bool,
+    expenses: list[dict],
+    incomes: list[dict]
+) -> bool:
     if n1:
-        source = DataSource(data)
-        source.save_data(os.environ['EXPENSES_PATH'])
+        source_exp = DataSource(expenses)
+        source_exp.save_data(os.environ['EXPENSES_PATH'])
+        source_inc = DataSource(incomes)
+        source_inc.save_data(os.environ['INCOMES_PATH'])
         return not is_open
     if n2:
         return not is_open
