@@ -15,7 +15,10 @@ def render(app: Dash) -> html.Div:
         return True
     return html.Div(
         dbc.Button(
-            i18n.t('general.save'),  # type: ignore
+            [
+                html.I(className='bi bi-save'),
+                i18n.t('general.save')
+            ],
             id=ids.SAVE_BTN,
             class_name='main_buttons left_buttons'
         ),

@@ -28,7 +28,14 @@ def main() -> None:
 
     dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
-    app = Dash(__name__, external_stylesheets=[dbc_css, dbc.themes.DARKLY])
+    app = Dash(
+        __name__,
+        external_stylesheets=[
+            dbc_css,
+            dbc.themes.DARKLY,
+            dbc.icons.BOOTSTRAP
+        ]
+    )
     app.title = i18n.t("general.app_title")  # type: ignore
     app.layout = layout.render(app, source)
     app.config['suppress_callback_exceptions'] = True

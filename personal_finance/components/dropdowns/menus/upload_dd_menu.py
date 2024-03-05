@@ -23,26 +23,45 @@ def render(app: Dash) -> html.Div:
         dbc.DropdownMenu(
             [
                 dbc.DropdownMenuItem(
-                    dcc.Upload(
-                        i18n.t('general.input_table'),
-                        id=ids.INPUT_TABLE_UPLOAD,
-                        multiple=True,
+                    dbc.Row(
+                        [
+                            dbc.Col(
+                                html.I(className='bi bi-filetype-csv'),
+                                width='auto'
+                            ),
+                            dbc.Col(
+                                dcc.Upload(
+                                    i18n.t('general.input_table'),
+                                    id=ids.INPUT_TABLE_UPLOAD,
+                                    multiple=True,
+                                ),
+                                width='auto'
+                            )
+                        ],
+                        class_name='g-0'
                     ),
                     id=ids.INPUT_TABLE_DATA_BTN,
                     n_clicks=0,
                 ),
                 dbc.DropdownMenuItem(divider=True),
                 dbc.DropdownMenuItem(
-                    i18n.t(f'general.{ids.OPEN_STATEMENT}'),
+                    [
+                        html.I(className='bi bi-filetype-csv'),
+                        i18n.t(f'general.{ids.OPEN_STATEMENT}')
+                    ],
                     id=ids.OPEN_STATEMENT,
                 ),
                 dbc.DropdownMenuItem(
-                    i18n.t(f'general.{ids.OPEN_CCBILL}'),
+                    [
+                        html.I(className='bi bi-filetype-csv'),
+                        i18n.t(f'general.{ids.OPEN_CCBILL}')
+                    ],
                     id=ids.OPEN_CCBILL,
                 ),
             ],
             label=i18n.t('general.upload'),
             align_end=True,
             color='secondary',
+            # class_name='bi bi-upload',
         ),
     ])

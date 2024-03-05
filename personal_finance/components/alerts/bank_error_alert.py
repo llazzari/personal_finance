@@ -8,11 +8,13 @@ from components import ids
 def render(app: Dash) -> html.Div:
     return html.Div(
         dbc.Alert(
-            i18n.t('general.bank_error'),
+            [
+                html.I(className='bi bi-x-octagon-fill'),
+                i18n.t('general.bank_error')
+            ],
             id=ids.BANK_ERROR_ALERT,
             is_open=False,
             duration=4000,
             color='danger',
         ),
-        style={'width': 'auto', 'margin-right': 0, 'margin-left': 'auto'},
     )

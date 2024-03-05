@@ -23,7 +23,10 @@ def render(app: Dash) -> html.Div:
         return {'remove': selection}, False
     return html.Div(
         dbc.Button(
-            i18n.t('general.delete_rows'),
+            [
+                html.I(className='bi bi-file-x'),
+                i18n.t('general.delete_rows'),
+            ],
             id=ids.DELETE_ROWS_BTN,
             class_name='main_buttons'
         ),

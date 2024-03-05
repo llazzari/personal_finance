@@ -7,7 +7,6 @@ import pandas as pd
 
 from components import ids
 from data.raw.banks import BANKS
-# from data.loader import set_table_data
 from data.raw.uploader import upload_bank_data
 
 

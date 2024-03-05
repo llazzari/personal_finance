@@ -2,7 +2,7 @@
 pt:
   app_title: Finanças pessoais
   no_data: Sem dados disponíveis. Importe os seus extratos ou faturas dos bancos disponíveis ou adicione despesas manualmente.
-  upload: Upload .csv
+  upload: Upload
   add: Adicionar
   add_manually: Selecione o número de despesas/receitas que deseja adicionar
   filter: filtre os dados...

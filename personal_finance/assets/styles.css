@@ -1,5 +1,6 @@
-.row {
-    --bs-gutter-x: 0rem !important;
+.bi {
+    margin-right: 5px;
+    display: inline-block;
 }
 
 .card {

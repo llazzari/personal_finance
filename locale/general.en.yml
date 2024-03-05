@@ -2,7 +2,7 @@
 en:
   app_title: Personal finances
   no_data: No data! Upload your statements or credit card bills from the available banks or add your data manually.
-  upload: Upload .csv
+  upload: Upload
   add: Add
   add_manually: Select the number of expenses/incomes you want to add
   filter: filter data...

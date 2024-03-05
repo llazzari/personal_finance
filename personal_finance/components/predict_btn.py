@@ -33,7 +33,10 @@ def render(app: Dash) -> html.Div:
 
     return html.Div(
         dbc.Button(
-            i18n.t('general.predict'),
+            [
+                html.I(className='bi bi-star'),
+                i18n.t('general.predict')
+            ],
             id=ids.PREDICT_BTN,
             class_name='main_buttons right_buttons'
         )
