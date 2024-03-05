@@ -34,7 +34,8 @@ class DataSource:
 
     def save_data(self) -> None:
         self.drop_columns()
-        self.dataframe.to_csv(DATA_PATH, index=False, float_format='%.2f')
+        if not self.is_empty:
+            self.dataframe.to_csv(DATA_PATH, index=False, float_format='%.2f')
 
     @property
     def is_empty(self) -> bool:
