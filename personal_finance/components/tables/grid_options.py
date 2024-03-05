@@ -12,7 +12,8 @@ DASH_GRID_OPTIONS: dict[str, Any] = {
     'rowDragManaged': True,
     'rowDragEntireRow': True,
     'suppressRowTransform': True,
-    'rowSelection': 'multiple'
+    'rowSelection': 'multiple',
+    # 'skipHeaderOnAutoSize': True,
 }
 
 

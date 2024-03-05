@@ -11,7 +11,7 @@ def render(data: list[dict]) -> html.Div:
             rowData=data,
             columnDefs=incomes_columns.set_income_columns(),
             defaultColDef=columns.DEFAULT_COLUMN_DEFINITION,
-            columnSize='responsiveSizeToFit',
+            columnSize='autoSize',
             dashGridOptions=grid_options.set_dash_grid_options(),
             getRowId='params.data.id',
             id=ids.INCOMES_TABLE,

@@ -22,7 +22,6 @@ def set_column(column: str) -> Column:
     return {
         'field': column,
         'headerName': i18n.t(f'columns.{column}'),
-        'flex': 1
     }
 
 

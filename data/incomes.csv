@@ -1,10 +1,14 @@
-date,description,amount,category,subcategory,year,month,recurrent,cleaned_description,bank,id
-2024-01-29T00:00:00,Pix No Crédito,60.56,Diversos,,2024,1,Não,credito,Inter,2
-2024-01-23T00:00:00,Liquidacao B3 *      19/01/2024,733.39,Retorno sobre investimentos,,2024,1,Não,liquidacao b3 19 01 2024,Inter,3
-2024-01-15T00:00:00,* Prov * Rendimento 7                  Hglg11,7.70,Retorno sobre investimentos,,2024,1,Não,prov rendimento hglg11,Inter,5
-2024-01-15T00:00:00,* Prov * Rendimento 80                 Bcff11,5.60,Retorno sobre investimentos,,2024,1,Não,prov rendimento 80 bcff11,Inter,6
-2024-01-15T00:00:00,* Prov * Juros S/capital 32                 Trpl4,6.61,Retorno sobre investimentos,,2024,1,Não,prov juros capital 32 trpl4,Inter,7
-2024-01-14T00:00:00,INTER PRE 10GB MENSAL,2.10,Diversos,,2024,1,Sim,,Inter,8
-2024-01-10T00:00:00,Liquidacao B3 *      08/01/2024,782.22,Retorno sobre investimentos,,2024,1,Não,liquidacao b3 08 01 2024,Inter,9
-2024-01-04T00:00:00,Liquidacao B3 *      02/01/2024,360.24,Retorno sobre investimentos,,2024,1,Não,liquidacao b3 02 01 2024,Inter,10
-2024-01-26T00:00:00,Fofs p/ prova de proficiência,100.00,Diversos,,2024,1,Não,nickeli silva chaves,Nubank,1
+date,amount,description,category,subcategory,year,month,recurrent,cleaned_description,bank,id
+2024-01-05T00:00:00,270.00,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,Salário,,2024,1,Não,nickeli chaves psicologa,Nubank,9
+2024-01-10T00:00:00,780.00,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,Salário,,2024,1,Não,nickeli chaves psicologa,Nubank,10
+2024-01-10T00:00:00,15.00,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,Salário,,2024,1,Não,nickeli chaves psicologa,Nubank,11
+2024-01-14T00:00:00,600.00,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,Salário,,2024,1,Não,nickeli chaves psicologa,Nubank,12
+,60.56,Pix No Crédito,Diversos,,2024,1,Não,,Inter,0
+,733.39,Liquidacao B3 *      19/01/2024,Retorno sobre investimentos,,2024,1,Não,,Inter,1
+,7.70,* Prov * Rendimento 7                  Hglg11,Retorno sobre investimentos,,2024,1,Não,,Inter,2
+,5.60,* Prov * Rendimento 80                 Bcff11,Retorno sobre investimentos,,2024,1,Não,,Inter,3
+,6.61,* Prov * Juros S/capital 32                 Trpl4,Retorno sobre investimentos,,2024,1,Não,,Inter,4
+,2.10,INTER PRE 10GB MENSAL,Diversos,,2024,1,Sim,,Inter,5
+,782.22,Liquidacao B3 *      08/01/2024,Retorno sobre investimentos,,2024,1,Não,,Inter,6
+,360.24,Liquidacao B3 *      02/01/2024,Retorno sobre investimentos,,2024,1,Não,,Inter,7
+,100.00,Fofs p/ prova de proficiência,Diversos,,2024,1,Não,,Nubank,8
