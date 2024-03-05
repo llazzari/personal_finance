@@ -7,7 +7,7 @@ from components.tables.columns import (
     set_column_with_dropdown,
 )
 from data.schema import DataSchema
-from data.categorize.base_categories import CATEGORIES
+from data.categorize.expenses_categories import CATEGORIES
 
 
 def set_columns() -> list[Column]:

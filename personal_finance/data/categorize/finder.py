@@ -3,7 +3,10 @@ import yaml
 import i18n
 from pathlib import Path
 
-from data.categorize.base_categories import CATEGORIES, RECURRENT_SUBCATEGORIES
+from data.categorize.expenses_categories import (
+    CATEGORIES,
+    RECURRENT_SUBCATEGORIES
+)
 
 PATH = Path.cwd() / 'locale' / 'subcategory.pt.yml'
 
