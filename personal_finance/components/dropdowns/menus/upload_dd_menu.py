@@ -5,6 +5,7 @@ import i18n
 
 from components import ids
 from components.tables.uploader import upload_data
+from data.raw.uploader import upload_personal_table_data
 
 
 def render() -> html.Div:
@@ -62,5 +63,7 @@ def render() -> html.Div:
     State(ids.EXPENSES_TABLE, 'rowData'),
     prevent_initial_call=True
 )
-def add_input_table(contents: list[str], old_data: list[dict]) -> dict[str, Any]:
-    return upload_data(old_data, contents)
+def input_table(contents: list[str], old_data: list[dict]) -> dict[str, Any]:
+    new_df = upload_personal_table_data(contents)
+
+    return upload_data(old_data, new_df)
