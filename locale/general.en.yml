@@ -34,3 +34,4 @@ en:
   remove_data_error: No data selected to be removed.
   expenses: Expenses
   incomes: Incomes
+  input_table_error: Table format not compatible. Expected columns are 'Date', 'Amount', 'Bank', 'Description'.

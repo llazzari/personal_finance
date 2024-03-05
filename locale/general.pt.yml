@@ -34,3 +34,4 @@ pt:
   remove_data_error: Nenhum dado foi selecionado para remoção.
   expenses: Despesas
   incomes: Receitas
+  input_table_error: Formato da tabela inválido. Espera-se as colunas 'Data', 'Valor', 'Banco' e 'Descrição'.

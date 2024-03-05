@@ -59,6 +59,7 @@ def render() -> html.Div:
 
 @callback(
     Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
+    Output(ids.INPUT_TABLE_ALERT, 'is_open'),
     Input(ids.INPUT_TABLE_UPLOAD, 'contents'),
     State(ids.EXPENSES_TABLE, 'rowData'),
     prevent_initial_call=True
@@ -66,10 +67,10 @@ def render() -> html.Div:
 def input_table(
     contents: list[str],
     old_data: list[dict]
-) -> dict[str, Any] | Any:
+) -> tuple[dict[str, Any] | Any, bool]:
     try:
         new_df = upload_personal_table_data(contents)
     except ValueError:
-        return no_update
+        return no_update, True
 
-    return upload_data(old_data, new_df)
+    return upload_data(old_data, new_df), False

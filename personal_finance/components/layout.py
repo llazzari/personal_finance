@@ -18,7 +18,8 @@ from data.source import DataSource
 from components.alerts import (
     bank_error_alert,
     prediction_alert,
-    remove_rows_alert
+    remove_rows_alert,
+    input_table_alert
 )
 from components import predict_btn
 from components.dropdowns.menus import upload_dd_menu
@@ -40,6 +41,7 @@ def render(app: Dash, source: DataSource) -> dbc.Container:
                 style={'text-align': 'right'},
             ),
 
+            input_table_alert.render(),
             bank_error_alert.render(),
             upload_dd_menu.render(),
             expenses_aggrid.render(source.table_data),
