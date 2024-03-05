@@ -11,8 +11,12 @@ from data.loader import load_data
 from data.source import DataSource
 
 
+EXPENSES_PATH = Path.cwd() / "data" / "expenses.csv"
+os.environ['EXPENSES_PATH'] = str(EXPENSES_PATH)
+
 LOCALE = 'pt'
 os.environ['LOCALE'] = LOCALE
+
 load_figure_template('darkly')
 
 
@@ -22,7 +26,7 @@ def main() -> None:
     locale_path = Path.cwd() / "locale"
     i18n.load_path.append(locale_path)  # type: ignore
 
-    df: pd.DataFrame = load_data()
+    df: pd.DataFrame = load_data(EXPENSES_PATH)
     data: list[dict] = df.to_dict('records')
     source = DataSource(data)
 

@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from datetime import datetime
+from pathlib import Path
 import os
 import babel.dates
 import pandas as pd
 
-from data.loader import DATA_PATH
 from data.schema import DataSchema
 from data.categorize.finder import find_category
 
@@ -32,10 +32,10 @@ class DataSource:
             errors='ignore'
         )
 
-    def save_data(self) -> None:
+    def save_data(self, file_path: str | Path) -> None:
         self.drop_columns()
         if not self.is_empty:
-            self.dataframe.to_csv(DATA_PATH, index=False, float_format='%.2f')
+            self.dataframe.to_csv(file_path, index=False, float_format='%.2f')
 
     @property
     def is_empty(self) -> bool:

@@ -1,5 +1,6 @@
 from dash import html, Input, Output, State, dcc, callback
 import i18n
+import os
 
 from components import ids
 from data.source import DataSource
@@ -30,7 +31,7 @@ def render() -> html.Div:
 def save(n1: int, n2: int, is_open: bool, data: list[dict]) -> bool:
     if n1:
         source = DataSource(data)
-        source.save_data()
+        source.save_data(os.environ['EXPENSES_PATH'])
         return not is_open
     if n2:
         return not is_open
