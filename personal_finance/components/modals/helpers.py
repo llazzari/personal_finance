@@ -1,7 +1,6 @@
 from typing import Any
 from dash import html, dcc, no_update
 import dash_bootstrap_components as dbc
-import pandas as pd
 
 from data.raw.cleaner import Bank
 from data.raw.uploader import upload_bank_data
@@ -39,28 +38,30 @@ def toggle_and_upload(
     inputs: tuple,
     bank_options: list[str],
     bank_selector: dict[str, Bank]
-) -> tuple[bool, dict | Any, bool]:
+) -> tuple[bool, dict | Any, dict | Any, bool]:
 
     bank_name: str = triggered['prop_id'].split('.')[0].split('_')[0]
 
-    is_open: bool = toggle_modal(inputs[:-1])
+    is_open: bool = toggle_modal(inputs[:-2])
 
     if bank_name not in bank_options:
-        return is_open, no_update, False
+        return is_open, no_update, no_update, False
 
     uploaded_contents: list[str] = triggered['value']
     bank: Bank = bank_selector[bank_name]
 
-    old_data: list[dict] = inputs[-1]
+    old_expenses: list[dict] = inputs[-2]
+    old_incomes: list[dict] = inputs[-1]
 
     try:
-        new_df: pd.DataFrame = upload_bank_data(bank, uploaded_contents)
+        new_expenses, new_incomes = upload_bank_data(bank, uploaded_contents)
     except ValueError:
-        return False, no_update, True
+        return False, no_update, no_update, True
     else:
-        add_data = upload_data(old_data, new_df)
+        add_exp = upload_data(old_expenses, new_expenses)
+        add_inc = upload_data(old_incomes, new_incomes)
 
-    return is_open, add_data, False
+    return is_open, add_exp, add_inc, False
 
 
 def footer(label: str, close_id: str) -> html.Div:

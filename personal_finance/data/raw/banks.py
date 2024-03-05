@@ -105,6 +105,8 @@ class CoraStatement:
 
 
 class C6CreditCard:
+    payment_description: str = 'Inclusao de Pagamento    '
+
     @property
     def reader(self) -> Reader:
         return Reader(
@@ -118,7 +120,8 @@ class C6CreditCard:
     def cleaner(self) -> Preprocessor:
         return compose(
             correct_amount_sign,
-            partial(correct_installments_date, 'Inclusao de Pagamento    '),
+            partial(correct_installments_date, self.payment_description),
+            partial(remove_ccbill_payment, self.payment_description),
             partial(create_bank_column, 'C6'),
         )
 
@@ -129,6 +132,7 @@ class NuCreditCard:
         '\\d+/\\d$',
         'Intersho$',
     ]
+    payment_description: str = 'Pagamento recebido'
 
     @property
     def reader(self) -> Reader:
@@ -144,12 +148,15 @@ class NuCreditCard:
         return compose(
             partial(clean_descriptions, self.patterns),
             correct_amount_sign,
-            partial(correct_installments_date, 'Pagamento recebido'),
+            partial(correct_installments_date, self.payment_description),
+            partial(remove_ccbill_payment, self.payment_description),
             partial(create_bank_column, 'Nubank'),
         )
 
 
 class SicrediCreditCard():
+    payment_description: str = 'PAGAMENTO DEBITO EM'
+
     @property
     def reader(self) -> Reader:
         return Reader(
@@ -163,13 +170,14 @@ class SicrediCreditCard():
 
     def change_amount_to_float(self, df: pd.DataFrame) -> pd.DataFrame:
         for text in ['R$', '.']:
-            df[DataSchema.AMOUNT] = df[DataSchema.AMOUNT].str.replace(
+            df.loc[DataSchema.AMOUNT] = df[DataSchema.AMOUNT].str.replace(
                 text, ''
             )
-        df[DataSchema.AMOUNT] = df[DataSchema.AMOUNT].str.replace('- ', '-')
-        df[DataSchema.AMOUNT] = df[
+        df.loc[DataSchema.AMOUNT] = df[DataSchema.AMOUNT].str.replace(
+            '- ', '-')
+        df.loc[DataSchema.AMOUNT] = df[
             DataSchema.AMOUNT].str.strip().str.replace(',', '.')
-        df[DataSchema.AMOUNT] = df[DataSchema.AMOUNT].astype(float)
+        df.loc[DataSchema.AMOUNT] = df[DataSchema.AMOUNT].astype(float)
         return df
 
     @property
@@ -177,7 +185,8 @@ class SicrediCreditCard():
         return compose(
             self.change_amount_to_float,
             correct_amount_sign,
-            partial(correct_installments_date, 'PAGAMENTO DEBITO EM'),
+            partial(correct_installments_date, self.payment_description),
+            partial(remove_ccbill_payment, self.payment_description),
             partial(create_bank_column, 'Sicredi')
         )
 

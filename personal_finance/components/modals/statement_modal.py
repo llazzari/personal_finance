@@ -32,6 +32,7 @@ def render() -> html.Div:
 @callback(
     Output(ids.STATEMENT_MODAL, 'is_open'),
     Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
+    Output(ids.INCOMES_TABLE, 'rowTransaction', allow_duplicate=True),
     Output(ids.BANK_ERROR_ALERT, 'is_open', allow_duplicate=True),
     [
         Input(ids.OPEN_STATEMENT_MODAL, 'n_clicks'),
@@ -41,11 +42,14 @@ def render() -> html.Div:
             for option in BANK_OPTIONS.values()
         ],
     ],
-    State(ids.STATEMENT_MODAL, 'is_open'),
-    State(ids.EXPENSES_TABLE, 'rowData'),
+    [
+        State(ids.STATEMENT_MODAL, 'is_open'),
+        State(ids.EXPENSES_TABLE, 'rowData'),
+        State(ids.INCOMES_TABLE, 'rowData'),
+    ],
     prevent_initial_call=True
 )
-def toggle_modal_and_upload(*inputs) -> tuple[bool, dict | Any, bool]:
+def toggle_modal_and_upload(*inputs) -> tuple[bool, dict | Any, Any, bool]:
     triggered = ctx.triggered[0]
     return toggle_and_upload(
         triggered,

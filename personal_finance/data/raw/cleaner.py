@@ -143,7 +143,7 @@ def extract_expenses(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def create_category_column(df: pd.DataFrame) -> pd.DataFrame:
-    df[DataSchema.CATEGORY] = i18n.t('category.miscellaneous')  # type: ignore
+    df[DataSchema.CATEGORY] = None
     return df
 
 
@@ -168,7 +168,7 @@ def create_bank_column(bank_name: str, df: pd.DataFrame) -> pd.DataFrame:
 
 
 def create_recurrent_column(df: pd.DataFrame) -> pd.DataFrame:
-    df[DataSchema.RECURRENT] = i18n.t('general.recurrent_no')
+    df[DataSchema.RECURRENT] = i18n.t('general.recurrent_no')  # type: ignore
     return df
 
 
@@ -179,7 +179,6 @@ def correct_installments_date(descript: str, df: pd.DataFrame) -> pd.DataFrame:
         df[DataSchema.DESCRIPTION] == descript
     ][DataSchema.DATE]
     if not previous_payment_date.empty:
-        # for _, correct_date in previous_payment_date.items():
         correct_date = previous_payment_date.iloc[0]
         correct_month: int = correct_date.month + 1
 
@@ -206,5 +205,4 @@ def correct_installments_year(month: int, year: int) -> int:
 
 
 def remove_ccbill_payment(description: str, df: pd.DataFrame) -> pd.DataFrame:
-    df = df[df[DataSchema.DESCRIPTION] != description]
-    return df
+    return df.loc[df[DataSchema.DESCRIPTION] != description, :]

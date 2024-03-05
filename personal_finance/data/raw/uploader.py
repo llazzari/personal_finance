@@ -10,6 +10,7 @@ from data.raw.cleaner import (
     create_recurrent_column,
     create_subcategory_column,
     extract_expenses,
+    extract_incomes,
     rename_columns,
     create_month_column,
     create_year_column
@@ -37,7 +38,10 @@ def parse(content: str, reader: Reader) -> pd.DataFrame:
     return df
 
 
-def upload_bank_data(bank: Bank, contents: list[str]) -> pd.DataFrame:
+def upload_bank_data(
+    bank: Bank,
+    contents: list[str]
+) -> tuple[pd.DataFrame, ...]:
     preprocessor = compose(
         create_category_column,
         create_subcategory_column,
@@ -46,15 +50,15 @@ def upload_bank_data(bank: Bank, contents: list[str]) -> pd.DataFrame:
         create_month_column,
         create_recurrent_column,
         bank.cleaner,
-        extract_expenses,
     )
 
-    return pd.concat([
+    df = pd.concat([
         preprocessor(parse(content, bank.reader)) for content in contents
     ])
+    return extract_expenses(df), extract_incomes(df)
 
 
-def upload_personal_table_data(contents: list[str]) -> pd.DataFrame:
+def upload_personal_table(contents: list[str]) -> tuple[pd.DataFrame, ...]:
     reader = Reader(bank='Banco')
     preprocessor = compose(
         create_category_column,
@@ -63,8 +67,8 @@ def upload_personal_table_data(contents: list[str]) -> pd.DataFrame:
         create_year_column,
         create_month_column,
         create_recurrent_column,
-        extract_expenses,
     )
-    return pd.concat([
+    df = pd.concat([
         preprocessor(parse(content, reader)) for content in contents
     ])
+    return extract_expenses(df), extract_incomes(df)
