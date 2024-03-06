@@ -1,4 +1,4 @@
-from dash import callback, html, dcc, Output, Input
+from dash import callback, html, dcc, Output, Input, State
 import plotly.express as px
 import pandas as pd
 import i18n
@@ -16,12 +16,13 @@ def render() -> html.Div:
 @callback(
     Output(ids.HORIZONTAL_BAR_CHART, 'children'),
     [
-        Input(ids.INCOMES_TABLE, 'rowData'),
+        Input(ids.INCOMES_TABLE, 'cellValueChanged'),
         Input(ids.MONTH_DROPDOWN, 'value'),
         Input(ids.YEAR_DROPDOWN, 'value'),
     ],
+    State(ids.INCOMES_TABLE, 'rowData'),
 )
-def update_bar_chart(data: list[dict], month: int, year: int) -> html.Div:
+def update_bar_chart(_, month: int, year: int, data: list[dict]) -> html.Div:
     source = DataSource(data)
     if source.is_empty:
         return html.Div(i18n.t('general.no_data'))

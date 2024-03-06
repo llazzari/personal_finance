@@ -1,4 +1,4 @@
-from dash import callback, html, dcc, Output, Input
+from dash import callback, html, dcc, Output, Input, State
 import plotly.express as px
 import i18n
 
@@ -28,12 +28,13 @@ def set_color_palette() -> dict[str, str]:
 @callback(
     Output(ids.SUNBURST_CHART, 'children'),
     [
-        Input(ids.EXPENSES_TABLE, 'rowData'),
+        Input(ids.EXPENSES_TABLE, 'cellValueChanged'),
         Input(ids.MONTH_DROPDOWN, 'value'),
         Input(ids.YEAR_DROPDOWN, 'value'),
     ],
+    State(ids.EXPENSES_TABLE, 'rowData'),
 )
-def update_chart(data: list[dict], month: int, year: int) -> html.Div:
+def update_chart(_, month: int, year: int, data: list[dict]) -> html.Div:
     if not data:
         return html.Div(id=ids.SUNBURST_CHART)
     source = DataSource(data)

@@ -1,4 +1,4 @@
-from dash import callback, html, Input, Output, dcc
+from dash import callback, html, Input, Output, dcc, State
 import plotly.express as px
 import i18n
 
@@ -13,10 +13,16 @@ def render() -> html.Div:
 
 @callback(
     Output(ids.BAR_CHART, 'children'),
-    Input(ids.EXPENSES_TABLE, 'rowData'),
-    Input(ids.INCOMES_TABLE, 'rowData')
+    [
+        Input(ids.EXPENSES_TABLE, 'cellValueChanged'),
+        Input(ids.INCOMES_TABLE, 'cellValueChanged'),
+    ],
+    [
+        State(ids.EXPENSES_TABLE, 'rowData'),
+        State(ids.INCOMES_TABLE, 'rowData'),
+    ],
 )
-def update_chart(expenses: list[dict], incomes: list[dict]) -> html.Div:
+def update_chart(_, __, expenses: list[dict], incomes: list[dict]) -> html.Div:
     if not expenses and not incomes:
         return html.Div(id=ids.BAR_CHART)
     for e in expenses:
