@@ -13,7 +13,7 @@ def render() -> html.Div:
                 i18n.t('general.save')
             ],
             id=ids.SAVE_BTN,
-            class_name='main_buttons left_buttons'
+            class_name='main_buttons'
         ),
     )
 

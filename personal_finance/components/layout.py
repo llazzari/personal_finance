@@ -53,7 +53,8 @@ def render(
                     dbc.Col(remove_rows_btn.render(), width='auto'),
                     dbc.Col(predict_btn.render(), width='auto'),
                 ],
-                class_name='buttons_row'
+                class_name='buttons_row',
+                justify='end',
             ),
             html.H2(html.B(i18n.t('general.expenses'))),
             expenses_aggrid.render(expenses),

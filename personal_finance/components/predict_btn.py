@@ -17,7 +17,7 @@ def render() -> html.Div:
                 i18n.t('general.predict')
             ],
             id=ids.PREDICT_BTN,
-            class_name='main_buttons right_buttons'
+            class_name='main_buttons'
         )
     )
 
