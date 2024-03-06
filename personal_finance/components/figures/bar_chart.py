@@ -13,33 +13,46 @@ def render() -> html.Div:
 
 @callback(
     Output(ids.BAR_CHART, 'children'),
-    Input(ids.EXPENSES_TABLE, 'rowData')
+    Input(ids.EXPENSES_TABLE, 'rowData'),
+    Input(ids.INCOMES_TABLE, 'rowData')
 )
-def update_chart(data: list[dict]) -> html.Div:
-    if not data:
+def update_chart(expenses: list[dict], incomes: list[dict]) -> html.Div:
+    if not expenses and not incomes:
         return html.Div(id=ids.BAR_CHART)
+    for e in expenses:
+        e[DataSchema.TYPE] = i18n.t('general.expenses')
+    for i in incomes:
+        i[DataSchema.TYPE] = i18n.t('general.incomes')
+
+    data: list[dict] = expenses + incomes
     source = DataSource(data)
-    df = source.expense_evolution()
+    df = source.evolution()
 
     fig = px.bar(
         df,
         x=DataSchema.MONTH,
         y=DataSchema.AMOUNT,
-        color=DataSchema.RECURRENT,
+        color=DataSchema.TYPE,
+        # pattern_shape=DataSchema.RECURRENT,
         labels={
             DataSchema.MONTH: i18n.t(f'columns.{DataSchema.MONTH}'),
             DataSchema.AMOUNT: i18n.t(f'columns.{DataSchema.AMOUNT}'),
-            DataSchema.RECURRENT: i18n.t(f'columns.{DataSchema.RECURRENT}')
+            DataSchema.RECURRENT: i18n.t(f'columns.{DataSchema.RECURRENT}'),
+            DataSchema.TYPE: i18n.t(f'columns.{DataSchema.TYPE}'),
         },
-        # text=DataSchema.RECURRENT
+        text=DataSchema.RECURRENT,
         category_orders={
             DataSchema.RECURRENT: [
                 i18n.t(f'general.recurrent_{option}') for option in [
                     'yes', 'no'
                 ]
-            ]
+            ],
+            DataSchema.TYPE: [
+                i18n.t(f'general.{typee}') for typee in ['incomes', 'expenses']
+            ],
         },
-        color_discrete_sequence=['#56A697', '#D9483B']
+        color_discrete_sequence=['#56A697', '#D9483B'],
+        barmode='group'
     )
     fig.update_layout(xaxis_type='category')
     return html.Div(

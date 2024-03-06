@@ -9,4 +9,5 @@ pt:
   month: Mês
   bank: Banco
   recurrent: Recorrente
+  type: Tipo
 

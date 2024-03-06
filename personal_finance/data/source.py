@@ -74,9 +74,10 @@ class DataSource:
         ].apply(find_category)
         return df_month_sum
 
-    def expense_evolution(self) -> pd.DataFrame:
+    def evolution(self) -> pd.DataFrame:
         df = self.dataframe.groupby(
-            [DataSchema.YEAR, DataSchema.MONTH, DataSchema.RECURRENT]
+            [DataSchema.YEAR, DataSchema.MONTH,
+                DataSchema.RECURRENT, DataSchema.TYPE]
         ).sum(numeric_only=True)
         df.reset_index(inplace=True)
         df[DataSchema.MONTH] = df[DataSchema.MONTH].apply(

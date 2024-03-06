@@ -28,7 +28,7 @@ pt:
   total_monthly_inc: Receitas totais do mês
   money: R$
   monthly_expenses: Receitas e despesas do mês separadas por categorias
-  expenses_evolution: Evolução das despesas
+  expenses_evolution: Evolução das receitas e despesas
   delete_rows: Remover dados selecionados
   bank_error: Dados incompatíveis! Talvez você tenha selecionado o banco errado...
   prediction_error: Não há dados para categorizar.

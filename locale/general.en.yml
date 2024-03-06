@@ -28,7 +28,7 @@ en:
   total_monthly_inc: Total monthly incomes
   money: $
   monthly_expenses: Month incomes and expenses by category
-  expenses_evolution: Expenses evolution
+  expenses_evolution: Incomes and expenses evolution
   delete_rows: Remove selected data
   bank_error: Incompatible data!
   prediction_error: No data to categorize.

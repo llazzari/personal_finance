@@ -9,3 +9,4 @@ class DataSchema:
     BANK = "bank"
     RECURRENT = "recurrent"
     CLEANED_DESCRIPTION = "cleaned_description"
+    TYPE = "type"
