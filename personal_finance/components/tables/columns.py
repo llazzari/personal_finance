@@ -38,4 +38,5 @@ def set_number_column(column: str) -> Column:
     column_defs['type'] = 'numericColumn'
     column_defs['filter'] = 'agNumberColumnFilter'
     column_defs['sortable'] = True
+    column_defs['valueParser'] = {'function': 'Number(params.newValue)'}
     return column_defs
