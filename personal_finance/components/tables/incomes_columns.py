@@ -14,6 +14,8 @@ def set_income_columns() -> list[Column]:
         DataSchema.CATEGORY,
         inc_categories
     )
+    inc_columns[4]['minWidth'] = 200
+    inc_columns[4]['width'] = 200
     return inc_columns
 
 
