@@ -1,162 +1,43 @@
-description,amount,category,subcategory,year,month,recurrent,bank,id
-Amazon 6/10,269.99,Moradia,Compras para casa,2024,2,Não,Nubank,0
-Supermercado Guanabara,159.41,Alimentação,Mantimentos,2024,2,Sim,Nubank,1
-Dm*Spotify,34.90,Gastos Pessoais,Assinaturas,2024,2,Sim,Nubank,2
-Pg *Intershop Intersho 7/10,299.90,Moradia,Compras para casa,2024,2,Não,Nubank,3
-BRASCON,110.08,Gastos Pessoais,Vestuário,2024,2,Não,C6,4
-PAG*CASAMARIA,60.43,Moradia,Compras para casa,2024,2,Não,C6,5
-HAVAN PELOTAS,68.98,Moradia,Compras para casa,2024,2,Não,C6,6
-FARMACIA SAO JOAO,34.85,Saúde,Medicações,2024,2,Não,C6,7
-COBASI PELOT*COBASI,83.31,Diversos,Animais de estimação,2024,2,Não,C6,8
-HAVAN PELOTAS,59.46,Moradia,Compras para casa,2024,2,Não,C6,9
-HAVAN PELOTAS,86.96,Moradia,Compras para casa,2024,2,Não,C6,10
-MARIAFLOR,99.80,Moradia,Compras para casa,2024,2,Não,C6,11
-993 SHOPPING PELOTAS,49.98,Diversos,Despesas Diversas,2024,2,Não,C6,12
-VLB COMERCIO DE ARTIGO,56.50,Alimentação,Mantimentos,2024,2,Sim,C6,13
-AMAZON BR,53.15,Moradia,Compras para casa,2024,2,Não,C6,14
-MERCADOLIVRE*6PRODUTO,27.67,Moradia,Compras para casa,2024,2,Não,C6,15
-AMAZON MARKETPLACE,86.83,Moradia,Compras para casa,2024,2,Não,C6,16
-VINDI  *INVESTIDOR10,19.90,Gastos Pessoais,Assinaturas,2024,2,Sim,C6,17
-MERCADOLIVRE*5PRODUTO,95.83,Moradia,Compras para casa,2024,2,Não,C6,18
-MERCADOLIVRE*3PRODUTO,27.02,Moradia,Compras para casa,2024,2,Não,C6,19
-ZP*PAGTODOS AMOR,63.56,Saúde,Despesas Médicas,2024,2,Não,C6,20
-KALUNGA SHOPPING PELOT,8.90,Diversos,Despesas Diversas,2024,2,Não,C6,21
-KALUNGA SHOPPING PELOT,11.80,Diversos,Despesas Diversas,2024,2,Não,C6,22
-CFC CPR,538.11,Diversos,Despesas Diversas,2024,2,Não,C6,23
-COMERCIAL ZAFFARI LOJA,193.32,Alimentação,Mantimentos,2024,2,Sim,C6,24
-ATACADAO 122 AS,30.10,Alimentação,Mantimentos,2024,2,Sim,C6,25
-SUPERMERCADO GUANABARA,64.19,Alimentação,Mantimentos,2024,2,Sim,C6,26
-FARMACIA SAO JOAO,37.88,Saúde,Medicações,2024,2,Não,C6,27
-PADARIA VILLA SERRANA,4.50,Alimentação,Mantimentos,2024,2,Não,C6,28
-OLDSCHOOLFOODS,86.35,Alimentação,Comer Fora,2024,2,Não,C6,29
-COMERCIAL ZAFFARI LOJA,15.88,Alimentação,Mantimentos,2024,2,Sim,C6,30
-SUPERMERCADO GUANABARA,78.91,Alimentação,Mantimentos,2024,2,Sim,C6,31
-VILLA CRUZ,24.77,Alimentação,Comer Fora,2024,2,Não,C6,32
-PAG*LOJASRENNERSA,69.90,Gastos Pessoais,Vestuário,2024,2,Não,C6,33
-TINA   *STORE,116.97,Gastos Pessoais,Vestuário,2024,2,Não,C6,34
-ECOSUL,19.60,Transporte,Impostos e taxas do automóvel,2024,2,Não,C6,35
-ECOSUL,19.60,Transporte,Impostos e taxas do automóvel,2024,2,Não,C6,36
-PADARIA VILLA SERRANA,15.45,Alimentação,Mantimentos,2024,2,Não,C6,37
-COMERCIAL ZAFFARI LOJA,219.32,Alimentação,Mantimentos,2024,2,Sim,C6,38
-HAVAN PELOTAS,74.01,Moradia,Compras para casa,2024,2,Não,C6,39
-ACQ*MIL BOLSAS,59.90,Gastos Pessoais,Vestuário,2024,2,Não,C6,40
-LOJA SO DOIS REAIS,42.80,Moradia,Compras para casa,2024,2,Não,C6,41
-LOJA SO DOIS REAIS,71.50,Moradia,Compras para casa,2024,2,Não,C6,42
-LOJA SO DOIS REAIS,10.00,Moradia,Compras para casa,2024,2,Não,C6,43
-PAG*ATACADOGLOBO,69.18,Moradia,Compras para casa,2024,2,Não,C6,44
-INOVE CASA,59.98,Moradia,Manutenção Residencial,2024,2,Não,C6,45
-SUPERMERCADO GUANABARA,57.25,Alimentação,Mantimentos,2024,2,Sim,C6,46
-SUPERMERCADO GUANABARA,79.50,Alimentação,Mantimentos,2024,2,Sim,C6,47
-EMPORIO GELEI,19.89,Entretenimento,Bares/Pubs,2024,2,Não,C6,48
-PG *TON KIKA PET SHOP,125.00,Diversos,Animais de estimação,2024,2,Não,C6,49
-POSTO AZEREDO,221.08,Transporte,Gasolina,2024,2,Sim,C6,50
-PAG*MARIAANGELICA,142.00,Gastos Pessoais,Beleza e Cuidados Pessoais,2024,2,Não,C6,51
-PAG*NICASCASAPUBLTDA,73.00,Entretenimento,Bares/Pubs,2024,2,Não,C6,52
-PAPUERA BAR,18.00,Entretenimento,Bares/Pubs,2024,2,Não,C6,53
-PAPUERA BAR,18.00,Entretenimento,Bares/Pubs,2024,2,Não,C6,54
-REI DO QUINDIM,63.36,Alimentação,Comer Fora,2024,2,Não,C6,55
-LA CARRETA PSJ,67.00,Alimentação,Comer Fora,2024,2,Não,C6,56
-FARMACIA SAO JOAO,67.50,Saúde,Medicações,2024,2,Não,C6,57
-FARMACIA SAO JOAO,16.89,Saúde,Medicações,2024,2,Não,C6,58
-AMAZON MARKETPLACE,21.90,Moradia,Compras para casa,2024,2,Não,C6,59
-MERCADOLIVRE*ACIMELSU,49.26,Moradia,Compras para casa,2024,2,Não,C6,60
-MERCADOLIVRE*BRUNOREZ,60.00,Moradia,Compras para casa,2024,2,Não,C6,61
-MERCADOLIVRE*MERCADOL,58.14,Moradia,Compras para casa,2024,2,Não,C6,62
-HUB*KABUM,913.20,Moradia,Compras para casa,2024,2,Não,C6,63
-IFOOD       *IFOOD,47.90,Alimentação,Comer Fora,2024,2,Não,C6,64
-AMAZON BR,17.90,Moradia,Compras para casa,2024,2,Não,C6,65
-Liquidacao B3 *      23/02/2024,66.55,Poupança/Dívidas/Investimentos,Investimentos,2024,2,Não,Inter,66
-Liquidacao B3 *      15/02/2024,511.89,Poupança/Dívidas/Investimentos,Investimentos,2024,2,Não,Inter,67
-Inter Pre 10gb Mensal,30.00,Diversos,Despesas Diversas,2024,2,Não,Inter,68
-Pagamento de boleto efetuado - OSIRNET INFO TELECOM EIRELI . EPP,110.13,Utilidades,Internet,2024,2,Sim,Nubank,69
-Pagamento de boleto efetuado - F SOUTO IMOVEIS LTDA,1900.57,Moradia,Hipoteca/Aluguel,2024,2,Sim,Nubank,70
-Pagamento de boleto efetuado - CIA ESTADUAL DE DIST,101.18,Utilidades,Eletricidade,2024,2,Sim,Nubank,71
-Transferência enviada pelo Pix - Shopee - 38.372.267/0001-82 - ADYEN DO BRASIL IP LTDA. Agência: 1 Conta: 100000037-5,41.50,Moradia,Compras para casa,2024,2,Não,Nubank,72
-Tarifa Pacote de Serviços - Cobrança referente 14/02/2024,14.55,Utilidades,Taxas Bancárias,2024,2,Sim,Banco do Brasil,73
-Pagamento Fatura de Água - SANEP - PELOTAS,128.84,Utilidades,Água,2024,2,Sim,Banco do Brasil,74
-Amazonprimebr,14.90,Gastos Pessoais,Assinaturas,2024,1,Sim,Nubank,75
-Amazon 5/10,269.99,Moradia,Compras para casa,2024,1,Não,Nubank,76
-Fina Flor,69.00,Diversos,Presentes e Doações,2024,1,Não,Nubank,77
-Pg *Intershop Intersho 6/10,299.90,Moradia,Compras para casa,2024,1,Não,Nubank,78
-Styllo 10/10,88.00,Diversos,Presentes e Doações,2024,1,Não,Nubank,79
-LOJAS RIACHUELO LJ 027,59.93,Gastos Pessoais,Vestuário,2024,1,Não,C6,80
-SUEL STREET WEAR,140.00,Gastos Pessoais,Vestuário,2024,1,Não,C6,81
-BRASCON,110.08,Gastos Pessoais,Vestuário,2024,1,Não,C6,82
-PAG*CASAMARIA,60.43,Moradia,Compras para casa,2024,1,Não,C6,83
-VALOREM*FENIX COMERCIO,49.99,Saúde,Medicações,2024,1,Não,C6,84
-HAVAN PELOTAS,68.98,Moradia,Compras para casa,2024,1,Não,C6,85
-POSTO AZEREDO,260.17,Transporte,Gasolina,2024,1,Sim,C6,86
-ECOSUL,15.20,Transporte,Impostos e taxas do automóvel,2024,1,Não,C6,87
-SIM JAGUARAO SHELL 116,8.98,Diversos,Despesas Diversas,2024,1,Não,C6,88
-ECOSUL,15.20,Transporte,Impostos e taxas do automóvel,2024,1,Não,C6,89
-VILA REAL CONFEITARIA,7.00,Alimentação,Mantimentos,2024,1,Não,C6,90
-CARREFOUR NPA PELOTAS,6.89,Alimentação,Mantimentos,2024,1,Sim,C6,91
-FERRAGEM LORENZET,25.30,Moradia,Manutenção Residencial,2024,1,Não,C6,92
-MACRO ATACADO KROLOW,33.01,Alimentação,Mantimentos,2024,1,Sim,C6,93
-FABRICA ROCA,25.33,Alimentação,Comer Fora,2024,1,Não,C6,94
-SUPERMERCADO GUANABARA,61.48,Alimentação,Mantimentos,2024,1,Sim,C6,95
-FARMACIA SAO JOAO,34.85,Saúde,Medicações,2024,1,Não,C6,96
-FARMACIA SAO JOAO,14.98,Saúde,Medicações,2024,1,Não,C6,97
-VILLA REAL,85.80,Alimentação,Comer Fora,2024,1,Não,C6,98
-COBASI PELOT*COBASI,83.32,Diversos,Animais de estimação,2024,1,Não,C6,99
-ATACADAO 122 AS,220.43,Alimentação,Mantimentos,2024,1,Sim,C6,100
-SUPERMERCADO GUANABARA,81.27,Alimentação,Mantimentos,2024,1,Sim,C6,101
-FABRICA ROCA,77.52,Alimentação,Comer Fora,2024,1,Não,C6,102
-WMS SUPERMERCADOS DO B,12.98,Alimentação,Mantimentos,2024,1,Sim,C6,103
-THIAGO MATHEUS ANCIBAR,198.00,Diversos,Despesas Diversas,2024,1,Não,C6,104
-FABRICA ROCA,32.55,Alimentação,Comer Fora,2024,1,Não,C6,105
-PAG*LEPETITSPA,17.25,Diversos,Despesas Diversas,2024,1,Não,C6,106
-CARREFOUR NPA PELOTAS,13.08,Alimentação,Mantimentos,2024,1,Sim,C6,107
-HAVAN PELOTAS,59.46,Moradia,Compras para casa,2024,1,Não,C6,108
-COMERCIAL ZAFFARI LOJA,256.26,Alimentação,Mantimentos,2024,1,Sim,C6,109
-SUPERMERCADO GUANABARA,81.73,Alimentação,Mantimentos,2024,1,Sim,C6,110
-PAG*PELOTAS,68.96,Diversos,Despesas Diversas,2024,1,Não,C6,111
-HAVAN PELOTAS,86.97,Moradia,Compras para casa,2024,1,Não,C6,112
-BRADESCO SEGUROS AUTO,234.49,Transporte,Seguro do automóvel,2024,1,Sim,C6,113
-MARIAFLOR,99.80,Moradia,Compras para casa,2024,1,Não,C6,114
-MACRO ATACADO KROLOW,103.05,Alimentação,Mantimentos,2024,1,Sim,C6,115
-993 SHOPPING PELOTAS,49.98,Gastos Pessoais,Vestuário,2024,1,Não,C6,116
-VLB COMERCIO DE ARTIGO,56.50,Alimentação,Mantimentos,2024,1,Sim,C6,117
-PELOTENSE GESTAO DE ES,10.00,Transporte,Impostos e taxas do automóvel,2024,1,Não,C6,118
-SUPERMERCADO GUANABARA,17.47,Alimentação,Mantimentos,2024,1,Sim,C6,119
-QUEVEDO E SILVA COMER,29.90,Alimentação,Mantimentos,2024,1,Sim,C6,120
-PAYGO*NICAS CASA PUB L,120.00,Entretenimento,Bares/Pubs,2024,1,Não,C6,121
-COMERCIAL ZAFFARI LOJA,152.89,Alimentação,Mantimentos,2024,1,Sim,C6,122
-POSTO AZEREDO,253.01,Transporte,Gasolina,2024,1,Sim,C6,123
-SUPERMERCADO PARAISO,9.21,Alimentação,Mantimentos,2024,1,Sim,C6,124
-PAG*MARIAANGELICA,155.00,Gastos Pessoais,Beleza e Cuidados Pessoais,2024,1,Não,C6,125
-BARBEARIA CHICAGO,45.00,Gastos Pessoais,Beleza e Cuidados Pessoais,2024,1,Não,C6,126
-IGOR SILVEIRA DOS SAN,4.50,Diversos,Despesas Diversas,2024,1,Não,C6,127
-FEITO DE LETRAS,2.25,Diversos,Despesas Diversas,2024,1,Não,C6,128
-FARMACIA SAO JOAO,7.99,Saúde,Medicações,2024,1,Não,C6,129
-ATACADAO 122 AS,121.88,Alimentação,Mantimentos,2024,1,Sim,C6,130
-AMAZON BR,53.15,Moradia,Compras para casa,2024,1,Não,C6,131
-AMAZON BR,50.94,Moradia,Compras para casa,2024,1,Não,C6,132
-AMAZON MARKETPLACE,56.66,Moradia,Compras para casa,2024,1,Não,C6,133
-MERCADOLIVRE*6PRODUTO,27.67,Moradia,Compras para casa,2024,1,Não,C6,134
-AMAZON MARKETPLACE,86.83,Moradia,Compras para casa,2024,1,Não,C6,135
-AMAZON MARKETPLACE,60.62,Moradia,Compras para casa,2024,1,Não,C6,136
-VINDI  *INVESTIDOR10,19.90,Gastos Pessoais,Assinaturas,2024,1,Sim,C6,137
-MERCADOLIVRE*5PRODUTO,161.60,Moradia,Compras para casa,2024,1,Não,C6,138
-MERCADOLIVRE*5PRODUTO,95.84,Moradia,Compras para casa,2024,1,Não,C6,139
-MERCADOLIVRE*3PRODUTO,62.83,Moradia,Compras para casa,2024,1,Não,C6,140
-MERCADOLIVRE*3PRODUTO,27.02,Moradia,Compras para casa,2024,1,Não,C6,141
-MERCADOLIVRE*ACIMELSU,49.27,Moradia,Compras para casa,2024,1,Não,C6,142
-Pagamento de boleto efetuado - AYMORE CRED.FIN.E INVEST.S/A,773.07,Poupança/Dívidas/Investimentos,Pagamentos de Dívidas,2024,1,Não,Nubank,143
-Pagamento de boleto efetuado - CONSELHO REGIONAL DE PSICOLOGIA 7 REGIAO,582.55,Diversos,Despesas Diversas,2024,1,Não,Nubank,144
-Comercial Zaffari Ltda,60.56,Alimentação,Mantimentos,2024,1,Sim,Inter,145
-Carlos Luiz Rodeghiero 169998860,10.00,Diversos,Despesas Diversas,2024,1,Não,Inter,146
-Fernando Antonio Reis Da Porciuncula,6.45,Alimentação,Mantimentos,2024,1,Sim,Inter,147
-Liquidacao B3 *      23/01/2024,689.20,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,Inter,148
-Yuri Do Nascimento Lima,27.00,Gastos Pessoais,Hobbies e Recreação,2024,1,Não,Inter,149
-Liquidacao B3 *      16/01/2024,589.00,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,Inter,150
-Clovis Helwig,3.70,Diversos,Despesas Diversas,2024,1,Não,Inter,151
-Liquidacao B3 *      12/01/2024,548.11,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,Inter,152
-Inter Pre 10gb Mensal,30.00,Utilidades,Celular/Telefone Móvel,2024,1,Sim,Inter,153
-Liquidacao B3 *      27/12/2023,501.89,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,Inter,154
-Pagamento de boleto efetuado - OSIRNET INFO TELECOM EIRELI . EPP,110.13,Utilidades,Internet,2024,1,Sim,Nubank,155
-Pagamento de boleto efetuado - F SOUTO IMOVEIS LTDA,1877.18,Moradia,Hipoteca/Aluguel,2024,1,Sim,Nubank,156
-Pagamento de boleto efetuado - CIA ESTADUAL DE DIST,173.89,Utilidades,Eletricidade,2024,1,Sim,Nubank,157
-Pagamento de boleto efetuado - PROFIC EM LINGUA ESTRANGEIRA DLLE UFSC,100.00,Gastos Pessoais,Estudos,2024,1,Não,Nubank,158
-Tarifa Pacote de Serviços - Cobrança referente 10/01/2024,14.55,Utilidades,Taxas Bancárias,2024,1,Sim,Banco do Brasil,159
-Pix - Enviado - 15/01 14:21 Roger De Ávila Vega,18.00,Gastos Pessoais,Hobbies e Recreação,2024,1,Não,Banco do Brasil,160
+date,description,amount,bank,category,subcategory,year,month,recurrent,id,cleaned_description
+2024-02-07T00:00:00,Melimais,17.99,Inter,Gastos Pessoais,Assinaturas,2024,2,Sim,41,melimais
+2024-02-07T00:00:00,Melimais,17.99,Inter,Gastos Pessoais,Assinaturas,2024,2,Sim,42,melimais
+2024-02-07T00:00:00,IOF,0.27,Inter,Utilidades,Taxas Bancárias,2024,2,Não,43,iof
+2024-02-07T00:00:00,Encargos rotativos,0.89,Inter,Utilidades,Taxas Bancárias,2024,2,Não,44,encargos rotativos
+2024-02-07T00:00:00,Intershop Forno 06/10,62.40,Inter,Moradia,Compras para casa,2024,2,Sim,46,intershop forno 06 10
+2024-02-07T00:00:00,Intershop Micro 06/10,58.34,Inter,Moradia,Compras para casa,2024,2,Sim,47,intershop micro 06 10
+2024-02-04T00:00:00,Supermercado Guanabara,159.41,Nubank,Alimentação,Mantimentos,2024,2,Sim,38,supermercado guanabara
+2024-01-11T00:00:00,Dm*Spotify,34.90,Nubank,Gastos Pessoais,Assinaturas,2024,2,Sim,39,dm spotify
+2024-01-09T00:00:00,Pg *Intershop Intersho 7/10,299.90,Nubank,Moradia,Compras para casa,2024,2,Sim,40,pg intershop intersho 10
+2024-02-27T00:00:00,Liquidacao B3 *      23/02/2024,66.55,Inter,Poupança/Dívidas/Investimentos,Investimentos,2024,2,Não,35,liquidacao b3 23 02 2024
+2024-02-19T00:00:00,Liquidacao B3 *      15/02/2024,511.89,Inter,Poupança/Dívidas/Investimentos,Investimentos,2024,2,Não,36,liquidacao b3 15 02 2024
+2024-02-14T00:00:00,Inter Pre 10gb Mensal,30.00,Inter,Utilidades,Celular/Telefone Móvel,2024,2,Não,37,inter pre 10gb mensal
+2024-02-05T00:00:00,Pagamento de boleto efetuado - OSIRNET INFO TELECOM EIRELI . EPP,110.13,Nubank,Utilidades,Internet,2024,2,Sim,30,efetuado osirnet info telecom eireli epp
+2024-02-05T00:00:00,Pagamento de boleto efetuado - F SOUTO IMOVEIS LTDA,1900.57,Nubank,Moradia,Hipoteca/Aluguel,2024,2,Sim,31,efetuado souto imoveis
+2024-02-06T00:00:00,Pagamento de boleto efetuado - CIA ESTADUAL DE DIST,101.18,Nubank,Utilidades,Eletricidade,2024,2,Sim,32,efetuado cia estadual dist
+2024-02-21T00:00:00,Transferência enviada pelo Pix - Shopee - 38.372.267/0001-82 - ADYEN DO BRASIL IP LTDA. Agência: 1 Conta: 100000037-5,41.50,Nubank,Moradia,Compras para casa,2024,2,Não,34,shopee 38 82 adyen brasil ip agencia
+2024-02-14T00:00:00,Tarifa Pacote de Serviços - Cobrança referente 14/02/2024,14.55,Banco do Brasil,Utilidades,Taxas Bancárias,2024,2,Sim,28,tarifa 14 02 2024
+2024-02-15T00:00:00,Pagamento Fatura de Água - SANEP - PELOTAS,128.84,Banco do Brasil,Utilidades,Água,2024,2,Sim,29,fatura agua sanep
+2024-01-07T00:00:00,Melimais,17.99,Inter,Gastos Pessoais,Assinaturas,2024,1,Sim,22,melimais
+2024-01-07T00:00:00,Spotify,34.90,Inter,Gastos Pessoais,Assinaturas,2024,1,Sim,23,spotify
+2024-01-07T00:00:00,Intershop Forno 05/10,62.40,Inter,Moradia,Compras para casa,2024,1,Sim,24,intershop forno 05 10
+2024-01-07T00:00:00,Intershop Micro 05/10,58.34,Inter,Moradia,Compras para casa,2024,1,Sim,25,intershop micro 05 10
+2023-12-19T00:00:00,Fina Flor,69.00,Nubank,Diversos,Presentes e Doações,2024,1,Não,19,fina flor
+2023-12-09T00:00:00,Pg *Intershop Intersho 6/10,299.90,Nubank,Moradia,Compras para casa,2024,1,Não,20,pg intershop intersho 10
+2023-12-09T00:00:00,Styllo 10/10,88.00,Nubank,Diversos,Presentes e Doações,2024,1,Não,21,styllo 10
+2024-01-29T00:00:00,Comercial Zaffari Ltda,60.56,Inter,Alimentação,Mantimentos,2024,1,Sim,7,comercial zaffari
+2024-01-27T00:00:00,Carlos Luiz Rodeghiero 169998860,10.00,Inter,Diversos,Despesas Diversas,2024,1,Não,8,carlos luiz rodeghiero 169998860
+2024-01-25T00:00:00,Fernando Antonio Reis Da Porciuncula,6.45,Inter,Alimentação,Mantimentos,2024,1,Não,9,fernando antonio reis porciuncula
+2024-01-25T00:00:00,Liquidacao B3 *      23/01/2024,689.20,Inter,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,10,liquidacao b3 23 01 2024
+2024-01-18T00:00:00,Yuri Do Nascimento Lima,27.00,Inter,Diversos,Despesas Diversas,2024,1,Não,11,yuri nascimento lima
+2024-01-18T00:00:00,Liquidacao B3 *      16/01/2024,589.00,Inter,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,12,liquidacao b3 16 01 2024
+2024-01-16T00:00:00,Clovis Helwig,3.70,Inter,Diversos,Despesas Diversas,2024,1,Não,13,clovis helwig
+2024-01-16T00:00:00,Liquidacao B3 *      12/01/2024,548.11,Inter,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,14,liquidacao b3 12 01 2024
+2024-01-14T00:00:00,Inter Pre 10gb Mensal,30.00,Inter,Utilidades,Celular/Telefone Móvel,2024,1,Não,15,inter pre 10gb mensal
+2024-01-02T00:00:00,Liquidacao B3 *      27/12/2023,501.89,Inter,Poupança/Dívidas/Investimentos,Investimentos,2024,1,Não,18,liquidacao b3 27 12 2023
+2024-01-02T00:00:00,Pagamento de boleto efetuado - OSIRNET INFO TELECOM EIRELI . EPP,110.13,Nubank,Utilidades,Internet,2024,1,Sim,3,efetuado osirnet info telecom eireli epp
+2024-01-04T00:00:00,Pagamento de boleto efetuado - F SOUTO IMOVEIS LTDA,1877.18,Nubank,Moradia,Hipoteca/Aluguel,2024,1,Sim,4,efetuado souto imoveis
+2024-01-05T00:00:00,Pagamento de boleto efetuado - CIA ESTADUAL DE DIST,173.89,Nubank,Utilidades,Eletricidade,2024,1,Sim,5,efetuado cia estadual dist
+2024-01-26T00:00:00,Pagamento de boleto efetuado - PROFIC EM LINGUA ESTRANGEIRA DLLE UFSC,100.00,Nubank,Gastos Pessoais,Estudos,2024,1,Não,6,efetuado profic lingua estrangeira dlle ufsc
+2024-01-10T00:00:00,Tarifa Pacote de Serviços - Cobrança referente 10/01/2024,14.55,Banco do Brasil,Utilidades,Taxas Bancárias,2024,1,Sim,0,tarifa 10 01 2024
+2024-01-15T00:00:00,Pix - Enviado - 15/01 14:21 Roger De Ávila Vega,18.00,Banco do Brasil,Diversos,Despesas Diversas,2024,1,Não,1,15 01 14 21 roger avila vega
+2024-01-15T00:00:00,Pagamento Fatura de Água - SANEP - PELOTAS,138.71,Banco do Brasil,Utilidades,Água,2024,1,Sim,2,fatura agua sanep

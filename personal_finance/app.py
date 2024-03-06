@@ -10,7 +10,7 @@ from components import layout
 from data.loader import load_data
 
 
-EXPENSES_PATH = Path.cwd() / "data" / "expenses.csv"
+EXPENSES_PATH = Path.cwd() / 'data' / 'expenses.csv'
 os.environ['EXPENSES_PATH'] = str(EXPENSES_PATH)
 INCOMES_PATH = Path.cwd() / 'data' / 'incomes.csv'
 os.environ['INCOMES_PATH'] = str(INCOMES_PATH)
