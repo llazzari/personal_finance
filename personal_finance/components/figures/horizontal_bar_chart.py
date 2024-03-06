@@ -36,7 +36,7 @@ def update_bar_chart(_, month: int, year: int, data: list[dict]) -> html.Div:
         y=DataSchema.CATEGORY,
         x=DataSchema.AMOUNT,
         color=DataSchema.AMOUNT,
-        color_continuous_scale=px.colors.sequential.Greens[3:],
+        color_continuous_scale=px.colors.sequential.algae[3:9],
         labels={
             DataSchema.AMOUNT: i18n.t(f'columns.{DataSchema.AMOUNT}'),
             DataSchema.CATEGORY: i18n.t(f'columns.{DataSchema.CATEGORY}'),
