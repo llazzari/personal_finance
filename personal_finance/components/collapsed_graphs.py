@@ -2,10 +2,9 @@ from dash import callback, html, Output, Input
 import dash_bootstrap_components as dbc
 import i18n
 
-from components import ids
 from components.dropdowns import months_dropdown, years_dropdown
 from components.figures import sunburst_chart, bar_chart, horizontal_bar_chart
-from components import expenses_card
+from components import expenses_card, incomes_card, ids
 from data.source import DataSource
 
 
@@ -53,14 +52,15 @@ def _monthly_sunburst_chart() -> html.Div:
                                     width='auto'
                                 ),
                             ],
-                            style={'margin': '10px'},
                         ),
                     ]),
+                    width=8
                 ),
-                dbc.Col(expenses_card.render(), width='auto')
+                dbc.Col(incomes_card.render(), width=2),
+                dbc.Col(expenses_card.render(), width=2)
             ],
-            justify='between',
-            style={'margin': '10px'},
+            justify='start',
+            style={'margin-bottom': '10px'}
         ),
         dbc.Row(
             [

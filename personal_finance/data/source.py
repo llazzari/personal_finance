@@ -60,7 +60,7 @@ class DataSource:
         df = self.filter_year(year)
         return df.query('month == @month')
 
-    def total_month_expense(self, year: int, month: int) -> float:
+    def total_month_amount(self, year: int, month: int) -> float:
         df = self.filter_month_and_year(year, month)
         return df[DataSchema.AMOUNT].sum()
 

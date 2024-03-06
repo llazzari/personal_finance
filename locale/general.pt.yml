@@ -25,6 +25,7 @@ pt:
   month: Selecione um mês
   year: Selecione um ano
   total_monthly_exp: Despesas totais do mês
+  total_monthly_inc: Receitas totais do mês
   money: R$
   monthly_expenses: Receitas e despesas do mês separadas por categorias
   expenses_evolution: Evolução das despesas

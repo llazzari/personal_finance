@@ -25,6 +25,7 @@ en:
   month: Select a month
   year: Select a year
   total_monthly_exp: Total monthly expenses
+  total_monthly_inc: Total monthly incomes
   money: $
   monthly_expenses: Month incomes and expenses by category
   expenses_evolution: Expenses evolution
