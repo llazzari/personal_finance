@@ -6,6 +6,8 @@ data/expenses.csv
 data/incomes.csv
 data/my_expenses.csv
 data/my_incomes.csv
+data/neni_expenses.csv
+data/neni_incomes.csv
 
 *.png
 
