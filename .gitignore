@@ -2,7 +2,10 @@
 data/despesas_Nicki.csv
 data/ml/
 data/bank_statements/
-data/*.csv
+data/expenses.csv
+data/incomes.csv
+data/my_expenses.csv
+data/my_incomes.csv
 
 *.png
 
