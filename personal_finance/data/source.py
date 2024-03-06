@@ -64,7 +64,7 @@ class DataSource:
         df = self.filter_month_and_year(year, month)
         return df[DataSchema.AMOUNT].sum()
 
-    def month_expense_by_category(self, year: int, month: int) -> pd.DataFrame:
+    def month_expense_by_subcategory(self, year: int, month: int) -> pd.DataFrame:
         df_month = self.filter_month_and_year(year, month)
         df_month_sum = df_month.groupby(
             by=DataSchema.SUBCATEGORY
@@ -89,3 +89,9 @@ class DataSource:
         locale: str = os.environ['LOCALE']
         month: str = babel.dates.format_date(date, format='MMM', locale=locale)
         return month.capitalize().strip('.')
+
+    def month_income_by_category(self, month: int, year: int) -> pd.DataFrame:
+        df = self.filter_month_and_year(year, month)
+        return df.groupby(
+            by=DataSchema.CATEGORY
+        ).sum(numeric_only=True).reset_index().sort_values(DataSchema.AMOUNT)

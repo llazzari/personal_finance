@@ -26,7 +26,7 @@ pt:
   year: Selecione um ano
   total_monthly_exp: Despesas totais do mês
   money: R$
-  monthly_expenses: Despesas do mês separadas por categorias e subcategorias 
+  monthly_expenses: Receitas e despesas do mês separadas por categorias
   expenses_evolution: Evolução das despesas
   delete_rows: Remover dados selecionados
   bank_error: Dados incompatíveis! Talvez você tenha selecionado o banco errado...

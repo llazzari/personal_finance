@@ -4,7 +4,7 @@ import i18n
 
 from components import ids
 from components.dropdowns import months_dropdown, years_dropdown
-from components.figures import sunburst_chart, bar_chart
+from components.figures import sunburst_chart, bar_chart, horizontal_bar_chart
 from components import expenses_card
 from data.source import DataSource
 
@@ -62,10 +62,10 @@ def _monthly_sunburst_chart() -> html.Div:
             justify='between',
             style={'margin': '10px'},
         ),
-        html.Div(
+        dbc.Row(
             [
-                # bar_polar_chart.render(app),
-                sunburst_chart.render(),
+                dbc.Col(horizontal_bar_chart.render(), width=6),
+                dbc.Col(sunburst_chart.render(), width=6),
             ],
             style={'justify': 'center'}
         ),

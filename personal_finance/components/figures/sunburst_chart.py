@@ -37,14 +37,14 @@ def update_chart(data: list[dict], month: int, year: int) -> html.Div:
     if not data:
         return html.Div(id=ids.SUNBURST_CHART)
     source = DataSource(data)
-    df_month_sum = source.month_expense_by_category(year, month)
+    df_month_sum = source.month_expense_by_subcategory(year, month)
 
     fig = px.sunburst(
         df_month_sum,
         path=[DataSchema.CATEGORY, DataSchema.SUBCATEGORY],
         values=DataSchema.AMOUNT,
         color=DataSchema.CATEGORY,
-        # color_discrete_sequence=styles.COLOR_DISCRETE_SEQUENCE,
+        title=i18n.t('general.expenses'),
     )
 
     styles.standardize(fig)

@@ -26,7 +26,7 @@ en:
   year: Select a year
   total_monthly_exp: Total monthly expenses
   money: $
-  monthly_expenses: Month expenses by category and subcategories 
+  monthly_expenses: Month incomes and expenses by category
   expenses_evolution: Expenses evolution
   delete_rows: Remove selected data
   bank_error: Incompatible data!

@@ -1,14 +1,33 @@
-date,amount,description,category,subcategory,year,month,recurrent,cleaned_description,bank,id
-2024-01-05T00:00:00,270.00,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,Salário,,2024,1,Não,nickeli chaves psicologa,Nubank,9
-2024-01-10T00:00:00,780.00,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,Salário,,2024,1,Não,nickeli chaves psicologa,Nubank,10
-2024-01-10T00:00:00,15.00,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,Salário,,2024,1,Não,nickeli chaves psicologa,Nubank,11
-2024-01-14T00:00:00,600.00,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,Salário,,2024,1,Não,nickeli chaves psicologa,Nubank,12
-,60.56,Pix No Crédito,Diversos,,2024,1,Não,,Inter,0
-,733.39,Liquidacao B3 *      19/01/2024,Retorno sobre investimentos,,2024,1,Não,,Inter,1
-,7.70,* Prov * Rendimento 7                  Hglg11,Retorno sobre investimentos,,2024,1,Não,,Inter,2
-,5.60,* Prov * Rendimento 80                 Bcff11,Retorno sobre investimentos,,2024,1,Não,,Inter,3
-,6.61,* Prov * Juros S/capital 32                 Trpl4,Retorno sobre investimentos,,2024,1,Não,,Inter,4
-,2.10,INTER PRE 10GB MENSAL,Diversos,,2024,1,Sim,,Inter,5
-,782.22,Liquidacao B3 *      08/01/2024,Retorno sobre investimentos,,2024,1,Não,,Inter,6
-,360.24,Liquidacao B3 *      02/01/2024,Retorno sobre investimentos,,2024,1,Não,,Inter,7
-,100.00,Fofs p/ prova de proficiência,Diversos,,2024,1,Não,,Nubank,8
+date,description,amount,category,subcategory,year,month,recurrent,cleaned_description,bank,id
+2024-01-19T00:00:00,"Estorno de ""Pg *Intershop Intersho""",290.90,Diversos,,2024,2,Não,estorno intershop intersho,Nubank,32
+2024-01-26T00:00:00,MERCADOLIVRE*BRUNOREZ,180.00,Diversos,,2024,2,Não,,C6,31
+2024-02-29T00:00:00,* Prov * Rendimento 19                 Bbas3,0.06,Investimentos,,2024,2,Não,prov rendimento 19 bbas3,Inter,15
+2024-02-29T00:00:00,* Prov * Rendimento 19                 Bbas3,0.16,Investimentos,,2024,2,Não,prov rendimento 19 bbas3,Inter,16
+2024-02-29T00:00:00,* Prov * Dividendos 19                 Bbas3,4.19,Investimentos,,2024,2,Não,prov dividendos 19 bbas3,Inter,17
+2024-02-29T00:00:00,* Prov * Juros S/capital 19                 Bbas3,9.91,Investimentos,,2024,2,Não,prov juros capital 19 bbas3,Inter,18
+2024-02-28T00:00:00,* Prov * Frações  Vghf11,1.03,Investimentos,,2024,2,Não,prov fracoes vghf11,Inter,19
+2024-02-22T00:00:00,* Prov * Dividendos 35                 Bbse3,43.46,Investimentos,,2024,2,Não,prov dividendos 35 bbse3,Inter,20
+2024-02-22T00:00:00,* Prov * Rendimento 35                 Bbse3,0.52,Investimentos,,2024,2,Não,prov rendimento 35 bbse3,Inter,21
+2024-02-20T00:00:00,* Prov * Rendimento 30                 Petr4,0.15,Investimentos,,2024,2,Não,prov rendimento 30 petr4,Inter,22
+2024-02-20T00:00:00,* Prov * Rendimento 30                 Petr4,0.08,Investimentos,,2024,2,Não,prov rendimento 30 petr4,Inter,23
+2024-02-20T00:00:00,* Prov * Juros S/capital 30                 Petr4,10.95,Investimentos,,2024,2,Não,prov juros capital 30 petr4,Inter,24
+2024-02-20T00:00:00,* Prov * Dividendos 30                 Petr4,7.29,Investimentos,,2024,2,Não,prov dividendos 30 petr4,Inter,25
+2024-02-14T00:00:00,INTER PRE 10GB MENSAL,2.10,Cashback,,2024,2,Não,,Inter,26
+2024-02-08T00:00:00,* Prov * Juros S/capital 80                 Sanb3,13.04,Investimentos,,2024,2,Não,prov juros capital 80 sanb3,Inter,27
+2024-02-07T00:00:00,* Prov * Rendimento 96                 Vghf11,9.61,Investimentos,,2024,2,Não,prov rendimento 96 vghf11,Inter,29
+2024-02-07T00:00:00,* Prov * Resgate Renda Variavel Mgff11,38.45,Investimentos,,2024,2,Não,prov resgate renda variavel mgff11,Inter,30
+2024-02-05T00:00:00,Ordem Bancária - 008898340001-08 FUND.COORD.DE APERF.DE,3100.00,Salário,,2024,2,Não,ordem bancaria fund coord aperf,Banco do Brasil,13
+2024-02-14T00:00:00,Pix - Recebido - 14/02 14:39 00062021257053 GERSON ROSA,129.00,Diversos,,2024,2,Não,gerson rosa,Banco do Brasil,14
+,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,270.00,Salário,,2024,1,Não,,Nubank,0
+,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,780.00,Salário,,2024,1,Não,,Nubank,1
+,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,15.00,Salário,,2024,1,Não,,Nubank,2
+,Transferência Recebida - NICKELI CHAVES PSICOLOGA LTDA - 51.579.980/0001-60 - NU PAGAMENTOS - IP (0260) Agência: 1 Conta: 27890421-3,600.00,Salário,,2024,1,Não,,Nubank,3
+,Pix No Crédito,60.56,Diversos,,2024,1,Não,,Inter,4
+,Liquidacao B3 *      19/01/2024,733.39,Investimentos,,2024,1,Não,,Inter,5
+,* Prov * Rendimento 7                  Hglg11,7.70,Investimentos,,2024,1,Não,,Inter,6
+,* Prov * Rendimento 80                 Bcff11,5.60,Investimentos,,2024,1,Não,,Inter,7
+,* Prov * Juros S/capital 32                 Trpl4,6.61,Investimentos,,2024,1,Não,,Inter,8
+,INTER PRE 10GB MENSAL,2.10,Diversos,,2024,1,Sim,,Inter,9
+,Liquidacao B3 *      08/01/2024,782.22,Investimentos,,2024,1,Não,,Inter,10
+,Liquidacao B3 *      02/01/2024,360.24,Investimentos,,2024,1,Não,,Inter,11
+,Fofs p/ prova de proficiência,100.00,Diversos,,2024,1,Não,,Nubank,12
