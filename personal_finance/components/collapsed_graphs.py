@@ -35,11 +35,18 @@ def _monthly_sunburst_chart() -> html.Div:
     return html.Div([
         dbc.Row(
             [
+                dbc.Col(incomes_card.render(), width=2),
+                dbc.Col(expenses_card.render(), width=2),
                 dbc.Col(
                     html.Div([
-                        html.H4(html.B(i18n.t(  # type: ignore
-                            'general.monthly_expenses'
-                        ))),
+                        html.H4(
+                            html.B(
+                                i18n.t(  # type: ignore
+                                    'general.monthly_expenses'
+                                )
+                            ),
+                            className='right-header',
+                        ),
                         dbc.Row(
                             [
                                 dbc.Col(
@@ -52,12 +59,11 @@ def _monthly_sunburst_chart() -> html.Div:
                                     width='auto'
                                 ),
                             ],
+                            justify='end'
                         ),
                     ]),
                     width=8
                 ),
-                dbc.Col(incomes_card.render(), width=2),
-                dbc.Col(expenses_card.render(), width=2)
             ],
             justify='start',
             style={'margin-bottom': '10px'}
