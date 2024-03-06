@@ -3,10 +3,6 @@
     display: inline-block;
 }
 
-.card {
-    margin-right: 10px;
-}
-
 .main_buttons {
     background-color: var(--bs-secondary);
     border-color: var(--bs-secondary);
