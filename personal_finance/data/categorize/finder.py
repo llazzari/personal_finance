@@ -1,4 +1,5 @@
 import functools
+import pandas as pd
 import yaml
 import i18n
 from pathlib import Path
@@ -7,6 +8,7 @@ from data.categorize.expenses_categories import (
     CATEGORIES,
     RECURRENT_SUBCATEGORIES
 )
+from data.schema import DataSchema
 
 PATH = Path.cwd() / 'locale' / 'subcategory.pt.yml'
 
@@ -33,8 +35,15 @@ def find_category(subcategory_label: str) -> str:
     return i18n.t(f'category.{category}')
 
 
+def find_categories(df: pd.DataFrame) -> pd.DataFrame:
+    df.loc[:, DataSchema.CATEGORY] = df[DataSchema.SUBCATEGORY].apply(
+        find_category
+    )
+    return df
+
+
 @functools.lru_cache
-def find_recurrences(subcategory_label: str) -> str:
+def find_recurrency(subcategory_label: str) -> str:
     is_recurrent: str = 'no'
 
     subcategories: dict[str, str] = set_subcategories_from_yaml()
@@ -43,3 +52,10 @@ def find_recurrences(subcategory_label: str) -> str:
     if subcategory in RECURRENT_SUBCATEGORIES:
         is_recurrent: str = 'yes'
     return i18n.t(f'general.recurrent_{is_recurrent}')
+
+
+def find_recurrences(df: pd.DataFrame) -> pd.DataFrame:
+    df.loc[:, DataSchema.RECURRENT] = df[DataSchema.SUBCATEGORY].apply(
+        find_recurrency
+    )
+    return df

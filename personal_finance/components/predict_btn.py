@@ -7,6 +7,8 @@ import pandas as pd
 from components import ids
 from data.ml.predictor import predict_subcategories, separate_data
 from data.source import DataSource
+from data.processor import Preprocessor, compose
+from data.categorize.finder import find_categories, find_recurrences
 
 
 def render() -> html.Div:
@@ -39,7 +41,12 @@ def on_click(_, expenses: list[dict]) -> tuple[list[dict] | Any, bool]:
     if uncategorized_df.empty:
         return no_update, True
 
-    newly_categorized_df = predict_subcategories(uncategorized_df)
+    categorizer: Preprocessor = compose(
+        predict_subcategories,
+        find_categories,
+        find_recurrences,
+    )
+    newly_categorized_df = categorizer(uncategorized_df)
 
     df = pd.concat([newly_categorized_df, categorized_df])
 
