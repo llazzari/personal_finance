@@ -1,6 +1,4 @@
-from pathlib import Path
-from typing import Any, Optional
-import joblib
+from typing import Any
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
@@ -9,14 +7,6 @@ from sklearn.metrics import accuracy_score, classification_report
 
 
 RANDOM_STATE: int = 42
-
-
-def save_model(model: RandomForestClassifier, file: str | Path) -> None:
-    joblib.dump(model, file)
-
-
-def save_vectorizer(vectorizer: CountVectorizer, file: str | Path) -> None:
-    joblib.dump(vectorizer, file)
 
 
 def split_data(X: np.ndarray, y: np.ndarray) -> list:
@@ -55,31 +45,9 @@ def evaluate_model(
 
 
 def train_and_test(X: np.ndarray, y: np.ndarray) -> None:
-    print(X.dtype, y.dtype)
     X_train, X_test, y_train, y_test = split_data(X, y)
     vectorizer = CountVectorizer()
     X_train_vectorized = vectorizer.fit_transform(X_train)
     X_test_vectorized = vectorizer.transform(X_test)
     model = train_random_forest(X_train_vectorized, y_train)
     evaluate_model(model, X_test_vectorized, y_test)
-    # save_model(model, MODEL_FILE)
-    # save_vectorizer(vectorizer, VECTORIZER_FILE)
-
-
-def load_model(model_file: str | Path) -> RandomForestClassifier:
-    return joblib.load(model_file)
-
-
-def load_vectorizer(vector_file: str | Path) -> CountVectorizer:
-    return joblib.load(vector_file)
-
-
-def predict(
-    X: np.ndarray,
-    model: RandomForestClassifier,
-    vectorizer: Optional[CountVectorizer] = None
-) -> np.ndarray:
-    if vectorizer is not None:
-        X_vectorized = vectorizer.transform(X)
-        return model.predict(X_vectorized)
-    return model.predict(X)
