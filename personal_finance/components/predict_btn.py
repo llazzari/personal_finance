@@ -5,7 +5,7 @@ import i18n
 import pandas as pd
 
 from components import ids
-from data.predictor import predict_subcategories, separate_data
+from data.ml.predictor import predict_subcategories, separate_data
 from data.source import DataSource
 
 
