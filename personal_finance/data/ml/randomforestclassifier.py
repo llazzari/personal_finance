@@ -47,8 +47,8 @@ def evaluate_model(
 
 
 def train_and_test(
-    X: spmatrix | np.ndarray,
-    y: spmatrix | np.ndarray,
+    X: np.ndarray,
+    y: np.ndarray,
     save_vectorizer_file: Optional[str] = None,
     save_model_file: Optional[str] = None
 ) -> None:
