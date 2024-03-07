@@ -53,8 +53,7 @@ def train_and_test(
     save_model_file: Optional[str] = None
 ) -> None:
     X_train, X_test, y_train, y_test = split_data(X, y)
-
-    if '<U' in X.dtype:
+    if X.dtype == '<U21':
         vectorizer = CountVectorizer()
         X_train = vectorizer.fit_transform(X_train)
         X_test = vectorizer.transform(X_test)
