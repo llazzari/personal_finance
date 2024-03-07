@@ -37,7 +37,7 @@ def train_random_forest(
 def evaluate_model(
     model: RandomForestClassifier,
     X_test: spmatrix | np.ndarray,
-    y_test: np.ndarray
+    y_test: spmatrix | np.ndarray
 ) -> None:
     predictions = model.predict(X_test)
     accuracy = accuracy_score(y_test, predictions)
@@ -47,8 +47,8 @@ def evaluate_model(
 
 
 def train_and_test(
-    X: np.ndarray,
-    y: np.ndarray,
+    X: spmatrix | np.ndarray,
+    y: spmatrix | np.ndarray,
     save_vectorizer_file: Optional[str] = None,
     save_model_file: Optional[str] = None
 ) -> None:
