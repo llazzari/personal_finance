@@ -19,6 +19,7 @@ def set_subcategories_from_yaml() -> dict[str, str]:
     return {v: k for k, v in subcategories_pt.items()}
 
 
+@functools.lru_cache
 def find_category(subcategory_label: str) -> str:
     subcategories: dict[str, str] = set_subcategories_from_yaml()
 
@@ -32,6 +33,7 @@ def find_category(subcategory_label: str) -> str:
     return i18n.t(f'category.{category}')
 
 
+@functools.lru_cache
 def find_recurrences(subcategory_label: str) -> str:
     is_recurrent: str = 'no'
 
