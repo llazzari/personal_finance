@@ -170,14 +170,15 @@ class SicrediCreditCard():
 
     def change_amount_to_float(self, df: pd.DataFrame) -> pd.DataFrame:
         for text in ['R$', '.']:
-            df.loc[DataSchema.AMOUNT] = df[DataSchema.AMOUNT].str.replace(
+            df.loc[:, DataSchema.AMOUNT] = df[DataSchema.AMOUNT].str.replace(
                 text, ''
             )
-        df.loc[DataSchema.AMOUNT] = df[DataSchema.AMOUNT].str.replace(
+        df.loc[:, DataSchema.AMOUNT] = df[DataSchema.AMOUNT].str.replace(
             '- ', '-')
-        df.loc[DataSchema.AMOUNT] = df[
+        df.loc[:, DataSchema.AMOUNT] = df[
             DataSchema.AMOUNT].str.strip().str.replace(',', '.')
-        df.loc[DataSchema.AMOUNT] = df[DataSchema.AMOUNT].astype(float)
+        df.loc[:, DataSchema.AMOUNT] = df[DataSchema.AMOUNT].astype(float)
+
         return df
 
     @property
