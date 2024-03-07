@@ -1,4 +1,5 @@
-from typing import Any
+from typing import Optional
+import joblib
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
@@ -35,7 +36,7 @@ def train_random_forest(
 
 def evaluate_model(
     model: RandomForestClassifier,
-    X_test: Any,
+    X_test: spmatrix | np.ndarray,
     y_test: np.ndarray
 ) -> None:
     predictions = model.predict(X_test)
@@ -45,12 +46,24 @@ def evaluate_model(
     print("Classification Report:\n", report)
 
 
-def train_and_test(X: np.ndarray, y: np.ndarray) -> None:
+def train_and_test(
+    X: np.ndarray,
+    y: np.ndarray,
+    save_vectorizer_file: Optional[str] = None,
+    save_model_file: Optional[str] = None
+) -> None:
     X_train, X_test, y_train, y_test = split_data(X, y)
 
-    vectorizer = CountVectorizer()
-    X_train_vectorized = vectorizer.fit_transform(X_train)
-    X_test_vectorized = vectorizer.transform(X_test)
+    if '<U' in X.dtype:
+        vectorizer = CountVectorizer()
+        X_train = vectorizer.fit_transform(X_train)
+        X_test = vectorizer.transform(X_test)
 
-    model = train_random_forest(X_train_vectorized, y_train)
-    evaluate_model(model, X_test_vectorized, y_test)
+        if save_vectorizer_file:
+            joblib.dump(vectorizer, save_vectorizer_file)
+
+    model = train_random_forest(X_train, y_train)
+    evaluate_model(model, X_test, y_test)
+
+    if save_model_file:
+        joblib.dump(model, save_model_file)
