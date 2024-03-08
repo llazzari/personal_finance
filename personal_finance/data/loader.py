@@ -2,7 +2,6 @@ import pandas as pd
 from pathlib import Path
 
 from data.schema import DataSchema
-from data.processor import sort_by_date
 
 
 def load_data(file_path: Path) -> pd.DataFrame:
@@ -25,3 +24,12 @@ def load_data(file_path: Path) -> pd.DataFrame:
     )
     df['id'] = df.index
     return sort_by_date(df)
+
+
+def sort_by_date(df: pd.DataFrame) -> pd.DataFrame:
+    df.sort_values(
+        by=[DataSchema.YEAR, DataSchema.MONTH],
+        ascending=False,
+        inplace=True,
+    )
+    return df
