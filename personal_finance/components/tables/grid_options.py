@@ -14,6 +14,8 @@ DASH_GRID_OPTIONS: dict[str, Any] = {
     'suppressRowTransform': True,
     'rowSelection': 'multiple',
     # 'skipHeaderOnAutoSize': True,
+    'suppressRowClickSelection': True,
+    # 'animateRows': False,
 }
 
 
