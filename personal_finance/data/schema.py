@@ -1,4 +1,5 @@
 class DataSchema:
+    """Column names that are used throughout the app."""
     AMOUNT = "amount"
     CATEGORY = "category"
     SUBCATEGORY = "subcategory"

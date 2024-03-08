@@ -11,6 +11,7 @@ from data.categorize.finder import find_category
 
 @dataclass
 class DataSource:
+    """Group of functions related to managing data for the callbacks."""
     _data: list[dict]
 
     @property
@@ -64,11 +65,13 @@ class DataSource:
         df = self.filter_month_and_year(year, month)
         return df[DataSchema.AMOUNT].sum()
 
-    def month_expense_by_subcategory(self, year: int, month: int) -> pd.DataFrame:
+    def month_expense_by_subcat(self, year: int, month: int) -> pd.DataFrame:
         df_month = self.filter_month_and_year(year, month)
         df_month_sum = df_month.groupby(
             by=DataSchema.SUBCATEGORY
-        ).sum().reset_index().sort_values(by=DataSchema.AMOUNT)
+        ).sum(numeric_only=True)
+        df_month_sum.reset_index(inplace=True)
+        df_month_sum.sort_values(by=DataSchema.AMOUNT, inplace=True)
         df_month_sum.loc[:, DataSchema.CATEGORY] = df_month_sum[
             DataSchema.SUBCATEGORY
         ].apply(find_category)
@@ -76,8 +79,12 @@ class DataSource:
 
     def evolution(self) -> pd.DataFrame:
         df = self.dataframe.groupby(
-            [DataSchema.YEAR, DataSchema.MONTH,
-                DataSchema.RECURRENT, DataSchema.TYPE]
+            [
+                DataSchema.YEAR,
+                DataSchema.MONTH,
+                DataSchema.RECURRENT,
+                DataSchema.TYPE
+            ]
         ).sum(numeric_only=True)
         df.reset_index(inplace=True)
         df[DataSchema.MONTH] = df[DataSchema.MONTH].apply(
@@ -93,6 +100,9 @@ class DataSource:
 
     def month_income_by_category(self, month: int, year: int) -> pd.DataFrame:
         df = self.filter_month_and_year(year, month)
-        return df.groupby(
+        df_cat = df.groupby(
             by=DataSchema.CATEGORY
-        ).sum(numeric_only=True).reset_index().sort_values(DataSchema.AMOUNT)
+        ).sum(numeric_only=True)
+        df_cat.reset_index(inplace=True)
+        df_cat.sort_values(DataSchema.AMOUNT, inplace=True)
+        return df_cat
