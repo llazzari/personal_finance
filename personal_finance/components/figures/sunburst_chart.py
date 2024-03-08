@@ -38,7 +38,7 @@ def update_chart(_, month: int, year: int, data: list[dict]) -> html.Div:
     if not data:
         return html.Div(id=ids.SUNBURST_CHART)
     source = DataSource(data)
-    df_month_sum = source.month_expense_by_subcategory(year, month)
+    df_month_sum = source.month_expense_by_subcat(year, month)
 
     fig = px.sunburst(
         df_month_sum,

@@ -39,6 +39,7 @@ def toggle_and_upload(
     bank_options: list[str],
     bank_selector: dict[str, Bank]
 ) -> tuple[bool, dict | Any, dict | Any, bool]:
+    """Toggle modal and uploads the data to the tables accordingly."""
 
     bank_name: str = triggered['prop_id'].split('.')[0].split('_')[0]
 

@@ -12,14 +12,6 @@
     border-color: var(--bs-secondary);
 }
 
-.right_buttons {
-    margin-left: 10px;
-}
-
-.left_buttons {
-    margin-right: 10px;
-}
-
 .buttons_row {
     margin-bottom: 10px;
     margin-top: 10px;
