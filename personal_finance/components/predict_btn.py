@@ -7,7 +7,7 @@ import pandas as pd
 from components import ids
 from data.ml.predictor import predict_subcategories, separate_data
 from data.source import DataSource
-from data.processor import Preprocessor, compose
+from data.raw.cleaner import Preprocessor, compose
 from data.categorize.finder import find_categories, find_recurrences
 
 

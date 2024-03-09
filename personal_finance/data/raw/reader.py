@@ -13,9 +13,11 @@ class Reader:
     decimal: str = '.'
     encoding_errors: str = 'strict'
     encoding: str = 'utf-8'
+    skipfooter: int = 0
     skiprows: Optional[int | list[int]] = None
     thousands: Optional[str] = None
     bank: Optional[str] = None
+    second_amount: Optional[str] = None
 
     @property
     def date_parser(self) -> list[str]:

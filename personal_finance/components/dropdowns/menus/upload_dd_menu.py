@@ -5,7 +5,9 @@ import i18n
 
 from components import ids
 from components.tables.uploader import upload_data
-from data.raw.uploader import upload_personal_table
+from data.raw.uploader import upload_bank_data
+from data.raw.banks import PersonalTable
+# from data.raw.uploader import upload_personal_table
 
 
 def render() -> html.Div:
@@ -73,8 +75,9 @@ def input_table(
     old_expenses: list[dict],
     old_incomes: list[dict]
 ) -> tuple[dict[str, Any] | Any, dict[str, Any] | Any, bool]:
+    bank = PersonalTable()
     try:
-        new_expenses, new_incomes = upload_personal_table(contents)
+        new_expenses, new_incomes = upload_bank_data(bank, contents)
     except ValueError:
         return no_update, no_update, True
 

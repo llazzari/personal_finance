@@ -1,19 +1,50 @@
+from dataclasses import dataclass
+import io
 from unidecode import unidecode
 import i18n
 import pandas as pd
 import nltk
 from functools import reduce
-from typing import Callable, Protocol
+from typing import Callable, Optional, Protocol
 
-from data.raw.reader import Reader
 from data.schema import DataSchema
+
+
+@dataclass
+class Columns:
+    date: str = 'Data'
+    amount: str = 'Valor'
+    description: str = 'Descrição'
+    bank: Optional[str] = None
+
+    def to_use(self) -> list[str]:
+        return [
+            self.date,
+            self.description,
+            self.amount
+        ]
+
+    def dtype(self) -> dict[str, type]:
+        return {
+            self.date: str,
+            self.amount: float,
+            self.description: str
+        }
+
 
 Preprocessor = Callable[[pd.DataFrame], pd.DataFrame]
 
 
 class Bank(Protocol):
     @property
-    def reader(self) -> Reader:
+    def encoding(self) -> str:
+        ...
+
+    @property
+    def columns(self) -> Columns:
+        ...
+
+    def reader(self, data: io.StringIO) -> pd.DataFrame:
         ...
 
     @property
@@ -118,13 +149,13 @@ def correct_amount_sign(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def rename_columns(reader: Reader, df: pd.DataFrame) -> pd.DataFrame:
+def rename_columns(columns: Columns, df: pd.DataFrame) -> pd.DataFrame:
     df.rename(
         columns={
-            reader.amount: DataSchema.AMOUNT,
-            reader.date: DataSchema.DATE,
-            reader.description: DataSchema.DESCRIPTION,
-            reader.bank: DataSchema.BANK
+            columns.amount: DataSchema.AMOUNT,
+            columns.date: DataSchema.DATE,
+            columns.description: DataSchema.DESCRIPTION,
+            columns.bank: DataSchema.BANK
         },
         inplace=True,
         errors='ignore'
