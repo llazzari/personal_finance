@@ -27,6 +27,7 @@ def main() -> None:
     locale_path = Path.cwd() / "locale"
     i18n.load_path.append(locale_path)  # type: ignore
 
+    # load expenses and incomes
     df_exp: pd.DataFrame = load_data(EXPENSES_PATH)
     expenses: list[dict] = df_exp.to_dict('records')
     df_inc: pd.DataFrame = load_data(INCOMES_PATH)
