@@ -376,7 +376,12 @@ class PersonalTable():
             data,
             dayfirst=True,
             parse_dates=[columns.date],
-            usecols=[columns.date, columns.amount, columns.description],
+            usecols=[
+                columns.date,
+                columns.amount,
+                columns.description,
+                columns.bank
+            ],
             dtype=dtype
         )
 
