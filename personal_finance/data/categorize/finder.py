@@ -22,10 +22,18 @@ def set_subcategories_from_yaml() -> dict[str, str]:
 
 
 @functools.lru_cache
-def find_category(subcategory_label: str) -> str:
+def get_subcategory(subcategory_label: str) -> str | None:
     subcategories: dict[str, str] = set_subcategories_from_yaml()
 
-    subcategory: str = subcategories[subcategory_label]
+    return subcategories.get(subcategory_label)
+
+
+@functools.lru_cache
+def find_category(subcategory_label: str) -> str | None:
+    subcategory: str | None = get_subcategory(subcategory_label)
+
+    if not subcategory:
+        return None
 
     category: str = list(
         filter(
@@ -46,8 +54,7 @@ def find_categories(df: pd.DataFrame) -> pd.DataFrame:
 def find_recurrency(subcategory_label: str) -> str:
     is_recurrent: str = 'no'
 
-    subcategories: dict[str, str] = set_subcategories_from_yaml()
-    subcategory: str = subcategories[subcategory_label]
+    subcategory: str | None = get_subcategory(subcategory_label)
 
     if subcategory in RECURRENT_SUBCATEGORIES:
         is_recurrent: str = 'yes'
