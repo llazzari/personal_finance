@@ -75,5 +75,5 @@ RECURRENT_SUBCATEGORIES: list[str] = [
     "health_insurance",
     "fitness",
     "subscriptions",
-    "gasoline"
+    "gas"
 ]
