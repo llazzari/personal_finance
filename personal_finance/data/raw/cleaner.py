@@ -209,6 +209,7 @@ def correct_installments_date(descript: str, df: pd.DataFrame) -> pd.DataFrame:
     previous_payment_date: pd.Series = df[
         df[DataSchema.DESCRIPTION] == descript
     ][DataSchema.DATE]
+
     if not previous_payment_date.empty:
         correct_date = previous_payment_date.iloc[0]
         correct_month: int = correct_date.month + 1
@@ -221,6 +222,16 @@ def correct_installments_date(descript: str, df: pd.DataFrame) -> pd.DataFrame:
             correct_month, correct_date.year
         )
     return df
+
+
+def create_columns() -> tuple[Preprocessor, ...]:
+    return (
+        create_category_column,
+        create_subcategory_column,
+        create_year_column,
+        create_month_column,
+        create_recurrent_column,
+    )
 
 
 def correct_installments_month(month: int) -> int:

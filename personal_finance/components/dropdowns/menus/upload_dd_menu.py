@@ -7,7 +7,6 @@ from components import ids
 from components.tables.uploader import upload_data
 from data.raw.uploader import upload_bank_data
 from data.raw.banks import PersonalTable
-# from data.raw.uploader import upload_personal_table
 
 
 def render() -> html.Div:

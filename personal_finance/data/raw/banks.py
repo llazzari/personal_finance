@@ -11,6 +11,7 @@ from data.raw.cleaner import (
     correct_amount_sign,
     correct_installments_date,
     create_bank_column,
+    create_columns,
     remove_ccbill_payment,
     Columns,
     rename_columns
@@ -54,6 +55,7 @@ class BBStatement:
         return compose(
             self.drop_1st_and_last_row,
             partial(rename_columns, self.columns),
+            *create_columns(),
             partial(create_bank_column, 'Banco do Brasil'),
             partial(
                 clean_descriptions,
@@ -110,6 +112,7 @@ class BradescoStatement:
     def cleaner(self) -> Preprocessor:
         return compose(
             self.drop_exceeding_lines,
+            *create_columns(),
             self.create_amount_column,
             self.drop_1st_and_last_row,
             partial(rename_columns, self.columns),
@@ -146,6 +149,7 @@ class NuStatement:
     def cleaner(self) -> Preprocessor:
         return compose(
             partial(rename_columns, self.columns),
+            *create_columns(),
             partial(clean_descriptions, self.patterns),
             partial(create_bank_column, 'Nubank'),
             partial(remove_ccbill_payment, 'Pagamento de fatura')
@@ -187,6 +191,7 @@ class InterStatement:
     def cleaner(self) -> Preprocessor:
         return compose(
             partial(rename_columns, self.columns),
+            *create_columns(),
             partial(clean_descriptions, self.patterns),
             partial(create_bank_column, 'Inter')
         )
@@ -215,6 +220,7 @@ class CoraStatement:
     def cleaner(self) -> Preprocessor:
         return compose(
             partial(rename_columns, self.columns),
+            *create_columns(),
             partial(clean_descriptions, []),
             partial(create_bank_column, 'Cora'),
         )
@@ -249,6 +255,7 @@ class C6CreditCard:
     def cleaner(self) -> Preprocessor:
         return compose(
             partial(rename_columns, self.columns),
+            *create_columns(),
             correct_amount_sign,
             partial(correct_installments_date, self.payment_description),
             partial(remove_ccbill_payment, self.payment_description),
@@ -290,6 +297,7 @@ class NuCreditCard:
     def cleaner(self) -> Preprocessor:
         return compose(
             partial(rename_columns, self.columns),
+            *create_columns(),
             partial(clean_descriptions, self.patterns),
             correct_amount_sign,
             partial(correct_installments_date, self.payment_description),
@@ -348,6 +356,7 @@ class SicrediCreditCard():
         return compose(
             self.change_amount_to_float,
             partial(rename_columns, self.columns),
+            *create_columns(),
             correct_amount_sign,
             partial(correct_installments_date, self.payment_description),
             partial(remove_ccbill_payment, self.payment_description),
