@@ -53,13 +53,13 @@ def train_and_test(
     save_model_file: Optional[str] = None
 ) -> None:
     X_train, X_test, y_train, y_test = split_data(X, y)
-    if X.dtype == '<U21':
-        vectorizer = CountVectorizer()
-        X_train = vectorizer.fit_transform(X_train)
-        X_test = vectorizer.transform(X_test)
 
-        if save_vectorizer_file:
-            joblib.dump(vectorizer, save_vectorizer_file)
+    vectorizer = CountVectorizer()
+    X_train = vectorizer.fit_transform(X_train)
+    X_test = vectorizer.transform(X_test)
+
+    if save_vectorizer_file:
+        joblib.dump(vectorizer, save_vectorizer_file)
 
     model = train_random_forest(X_train, y_train)
     evaluate_model(model, X_test, y_test)

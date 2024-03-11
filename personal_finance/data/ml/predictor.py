@@ -35,7 +35,7 @@ def predict_subcategories(uncategorized_df: pd.DataFrame) -> pd.DataFrame:
     model: MLModel = joblib.load(SUBCAT_MODEL_FILE)
     vectorizer: Vectorizer = joblib.load(SUBCAT_VECTORIZER_FILE)
     X_vectorized: spmatrix = vectorizer.transform(
-        df[DataSchema.CLEANED_DESCRIPTION].to_numpy(dtype='<U21')
+        df[DataSchema.CLEANED_DESCRIPTION].to_numpy(dtype='<U50')
     )
     df.loc[:, DataSchema.SUBCATEGORY] = model.predict(X_vectorized)
 

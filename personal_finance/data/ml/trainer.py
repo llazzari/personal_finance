@@ -16,8 +16,8 @@ incomes = pd.read_csv(f'{ML_PATH}/train_incomes_data.csv')
 
 def train_subcategories_model() -> None:
     train_and_test(
-        X=expenses[DataSchema.CLEANED_DESCRIPTION].to_numpy(dtype='<U21'),
-        y=expenses[DataSchema.SUBCATEGORY].to_numpy(dtype='<U21'),
+        X=expenses[DataSchema.CLEANED_DESCRIPTION].to_numpy(dtype='<U50'),
+        y=expenses[DataSchema.SUBCATEGORY].to_numpy(dtype='<U50'),
         save_model_file=str(SUBCAT_MODEL_FILE),
         save_vectorizer_file=str(SUBCAT_VECTORIZER_FILE)
     )
@@ -25,8 +25,8 @@ def train_subcategories_model() -> None:
 
 def train_incomes_model() -> None:
     train_and_test(
-        X=incomes[DataSchema.CLEANED_DESCRIPTION].to_numpy(dtype='<U21'),
-        y=incomes[DataSchema.CATEGORY].to_numpy(dtype='<U21'),
+        X=incomes[DataSchema.CLEANED_DESCRIPTION].to_numpy(dtype='<U50'),
+        y=incomes[DataSchema.CATEGORY].to_numpy(dtype='<U50'),
         save_model_file=str(INCOME_MODEL_FILE),
         save_vectorizer_file=str(INCOME_VECTORIZER_FILE)
     )
