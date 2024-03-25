@@ -14,22 +14,19 @@ from data.categorize.finder import find_categories, find_recurrences
 def render() -> html.Div:
     return html.Div(
         dbc.Button(
-            [
-                html.I(className='bi bi-star'),
-                i18n.t('general.predict')
-            ],
+            [html.I(className="bi bi-star"), i18n.t("general.predict")],
             id=ids.PREDICT_BTN,
-            class_name='main_buttons'
+            class_name="main_buttons",
         )
     )
 
 
 @callback(
-    Output(ids.EXPENSES_TABLE, 'rowData', allow_duplicate=True),
-    Output(ids.PREDICT_ERROR_ALERT, 'is_open'),
-    Input(ids.PREDICT_BTN, 'n_clicks'),
-    State(ids.EXPENSES_TABLE, 'rowData'),
-    prevent_initial_call=True
+    Output(ids.EXPENSES_TABLE, "rowData", allow_duplicate=True),
+    Output(ids.PREDICT_ERROR_ALERT, "is_open"),
+    Input(ids.PREDICT_BTN, "n_clicks"),
+    State(ids.EXPENSES_TABLE, "rowData"),
+    prevent_initial_call=True,
 )
 def on_click(_, expenses: list[dict]) -> tuple[list[dict] | Any, bool]:
     source_expenses = DataSource(expenses)
@@ -48,6 +45,6 @@ def on_click(_, expenses: list[dict]) -> tuple[list[dict] | Any, bool]:
     )
     newly_categorized_df = categorizer(uncategorized_df)
 
-    df = pd.concat([newly_categorized_df, categorized_df])
+    df: pd.DataFrame = pd.concat([newly_categorized_df, categorized_df])
 
-    return df.to_dict('records'), False
+    return df.to_dict("records"), False
