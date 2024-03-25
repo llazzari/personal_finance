@@ -14,32 +14,32 @@ from data.raw.cleaner import (
     create_columns,
     remove_ccbill_payment,
     Columns,
-    rename_columns
+    rename_columns,
 )
 
 
 class BBStatement:
     patterns: list[str] = [
-        '\\d+/\\d+/\\d+',
-        '([\\w|\\W]+:)\\d+',
-        '\\d+\\s{1}',
-        '\\d{2}[\\w|\\W]+\\s{1}\\d{2}h\\d{2}min'
+        "\\d+/\\d+/\\d+",
+        "([\\w|\\W]+:)\\d+",
+        "\\d+\\s{1}",
+        "\\d{2}[\\w|\\W]+\\s{1}\\d{2}h\\d{2}min",
     ]
 
     @property
     def encoding(self) -> str:
-        return 'latin-1'
+        return "latin-1"
 
     @property
     def columns(self) -> Columns:
-        return Columns(description='Histórico')
+        return Columns(description="Histórico")
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
         columns = self.columns
         return pd.read_csv(
             data,
             encoding=self.encoding,
-            encoding_errors='replace',
+            encoding_errors="replace",
             parse_dates=[columns.date],
             usecols=columns.to_use(),
             dtype=columns.dtype(),
@@ -56,7 +56,7 @@ class BBStatement:
             self.drop_1st_and_last_row,
             partial(rename_columns, self.columns),
             *create_columns(),
-            partial(create_bank_column, 'Banco do Brasil'),
+            partial(create_bank_column, "Banco do Brasil"),
             partial(
                 clean_descriptions,
                 self.patterns,
@@ -69,30 +69,30 @@ class BradescoStatement:
 
     @property
     def columns(self) -> Columns:
-        return Columns(description='Histórico', amount='amount')
+        return Columns(description="Histórico", amount="amount")
 
     @property
     def encoding(self) -> str:
-        return 'latin-1'
+        return "latin-1"
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
         return pd.read_csv(
             data,
             encoding=self.encoding,
-            encoding_errors='replace',
+            encoding_errors="replace",
             skiprows=1,
             skipfooter=30,
-            engine='python',
-            on_bad_lines='skip',
-            sep=';',
-            decimal=',',
-            thousands='.',
-            usecols=['Data', 'Histórico', 'Crédito (R$)', 'Débito (R$)'],
+            engine="python",
+            on_bad_lines="skip",
+            sep=";",
+            decimal=",",
+            thousands=".",
+            usecols=["Data", "Histórico", "Crédito (R$)", "Débito (R$)"],
             dtype={
-                'Data': str,
-                'Histórico': str,
-                'Crédito (R$)': float,
-                'Débito (R$)': float
+                "Data": str,
+                "Histórico": str,
+                "Crédito (R$)": float,
+                "Débito (R$)": float,
             },
         )
 
@@ -101,11 +101,11 @@ class BradescoStatement:
         return df.iloc[1:-1]
 
     def drop_exceeding_lines(self, df: pd.DataFrame) -> pd.DataFrame:
-        return df.loc[df['Data'].notna(), :]
+        return df.loc[df["Data"].notna(), :]
 
     def create_amount_column(self, df: pd.DataFrame) -> pd.DataFrame:
-        df['amount'] = df[['Crédito (R$)', 'Débito (R$)']].sum(axis=1)
-        df.drop(columns=['Crédito (R$)', 'Débito (R$)'], inplace=True)
+        df["amount"] = df[["Crédito (R$)", "Débito (R$)"]].sum(axis=1)
+        df.drop(columns=["Crédito (R$)", "Débito (R$)"], inplace=True)
         return df
 
     @property
@@ -120,16 +120,16 @@ class BradescoStatement:
                 clean_descriptions,
                 self.patterns,
             ),
-            partial(create_bank_column, 'Bradesco'),
+            partial(create_bank_column, "Bradesco"),
         )
 
 
 class NuStatement:
-    patterns: list[str] = ['^.*?-', '-.*$']
+    patterns: list[str] = ["^.*?-", "-.*$"]
 
     @property
     def encoding(self) -> str:
-        return 'utf-8'
+        return "utf-8"
 
     @property
     def columns(self) -> Columns:
@@ -151,32 +151,32 @@ class NuStatement:
             partial(rename_columns, self.columns),
             *create_columns(),
             partial(clean_descriptions, self.patterns),
-            partial(create_bank_column, 'Nubank'),
-            partial(remove_ccbill_payment, 'Pagamento de fatura')
+            partial(create_bank_column, "Nubank"),
+            partial(remove_ccbill_payment, "Pagamento de fatura"),
         )
 
 
 class InterStatement:
     patterns: list[str] = [
-        '^.*?estabelecimento\\s{1}',
-        '^Pix .*-',
-        '-.*$',
-        'inter pre \\d{1,}gb mensal',
-        'redes sociais'
+        "^.*?estabelecimento\\s{1}",
+        "^Pix .*-",
+        "-.*$",
+        "inter pre \\d{1,}gb mensal",
+        "redes sociais",
     ]
 
     @property
     def columns(self) -> Columns:
-        return Columns(date='Data Lançamento')
+        return Columns(date="Data Lançamento")
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
-        columns = self.columns
+        columns: Columns = self.columns
         return pd.read_csv(
             data,
-            sep=';',
+            sep=";",
             skiprows=4,
-            decimal=',',
-            thousands='.',
+            decimal=",",
+            thousands=".",
             parse_dates=[columns.date],
             usecols=[columns.date, columns.amount, columns.description],
             dtype=columns.dtype(),
@@ -185,7 +185,7 @@ class InterStatement:
 
     @property
     def encoding(self) -> str:
-        return 'utf-8'
+        return "utf-8"
 
     @property
     def cleaner(self) -> Preprocessor:
@@ -193,18 +193,18 @@ class InterStatement:
             partial(rename_columns, self.columns),
             *create_columns(),
             partial(clean_descriptions, self.patterns),
-            partial(create_bank_column, 'Inter')
+            partial(create_bank_column, "Inter"),
         )
 
 
 class CoraStatement:
     @property
     def columns(self) -> Columns:
-        return Columns(description='Identificação')
+        return Columns(description="Identificação")
 
     @property
     def encoding(self) -> str:
-        return 'utf-8'
+        return "utf-8"
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
         columns = self.columns
@@ -222,25 +222,22 @@ class CoraStatement:
             partial(rename_columns, self.columns),
             *create_columns(),
             partial(clean_descriptions, []),
-            partial(create_bank_column, 'Cora'),
+            partial(create_bank_column, "Cora"),
         )
 
 
 class C6CreditCard:
-    payment_description: str = 'Inclusao de Pagamento    '
+    payment_description: str = "Inclusao de Pagamento    "
 
     @property
     def columns(self) -> Columns:
-        return Columns(
-            date='Data de Compra',
-            amount='Valor (em R$)'
-        )
+        return Columns(date="Data de Compra", amount="Valor (em R$)")
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
         columns = self.columns
         return pd.read_csv(
             data,
-            sep=';',
+            sep=";",
             parse_dates=[columns.date],
             usecols=[columns.date, columns.amount, columns.description],
             dtype=columns.dtype(),
@@ -249,7 +246,7 @@ class C6CreditCard:
 
     @property
     def encoding(self) -> str:
-        return 'utf-8'
+        return "utf-8"
 
     @property
     def cleaner(self) -> Preprocessor:
@@ -259,32 +256,32 @@ class C6CreditCard:
             correct_amount_sign,
             partial(correct_installments_date, self.payment_description),
             partial(remove_ccbill_payment, self.payment_description),
-            partial(create_bank_column, 'C6'),
+            partial(create_bank_column, "C6"),
         )
 
 
 class NuCreditCard:
     patterns: list[str] = [
-        'Pg \\*',
-        '\\d+/\\d$',
-        'Intersho$',
+        "Pg \\*",
+        "\\d+/\\d$",
+        "Intersho$",
     ]
-    payment_description: str = 'Pagamento recebido'
+    payment_description: str = "Pagamento recebido"
 
     @property
     def columns(self) -> Columns:
         return Columns(
-            date='date',
-            amount='amount',
-            description='title',
+            date="date",
+            amount="amount",
+            description="title",
         )
 
     @property
     def encoding(self) -> str:
-        return 'utf-8'
+        return "utf-8"
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
-        columns = self.columns
+        columns: Columns = self.columns
         return pd.read_csv(
             data,
             dayfirst=False,
@@ -302,26 +299,26 @@ class NuCreditCard:
             correct_amount_sign,
             partial(correct_installments_date, self.payment_description),
             partial(remove_ccbill_payment, self.payment_description),
-            partial(create_bank_column, 'Nubank'),
+            partial(create_bank_column, "Nubank"),
         )
 
 
-class SicrediCreditCard():
-    payment_description: str = 'PAGAMENTO DEBITO EM'
+class SicrediCreditCard:
+    payment_description: str = "PAGAMENTO DEBITO EM"
 
     @property
     def columns(self) -> Columns:
         return Columns(
-            date=' Data ',
-            amount=' Valor ',
-            description=' Estabelecimento ',
+            date=" Data ",
+            amount=" Valor ",
+            description=" Estabelecimento ",
         )
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
-        columns = self.columns
+        columns: Columns = self.columns
         return pd.read_csv(
             data,
-            sep=';',
+            sep=";",
             skiprows=18,
             dayfirst=True,
             parse_dates=[columns.date],
@@ -335,18 +332,14 @@ class SicrediCreditCard():
 
     @property
     def encoding(self) -> str:
-        return 'utf-8'
+        return "utf-8"
 
     def change_amount_to_float(self, df: pd.DataFrame) -> pd.DataFrame:
         columns = self.columns
-        for text in ['R$', '.']:
-            df.loc[:, columns.amount] = df[columns.amount].str.replace(
-                text, ''
-            )
-        df.loc[:, columns.amount] = df[columns.amount].str.replace(
-            '- ', '-')
-        df.loc[:, columns.amount] = df[
-            columns.amount].str.strip().str.replace(',', '.')
+        for text in ["R$", "."]:
+            df.loc[:, columns.amount] = df[columns.amount].str.replace(text, "")
+        df.loc[:, columns.amount] = df[columns.amount].str.replace("- ", "-")
+        df.loc[:, columns.amount] = df[columns.amount].str.strip().str.replace(",", ".")
         df.loc[:, columns.amount] = df[columns.amount].astype(float)
 
         return df
@@ -360,39 +353,38 @@ class SicrediCreditCard():
             correct_amount_sign,
             partial(correct_installments_date, self.payment_description),
             partial(remove_ccbill_payment, self.payment_description),
-            partial(create_bank_column, 'Sicredi')
+            partial(create_bank_column, "Sicredi"),
         )
 
 
-class PersonalTable():
+class PersonalTable:
     @property
     def columns(self) -> Columns:
-        return Columns(bank='Banco')
+        return Columns(bank="Banco")
 
     @property
     def encoding(self) -> str:
-        return 'utf-8'
+        return "utf-8"
 
     @property
     def cleaner(self) -> Preprocessor:
-        return partial(rename_columns, self.columns)
+        return compose(
+            partial(rename_columns, self.columns),
+            *create_columns(),
+        )
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
-        columns = self.columns
-        dtype = columns.dtype()
+        columns: Columns = self.columns
+        dtype: dict[str, type] = columns.dtype()
         dtype[columns.bank] = str
         return pd.read_csv(
             data,
             dayfirst=True,
             parse_dates=[columns.date],
-            usecols=[
-                columns.date,
-                columns.amount,
-                columns.description,
-                columns.bank
-            ],
-            dtype=dtype
+            usecols=[columns.date, columns.amount, columns.description, columns.bank],
+            dtype=dtype,
         )
+
 
 # class BradescoCreditCard():
 #     @property
@@ -414,16 +406,16 @@ class PersonalTable():
 
 BANKS: dict[str, dict[str, Any]] = {
     ids.STATEMENT_MODAL: {
-        'Banco do Brasil': BBStatement(),
-        'Nubank': NuStatement(),
-        'Inter': InterStatement(),
-        'Cora': CoraStatement(),
+        "Banco do Brasil": BBStatement(),
+        "Nubank": NuStatement(),
+        "Inter": InterStatement(),
+        "Cora": CoraStatement(),
         # 'Bradesco': BradescoStatement(),
     },
     ids.CCBILL_MODAL: {
-        'C6': C6CreditCard(),
-        'Nubank': NuCreditCard(),
-        'Sicredi': SicrediCreditCard(),
+        "C6": C6CreditCard(),
+        "Nubank": NuCreditCard(),
+        "Sicredi": SicrediCreditCard(),
         # 'Bradesco': BradescoCreditCard(),
-    }
+    },
 }

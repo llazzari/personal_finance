@@ -9,27 +9,22 @@ from typing import Callable, Optional, Protocol
 
 from data.schema import DataSchema
 
+# nltk.download("punkt")
+# nltk.download("stopwords")
+
 
 @dataclass
 class Columns:
-    date: str = 'Data'
-    amount: str = 'Valor'
-    description: str = 'Descrição'
+    date: str = "Data"
+    amount: str = "Valor"
+    description: str = "Descrição"
     bank: Optional[str] = None
 
     def to_use(self) -> list[str]:
-        return [
-            self.date,
-            self.description,
-            self.amount
-        ]
+        return [self.date, self.description, self.amount]
 
     def dtype(self) -> dict[str, type]:
-        return {
-            self.date: str,
-            self.amount: float,
-            self.description: str
-        }
+        return {self.date: str, self.amount: float, self.description: str}
 
 
 Preprocessor = Callable[[pd.DataFrame], pd.DataFrame]
@@ -37,63 +32,59 @@ Preprocessor = Callable[[pd.DataFrame], pd.DataFrame]
 
 class Bank(Protocol):
     @property
-    def encoding(self) -> str:
-        ...
+    def encoding(self) -> str: ...
 
     @property
-    def columns(self) -> Columns:
-        ...
+    def columns(self) -> Columns: ...
 
-    def reader(self, data: io.StringIO) -> pd.DataFrame:
-        ...
+    def reader(self, data: io.StringIO) -> pd.DataFrame: ...
 
     @property
-    def cleaner(self) -> Preprocessor:
-        ...
+    def cleaner(self) -> Preprocessor: ...
 
 
 def compose(*functions: Preprocessor) -> Preprocessor:
     return reduce(lambda f, g: lambda x: g(f(x)), functions)
 
 
-def tokenize(text) -> str:
+def tokenize(text: str) -> str:
     """Tokenizes text into a list of tokens (words)."""
 
     # Tokenize into words
-    words = nltk.word_tokenize(text)
+    words: list[str] = nltk.word_tokenize(text)
 
     def set_unimportant_words() -> list[str]:
-        stop_words: list[str] = nltk.corpus.stopwords.words('portuguese')
+        stop_words: list[str] = nltk.corpus.stopwords.words("portuguese")
         unimportant_words: list[str] = [
-            'pix',
-            'enviado',
-            'enviada',
-            'transferencia',
-            'cobranca',
-            'referente',
-            'pacote',
-            'servicos',
-            'pagamento',
+            "pix",
+            "enviado",
+            "enviada",
+            "transferencia",
+            "cobranca",
+            "referente",
+            "pacote",
+            "servicos",
+            "pagamento",
             # 'fatura',
-            'boleto',
-            'banco',
-            'bol',
-            'ltda',
-            'conta',
-            'compra',
-            'cartao',
-            'pagto',
-            'pgto',
-            'estabelecimento',
-            'cp',
-            'bra',
-            'sa',
-            'pag',
-            'pelotas',
-            'ifd',
-            'marketplace',
-            '6produto',
-            'br'
+            "boleto",
+            "banco",
+            "bol",
+            "ltda",
+            "conta",
+            "compra",
+            "cartao",
+            "pagto",
+            "pgto",
+            "estabelecimento",
+            "cp",
+            "bra",
+            "sa",
+            "pag",
+            "pelotas",
+            "ifd",
+            "marketplace",
+            "6produto",
+            "br",
         ]
         for word in stop_words:
             unimportant_words.append(word)
@@ -104,33 +95,32 @@ def tokenize(text) -> str:
     return " ".join(unique_words)
 
 
-def clean_descriptions(
-    patterns: list[str],
-    df: pd.DataFrame
-) -> pd.DataFrame:
-    df[DataSchema.CLEANED_DESCRIPTION] = df[
-        DataSchema.DESCRIPTION
-    ].str.lower().str.strip()
+def clean_descriptions(patterns: list[str], df: pd.DataFrame) -> pd.DataFrame:
+    df[DataSchema.CLEANED_DESCRIPTION] = (
+        df[DataSchema.DESCRIPTION].str.lower().str.strip()
+    ).astype(str)
 
     df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
         DataSchema.CLEANED_DESCRIPTION
-    ].apply(unidecode)  # removes accents from description
+    ].apply(
+        unidecode
+    )  # removes accents from description
 
     for p in patterns:
         df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
             DataSchema.CLEANED_DESCRIPTION
-        ].str.replace(p, '', regex=True, case=False)
+        ].str.replace(p, "", regex=True, case=False)
 
     general_patterns = [
-        '[^a-z0-9 ]+',  # removes punctuation
-        '[ ]{2,}',  # removes 2 or more whitespaces
-        '\\s{1}\\w{1}(\\s{0}$|\\s{1})',  # removes single letter
-        '\\s{0,}\\d{3,}\\s{1}'  # removes 3 or more numbers
+        "[^a-z0-9 ]+",  # removes punctuation
+        "[ ]{2,}",  # removes 2 or more whitespaces
+        "\\s{1}\\w{1}(\\s{0}$|\\s{1})",  # removes single letter
+        "\\s{0,}\\d{3,}\\s{1}",  # removes 3 or more numbers
     ]
     for gp in general_patterns:
         df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
             DataSchema.CLEANED_DESCRIPTION
-        ].str.replace(gp, ' ', regex=True)
+        ].str.replace(gp, " ", regex=True)
 
     df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
         DataSchema.CLEANED_DESCRIPTION
@@ -155,10 +145,10 @@ def rename_columns(columns: Columns, df: pd.DataFrame) -> pd.DataFrame:
             columns.amount: DataSchema.AMOUNT,
             columns.date: DataSchema.DATE,
             columns.description: DataSchema.DESCRIPTION,
-            columns.bank: DataSchema.BANK
+            columns.bank: DataSchema.BANK,
         },
         inplace=True,
-        errors='ignore'
+        errors="ignore",
     )
     return df
 
@@ -199,24 +189,22 @@ def create_bank_column(bank_name: str, df: pd.DataFrame) -> pd.DataFrame:
 
 
 def create_recurrent_column(df: pd.DataFrame) -> pd.DataFrame:
-    df[DataSchema.RECURRENT] = i18n.t('general.recurrent_no')  # type: ignore
+    df[DataSchema.RECURRENT] = i18n.t("general.recurrent_no")  # type: ignore
     return df
 
 
 def correct_installments_date(descript: str, df: pd.DataFrame) -> pd.DataFrame:
     """Sets the installment month to the month where it is charged,
     that is, the month after the previous payment."""
-    previous_payment_date: pd.Series = df[
-        df[DataSchema.DESCRIPTION] == descript
-    ][DataSchema.DATE]
+    previous_payment_date: pd.Series = df[df[DataSchema.DESCRIPTION] == descript][
+        DataSchema.DATE
+    ]
 
     if not previous_payment_date.empty:
         correct_date = previous_payment_date.iloc[0]
         correct_month: int = correct_date.month + 1
 
-        df[DataSchema.MONTH] = correct_installments_month(
-            correct_month
-        )
+        df[DataSchema.MONTH] = correct_installments_month(correct_month)
 
         df[DataSchema.YEAR] = correct_installments_year(
             correct_month, correct_date.year
