@@ -1,17 +1,9 @@
 .venv
-data/despesas_Nicki.csv
-data/receitas_Nicki.csv
-data/ml/
-data/bank_statements/
-data/expenses.csv
-data/incomes.csv
-data/my_expenses.csv
-data/my_incomes.csv
-data/neni_expenses.csv
-data/neni_incomes.csv
-data/our_expenses.csv
-data/our_incomes.csv
 
+poetry.lock
+pyproject.toml
+
+*.csv
 *.png
 
 # Byte-compiled / optimized / DLL files
