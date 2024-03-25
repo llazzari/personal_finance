@@ -24,11 +24,7 @@ from components.dropdowns.menus import upload_dd_menu
 def render(app: Dash, expenses: list[dict], incomes: list[dict]) -> dbc.Container:
     return dbc.Container(
         [
-            html.H1(html.B(app.title)),
-            # html.Hr(),
-            # html.Div(
-            #     html.H2(html.B(i18n.t('general.incomes'))),  # type: ignore
-            # ),
+            html.H3(html.B(app.title)),
             html.Hr(),
             input_table_alert.render(),
             bank_error_alert.render(),
@@ -45,9 +41,9 @@ def render(app: Dash, expenses: list[dict], incomes: list[dict]) -> dbc.Containe
                 class_name="buttons_row",
                 justify="end",
             ),
-            html.H2(html.B(i18n.t("general.expenses"))),
+            html.H4(html.B(i18n.t("general.expenses"))),
             expenses_aggrid.render(expenses),
-            html.H2(html.B(i18n.t("general.incomes"))),
+            html.H4(html.B(i18n.t("general.incomes"))),
             incomes_aggrid.render(incomes),
             html.Hr(),
             collapsed_graphs.render(),
