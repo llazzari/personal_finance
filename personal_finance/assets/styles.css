@@ -64,3 +64,35 @@
     line-height: 1em;
     text-align: center;
 }
+
+.tabs,
+.tabs:not(:focus-visible) {
+    color: var(--bs-white);
+    font-weight: bold;
+}
+.tabs:hover {
+    background-color: var(--bs-primary);
+}
+
+.tabs-container {
+    height: 25%;
+}
+
+.monthly-card {
+    color: var(--bs-white);
+    font-weight: bold;
+    margin-left: 10px;
+    background-color: var(--bs-success);
+}
+
+.inc-card-header {
+    background-color: var(--bs-success);
+}
+
+.exp-card-header {
+    background-color: var(--bs-danger);
+}
+
+.bal-card-header {
+    background-color: var(--bs-primary);
+}
