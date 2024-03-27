@@ -11,11 +11,11 @@ def render() -> html.Div:
 
 
 @callback(
-    Output(ids.EXP_CARD, 'children'),
+    Output(ids.EXP_CARD, "children"),
     [
-        Input(ids.EXPENSES_TABLE, 'rowData'),
-        Input(ids.MONTH_DROPDOWN, 'value'),
-        Input(ids.YEAR_DROPDOWN, 'value'),
+        Input(ids.EXPENSES_TABLE, "rowData"),
+        Input(ids.MONTH_DROPDOWN, "value"),
+        Input(ids.YEAR_DROPDOWN, "value"),
     ],
 )
 def update_card(data: list[dict], month: int, year: int) -> html.Div:
@@ -25,13 +25,22 @@ def update_card(data: list[dict], month: int, year: int) -> html.Div:
     expenses: float = source.total_month_amount(year, month)
 
     return html.Div(
-        dbc.Card([
-            dbc.CardHeader(html.B(i18n.t(  # type: ignore
-                'general.total_monthly_exp'
-            ))),
-            dbc.CardBody(
-                html.P(html.B(f"{i18n.t('general.money')} {expenses:.2f}"))
-            )
-        ]),
-        id=ids.EXP_CARD
+        dbc.Card(
+            [
+                dbc.CardHeader(
+                    [
+                        html.I(className="bi bi-coin"),
+                        html.B(i18n.t("general.expenses")),
+                    ],
+                    class_name="exp-card-header",
+                ),
+                dbc.CardBody(
+                    html.P(html.B(f"{i18n.t('general.money')} {expenses:.2f}"))
+                ),
+            ],
+            outline=True,
+            color="danger",
+        ),
+        id=ids.EXP_CARD,
+        style={"margin-bottom": "5px"},
     )
