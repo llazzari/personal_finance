@@ -1,58 +1,50 @@
 from dash import html, Dash
 import dash_bootstrap_components as dbc
+import dash_mantine_components as dmc
 import i18n
 
-from components import (
-    save_btn,
-    confirm_dialog,
-    collapsed_graphs,
-    remove_rows_btn,
-)
-from components.tables import expenses_aggrid, incomes_aggrid
+from components import tables_tab, monthly_tab, evolution_tab
 from components.modals import statement_modal, credit_card_modal, save_modal
-from components.alerts import (
-    bank_error_alert,
-    prediction_alert,
-    remove_rows_alert,
-    input_table_alert,
-)
-
-from components import predict_btn
-from components.dropdowns.menus import upload_dd_menu
 
 
 def render(app: Dash, expenses: list[dict], incomes: list[dict]) -> dbc.Container:
     return dbc.Container(
         [
             html.H3(html.B(app.title)),
-            html.Hr(),
-            input_table_alert.render(),
-            bank_error_alert.render(),
-            prediction_alert.render(),
-            remove_rows_alert.render(),
-            confirm_dialog.render(),
-            dbc.Row(
+            dmc.Tabs(
                 [
-                    dbc.Col(upload_dd_menu.render(), width="auto"),
-                    dbc.Col(save_btn.render(), width="auto"),
-                    dbc.Col(remove_rows_btn.render(), width="auto"),
-                    dbc.Col(predict_btn.render(), width="auto"),
+                    dmc.TabsList(
+                        [
+                            dmc.Tab(
+                                i18n.t("general.tables"),
+                                value="tables",
+                                className="tabs",
+                            ),
+                            dmc.Tab(
+                                i18n.t("general.monthly_dashboard"),
+                                value="monthly-dashboard",
+                                className="tabs",
+                            ),
+                            dmc.Tab(
+                                i18n.t("general.evolution_dashboard"),
+                                value="evolution-dashboard",
+                                className="tabs",
+                            ),
+                        ]
+                    ),
+                    dmc.TabsPanel(tables_tab.render(incomes, expenses), value="tables"),
+                    dmc.TabsPanel(monthly_tab.render(), value="monthly-dashboard"),
+                    dmc.TabsPanel(evolution_tab.render(), value="evolution-dashboard"),
                 ],
-                class_name="buttons_row",
-                justify="end",
+                orientation="vertical",
+                placement="left",
+                value="tables",
             ),
-            html.H4(html.B(i18n.t("general.expenses"))),
-            expenses_aggrid.render(expenses),
-            html.H4(html.B(i18n.t("general.incomes"))),
-            incomes_aggrid.render(incomes),
-            html.Hr(),
-            collapsed_graphs.render(),
-            html.Hr(),
             save_modal.render(),
             statement_modal.render(),
             credit_card_modal.render(),
             html.Div(style={"margin": "20px"}),
         ],
-        class_name="dbc",
+        class_name="dbc dbc-container tabs-container",
         fluid=True,
     )
