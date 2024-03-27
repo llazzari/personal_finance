@@ -47,3 +47,4 @@ SEGMENTED_EVOLUTION = "segmented-evolution"
 EXPENSES_EVOLUTION_PER_CATEGORY = "expenses-evolution-per-category"
 
 MONTHLY_TAB = "monthly-tab"
+YEARLY_EVOLUTION_LINE_CHART = "yearly-evolution-line-chart"

@@ -102,3 +102,11 @@ class DataSource:
         dff.loc[:, DataSchema.AMOUNT] = dff[DataSchema.AMOUNT].round(2)
         dff[DataSchema.MONTH] = dff[DataSchema.MONTH].apply(self.convert_month_locale)
         return dff
+
+    def yearly_evolution(self) -> pd.DataFrame:
+        dff: pd.DataFrame = self.dataframe.groupby(
+            by=[DataSchema.YEAR, DataSchema.TYPE]
+        ).sum(numeric_only=True)
+        dff.reset_index(inplace=True)
+        dff.loc[:, DataSchema.AMOUNT] = dff[DataSchema.AMOUNT].round(2)
+        return dff

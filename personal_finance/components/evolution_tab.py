@@ -5,8 +5,11 @@ import i18n
 
 from components import ids
 from components.dropdowns import years_dropdown_evolution
-from components.figures import expenses_evolution_per_category
-from components.figures import monthly_evolution_bar_chart
+from components.figures import (
+    monthly_evolution_bar_chart,
+    expenses_evolution_per_category,
+    yearly_evolution_line_chart,
+)
 
 
 def render() -> html.Div:
@@ -50,7 +53,11 @@ def update_tab(expenses: list[dict], incomes: list[dict]) -> html.Div:
 )
 def update_content(segment: str) -> html.Div:
     if segment == i18n.t("general.yearly"):
-        return html.Div()
+        return html.Div(
+            [
+                yearly_evolution_line_chart.render(),
+            ]
+        )
     return html.Div(
         [
             years_dropdown_evolution.render(),
