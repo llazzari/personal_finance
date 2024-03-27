@@ -42,23 +42,22 @@ def update_chart(
         x=DataSchema.MONTH,
         y=DataSchema.AMOUNT,
         color=DataSchema.TYPE,
-        # pattern_shape=DataSchema.RECURRENT,
         labels={
             DataSchema.MONTH: i18n.t(f"columns.{DataSchema.MONTH}"),
             DataSchema.AMOUNT: i18n.t(f"columns.{DataSchema.AMOUNT}"),
             DataSchema.RECURRENT: i18n.t(f"columns.{DataSchema.RECURRENT}"),
             DataSchema.TYPE: i18n.t(f"columns.{DataSchema.TYPE}"),
         },
-        text=DataSchema.RECURRENT,
+        hover_data={DataSchema.RECURRENT: True, DataSchema.TYPE: True},
         category_orders={
             DataSchema.RECURRENT: [
                 i18n.t(f"general.recurrent_{option}") for option in ["yes", "no"]
             ],
             DataSchema.TYPE: [
-                i18n.t(f"general.{typee}") for typee in ["incomes", "expenses"]
+                i18n.t(f"general.{typee}") for typee in ["expenses", "incomes"]
             ],
         },
-        color_discrete_sequence=["#56A697", "#D9483B"],
+        color_discrete_sequence=px.colors.qualitative.Set1,
         barmode="group",
     )
     fig.update_layout(xaxis_type="category")
