@@ -392,6 +392,17 @@ files = [
 ]
 
 [[package]]
+name = "dash-mantine-components"
+version = "0.12.1"
+description = "Plotly Dash Components based on Mantine"
+optional = false
+python-versions = "*"
+files = [
+    {file = "dash_mantine_components-0.12.1-py3-none-any.whl", hash = "sha256:2630bca31cb96d96fb2c4f986e639b9f92d6319aba8cba02f76da6c0d8f5ca48"},
+    {file = "dash_mantine_components-0.12.1.tar.gz", hash = "sha256:c3dcbfd89813a1539654b8d016eb953dc5f67aafe1a77d45b5ec9faa6f25d3e7"},
+]
+
+[[package]]
 name = "dash-table"
 version = "5.0.0"
 description = "Dash table"
@@ -1761,4 +1772,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "384e342bbb51ca6c81eb42b5fdc2d5e22f210f98c6b24f4b59cf5cae82f5610e"
+content-hash = "62b022469aea9fb7232a721e2c03ba98b06ed55e915cdccaed98c59c24e2b2a0"
