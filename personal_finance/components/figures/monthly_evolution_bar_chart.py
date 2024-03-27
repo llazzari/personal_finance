@@ -28,8 +28,6 @@ def render() -> html.Div:
 def update_chart(
     _, __, year: int, expenses: list[dict], incomes: list[dict]
 ) -> html.Div:
-    if not expenses and not incomes:
-        return html.Div(id=ids.BAR_CHART)
     for e in expenses:
         e[DataSchema.TYPE] = i18n.t("general.expenses")
     for i in incomes:
