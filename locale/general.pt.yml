@@ -36,3 +36,11 @@ pt:
   expenses: Despesas
   incomes: Receitas
   input_table_error: Formato da tabela inválido. Espera-se as colunas 'Data', 'Valor', 'Banco' e 'Descrição'.
+  tables: Tabelas
+  monthly_dashboard: Dashboard mensal
+  evolution_dashboard: Dashboard evolutivo
+  incomes_source: Fontes de receitas
+  balance: Saldo
+  monthly: Mensal
+  yearly: Anual
+  expenses_evolution_per_category: Evolução das despesas por categoria

@@ -36,3 +36,11 @@ en:
   expenses: Expenses
   incomes: Incomes
   input_table_error: Table format not compatible. Expected columns are 'Date', 'Amount', 'Bank', 'Description'.
+  tables: Tables
+  monthly_dashboard: Monthly dashboard
+  evolution_dashboard: Evolution dashboard
+  income_source: Income source
+  balance: Balance
+  monthly: Monthly
+  yearly: Yearly
+  expenses_evolution_per_category: Expenses evolution per category
