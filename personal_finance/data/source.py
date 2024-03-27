@@ -48,20 +48,20 @@ class DataSource:
         return self.dataframe.query("year == @year")
 
     def unique_months_from_year(self, year: int) -> list[int]:
-        df = self.filter_year(year)
+        df: pd.DataFrame = self.filter_year(year)
         return df[DataSchema.MONTH].unique().tolist()
 
     def filter_month_and_year(self, year: int, month: int) -> pd.DataFrame:
-        df = self.filter_year(year)
+        df: pd.DataFrame = self.filter_year(year)
         return df.query("month == @month")
 
     def total_month_amount(self, year: int, month: int) -> float:
-        df = self.filter_month_and_year(year, month)
+        df: pd.DataFrame = self.filter_month_and_year(year, month)
         return df[DataSchema.AMOUNT].sum()
 
     def month_expense_by_subcat(self, year: int, month: int) -> pd.DataFrame:
-        df_month = self.filter_month_and_year(year, month)
-        df_month_sum = df_month.groupby(by=DataSchema.SUBCATEGORY).sum(
+        df_month: pd.DataFrame = self.filter_month_and_year(year, month)
+        df_month_sum: pd.DataFrame = df_month.groupby(by=DataSchema.SUBCATEGORY).sum(
             numeric_only=True
         )
         df_month_sum.reset_index(inplace=True)
@@ -87,8 +87,18 @@ class DataSource:
         return month.capitalize().strip(".")
 
     def month_income_by_category(self, month: int, year: int) -> pd.DataFrame:
-        df = self.filter_month_and_year(year, month)
-        df_cat = df.groupby(by=DataSchema.CATEGORY).sum(numeric_only=True)
+        df: pd.DataFrame = self.filter_month_and_year(year, month)
+        df_cat: pd.DataFrame = df.groupby(by=DataSchema.CATEGORY).sum(numeric_only=True)
         df_cat.reset_index(inplace=True)
         df_cat.sort_values(DataSchema.AMOUNT, inplace=True)
         return df_cat
+
+    def evolution_per_category(self, year: int) -> pd.DataFrame:
+        df: pd.DataFrame = self.filter_year(year)
+        dff: pd.DataFrame = df.groupby(by=[DataSchema.CATEGORY, DataSchema.MONTH]).sum(
+            numeric_only=True
+        )
+        dff.reset_index(inplace=True)
+        dff.loc[:, DataSchema.AMOUNT] = dff[DataSchema.AMOUNT].round(2)
+        dff[DataSchema.MONTH] = dff[DataSchema.MONTH].apply(self.convert_month_locale)
+        return dff
