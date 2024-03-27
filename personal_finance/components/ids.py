@@ -24,6 +24,7 @@ YEAR_DROPDOWN = "years-dd"
 MONTH_DROPDOWN = "months-dd"
 EXP_CARD = "exp-card"
 INC_CARD = "inc-card"
+BALANCE_CARD = "balance-card"
 HORIZONTAL_BAR_CHART = "bar-polar-chart"
 SUNBURST_CHART = "sunburst-chart"
 BAR_CHART = "bar-chart"
@@ -38,3 +39,9 @@ REMOVE_DATA_ERROR_ALERT = "remove-data-error-alert"
 INPUT_TABLE_ALERT = "input-table-error-alert"
 
 YEAR_DROPDOWN_EVOLUTION = "years_dropdown-evolution"
+
+EVOLUTION_TAB = "evolution-tab"
+EVOLUTION_CONTENT = "evolution-content"
+SEGMENTED_EVOLUTION = "segmented-evolution"
+
+EXPENSES_EVOLUTION_PER_CATEGORY = "expenses-evolution-per-category"
