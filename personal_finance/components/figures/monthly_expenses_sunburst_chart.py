@@ -1,6 +1,8 @@
 from dash import callback, html, dcc, Output, Input, State
+from pandas import DataFrame
 import plotly.express as px
 import i18n
+from plotly.graph_objs._figure import Figure
 
 from components import ids
 from components.figures import styles
@@ -14,11 +16,11 @@ def render() -> html.Div:
 
 def set_color_palette() -> dict[str, str]:
     color_palette: dict[str, str] = {
-        i18n.t(f'category.{category}'): color
+        i18n.t(f"category.{category}"): color
         for category, color in styles.categories_palette.items()
     }
     subcolor_palette: dict[str, str] = {
-        i18n.t(f'subcategory.{subcategory}'): color
+        i18n.t(f"subcategory.{subcategory}"): color
         for subcategory, color in styles.subcategories_palette.items()
     }
     color_palette.update(subcolor_palette)
@@ -26,44 +28,43 @@ def set_color_palette() -> dict[str, str]:
 
 
 @callback(
-    Output(ids.SUNBURST_CHART, 'children'),
+    Output(ids.SUNBURST_CHART, "children"),
     [
-        Input(ids.EXPENSES_TABLE, 'cellValueChanged'),
-        Input(ids.MONTH_DROPDOWN, 'value'),
-        Input(ids.YEAR_DROPDOWN, 'value'),
+        Input(ids.EXPENSES_TABLE, "cellValueChanged"),
+        Input(ids.MONTH_DROPDOWN, "value"),
+        Input(ids.YEAR_DROPDOWN, "value"),
     ],
-    State(ids.EXPENSES_TABLE, 'rowData'),
+    State(ids.EXPENSES_TABLE, "rowData"),
 )
 def update_chart(_, month: int, year: int, data: list[dict]) -> html.Div:
     if not data:
         return html.Div(id=ids.SUNBURST_CHART)
     source = DataSource(data)
-    df_month_sum = source.month_expense_by_subcat(year, month)
+    df_month_sum: DataFrame = source.month_expense_by_subcat(year, month)
 
-    fig = px.sunburst(
+    fig: Figure = px.sunburst(
         df_month_sum,
         path=[DataSchema.CATEGORY, DataSchema.SUBCATEGORY],
         values=DataSchema.AMOUNT,
         color=DataSchema.CATEGORY,
-        title=i18n.t('general.expenses'),
+        title=i18n.t("general.expenses"),
+        # color_discrete_sequence=px.colors.qualitative.Vivid,
     )
 
     styles.standardize(fig)
 
     AMOUNT_LABEL: str = i18n.t(f"columns.{DataSchema.AMOUNT}")
-    SUBCATEGORY_LABEL: str = i18n.t(f'columns.{DataSchema.SUBCATEGORY}')
-    CATEGORY_LABEL: str = i18n.t(f'columns.{DataSchema.CATEGORY}')
+    SUBCATEGORY_LABEL: str = i18n.t(f"columns.{DataSchema.SUBCATEGORY}")
+    CATEGORY_LABEL: str = i18n.t(f"columns.{DataSchema.CATEGORY}")
 
     color_palette: dict[str, str] = set_color_palette()
     fig.update_traces(
         textinfo="label+percent parent",
-        insidetextorientation='horizontal',
-        marker_colors=[
-            color_palette[cat] for cat in fig.data[-1].labels
-        ],
+        insidetextorientation="horizontal",
+        marker_colors=[color_palette[cat] for cat in fig.data[-1].labels],
     )
     fig.update_traces(
-        hovertemplate=f'<b>{AMOUNT_LABEL}: %{{value:.2f}} </b>' +
-        f'<br>{CATEGORY_LABEL}/{SUBCATEGORY_LABEL}: %{{id}}'
+        hovertemplate=f"<b>{AMOUNT_LABEL}: %{{value:.2f}} </b>"
+        + f"<br>{CATEGORY_LABEL}/{SUBCATEGORY_LABEL}: %{{id}}"
     )
     return html.Div(dcc.Graph(figure=fig), id=ids.SUNBURST_CHART)
