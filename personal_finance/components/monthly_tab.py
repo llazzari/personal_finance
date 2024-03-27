@@ -1,8 +1,8 @@
-from dash import html
+from dash import html, callback, Output, Input
 import dash_bootstrap_components as dbc
 import i18n
 
-from components import incomes_card, expenses_card, balance_card
+from components import ids, incomes_card, expenses_card, balance_card
 from components.dropdowns import years_dropdown, months_dropdown
 from components.figures import (
     monthly_expenses_sunburst_chart,
@@ -11,6 +11,16 @@ from components.figures import (
 
 
 def render() -> html.Div:
+    return html.Div(id=ids.MONTHLY_TAB)
+
+
+@callback(
+    Output(ids.MONTHLY_TAB, "children"),
+    [Input(ids.EXPENSES_TABLE, "rowData"), Input(ids.INCOMES_TABLE, "rowData")],
+)
+def update_tab_content(expenses: list[dict], incomes: list[dict]) -> html.Div:
+    if not expenses and not incomes:
+        return html.Div()
     return html.Div(
         [
             dbc.Row(
@@ -61,4 +71,5 @@ def render() -> html.Div:
             ),
         ],
         style={"margin": "10px"},
+        id=ids.MONTHLY_TAB,
     )

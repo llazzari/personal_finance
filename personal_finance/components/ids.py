@@ -45,3 +45,5 @@ EVOLUTION_CONTENT = "evolution-content"
 SEGMENTED_EVOLUTION = "segmented-evolution"
 
 EXPENSES_EVOLUTION_PER_CATEGORY = "expenses-evolution-per-category"
+
+MONTHLY_TAB = "monthly-tab"

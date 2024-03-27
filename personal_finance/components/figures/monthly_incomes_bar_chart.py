@@ -25,9 +25,6 @@ def render() -> html.Div:
 )
 def update_bar_chart(_, month: int, year: int, data: list[dict]) -> html.Div:
     source = DataSource(data)
-    if source.is_empty:
-        return html.Div(i18n.t("general.no_data"))
-
     df: pd.DataFrame = source.month_income_by_category(month, year)
 
     fig: Figure = px.bar(
