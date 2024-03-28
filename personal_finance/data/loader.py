@@ -17,12 +17,12 @@ def load_data(file_path: Path) -> pd.DataFrame:
         DataSchema.RECURRENT: str,
         DataSchema.DESCRIPTION: str,
     }
-    df = pd.read_csv(
+    df: pd.DataFrame = pd.read_csv(
         file_path,
         dtype=dtype,
         usecols=list(dtype.keys()),
     )
-    df['id'] = df.index
+    df["id"] = df.index
     return sort_by_date(df)
 
 
