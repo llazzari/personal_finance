@@ -10,69 +10,68 @@ from data.raw.banks import PersonalTable
 
 
 def render() -> html.Div:
-    return html.Div([
-        dbc.DropdownMenu(
-            [
-                dbc.DropdownMenuItem(
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                html.I(className='bi bi-filetype-csv'),
-                                width='auto'
-                            ),
-                            dbc.Col(
-                                dcc.Upload(
-                                    i18n.t('general.input_table'),
-                                    id=ids.INPUT_TABLE_UPLOAD,
-                                    multiple=True,
+    return html.Div(
+        [
+            dbc.DropdownMenu(
+                [
+                    dbc.DropdownMenuItem(
+                        dbc.Row(
+                            [
+                                dbc.Col(
+                                    html.I(className="bi bi-filetype-csv"), width="auto"
                                 ),
-                                width='auto'
-                            )
-                        ],
-                        class_name='g-0'
+                                dbc.Col(
+                                    dcc.Upload(
+                                        i18n.t("general.input_table"),
+                                        id=ids.INPUT_TABLE_UPLOAD,
+                                        multiple=True,
+                                    ),
+                                    width="auto",
+                                ),
+                            ],
+                            class_name="g-0",
+                        ),
+                        id=ids.INPUT_TABLE_DATA_BTN,
+                        n_clicks=0,
                     ),
-                    id=ids.INPUT_TABLE_DATA_BTN,
-                    n_clicks=0,
-                ),
-                dbc.DropdownMenuItem(divider=True),
-                dbc.DropdownMenuItem(
-                    [
-                        html.I(className='bi bi-filetype-csv'),
-                        i18n.t('general.statement')  # type: ignore
-                    ],
-                    id=ids.OPEN_STATEMENT_MODAL,
-                ),
-                dbc.DropdownMenuItem(
-                    [
-                        html.I(className='bi bi-filetype-csv'),
-                        i18n.t('general.credit-card-bill')  # type: ignore
-                    ],
-                    id=ids.OPEN_CCBILL_MODAL,
-                ),
-            ],
-            label=i18n.t('general.upload'),  # type: ignore
-            align_end=True,
-            color='secondary',
-            style={'margin-bottom': '10px'},
-        ),
-    ])
+                    dbc.DropdownMenuItem(divider=True),
+                    dbc.DropdownMenuItem(
+                        [
+                            html.I(className="bi bi-filetype-csv"),
+                            i18n.t("general.statement"),  # type: ignore
+                        ],
+                        id=ids.OPEN_STATEMENT_MODAL,
+                    ),
+                    dbc.DropdownMenuItem(
+                        [
+                            html.I(className="bi bi-filetype-csv"),
+                            i18n.t("general.credit-card-bill"),  # type: ignore
+                        ],
+                        id=ids.OPEN_CCBILL_MODAL,
+                    ),
+                ],
+                label=i18n.t("general.upload"),  # type: ignore
+                align_end=True,
+                color="secondary",
+                style={"margin-bottom": "10px"},
+            ),
+        ]
+    )
 
 
 @callback(
-    Output(ids.EXPENSES_TABLE, 'rowTransaction', allow_duplicate=True),
-    Output(ids.INCOMES_TABLE, 'rowTransaction', allow_duplicate=True),
-    Output(ids.INPUT_TABLE_ALERT, 'is_open'),
-    Input(ids.INPUT_TABLE_UPLOAD, 'contents'),
+    Output(ids.EXPENSES_TABLE, "rowTransaction", allow_duplicate=True),
+    Output(ids.INCOMES_TABLE, "rowTransaction", allow_duplicate=True),
+    Output(ids.INPUT_TABLE_ALERT, "is_open"),
+    Input(ids.INPUT_TABLE_UPLOAD, "contents"),
     [
-        State(ids.EXPENSES_TABLE, 'rowData'),
-        State(ids.INCOMES_TABLE, 'rowData'),
+        State(ids.EXPENSES_TABLE, "rowData"),
+        State(ids.INCOMES_TABLE, "rowData"),
     ],
-    prevent_initial_call=True
+    prevent_initial_call=True,
 )
 def input_table(
-    contents: list[str],
-    old_expenses: list[dict],
-    old_incomes: list[dict]
+    contents: list[str], old_expenses: list[dict], old_incomes: list[dict]
 ) -> tuple[dict[str, Any] | Any, dict[str, Any] | Any, bool]:
     bank = PersonalTable()
     try:
@@ -83,5 +82,5 @@ def input_table(
     return (
         upload_data(old_expenses, new_expenses),
         upload_data(old_incomes, new_incomes),
-        False
+        False,
     )
