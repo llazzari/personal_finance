@@ -1,4 +1,4 @@
-from dash import callback, html, Output, Input
+from dash import callback, html, Output, Input, State
 import dash_bootstrap_components as dbc
 import i18n
 
@@ -13,12 +13,13 @@ def render() -> html.Div:
 @callback(
     Output(ids.EXP_CARD, "children"),
     [
-        Input(ids.EXPENSES_TABLE, "rowData"),
+        Input(ids.EXPENSES_TABLE, "cellValueChanged"),
         Input(ids.MONTH_DROPDOWN, "value"),
         Input(ids.YEAR_DROPDOWN, "value"),
     ],
+    State(ids.EXPENSES_TABLE, "rowData"),
 )
-def update_card(data: list[dict], month: int, year: int) -> html.Div:
+def update_card(_, month: int, year: int, data: list[dict]) -> html.Div:
     if not data:
         return html.Div(id=ids.EXP_CARD)
     source = DataSource(data)
