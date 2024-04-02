@@ -35,7 +35,7 @@ class BBStatement:
         return Columns(description="Histórico")
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
-        columns = self.columns
+        columns: Columns = self.columns
         return pd.read_csv(
             data,
             encoding=self.encoding,
@@ -136,7 +136,7 @@ class NuStatement:
         return Columns()
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
-        columns = self.columns
+        columns: Columns = self.columns
         return pd.read_csv(
             data,
             parse_dates=[columns.date],
@@ -207,7 +207,7 @@ class CoraStatement:
         return "utf-8"
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
-        columns = self.columns
+        columns: Columns = self.columns
         return pd.read_csv(
             data,
             parse_dates=[columns.date],
@@ -234,7 +234,7 @@ class C6CreditCard:
         return Columns(date="Data de Compra", amount="Valor (em R$)")
 
     def reader(self, data: io.StringIO) -> pd.DataFrame:
-        columns = self.columns
+        columns: Columns = self.columns
         return pd.read_csv(
             data,
             sep=";",

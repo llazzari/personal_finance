@@ -10,18 +10,19 @@ from components.tables.uploader import upload_data
 def buttons_row(options: dict[str, str], upload: bool = False) -> html.Div:
     def create_button(label: str, id: str, upload: bool) -> html.Div:
         if upload:
-            return html.Div(
-                dcc.Upload(dbc.Button(label), id=id, multiple=True)
-            )
+            return html.Div(dcc.Upload(dbc.Button(label), id=id, multiple=True))
         return html.Div(dbc.Button(label, id=id))
+
     return html.Div(
-        dbc.Row([
-            dbc.Col(
-                create_button(label, id, upload),
-                width='auto',
-            )
-            for label, id in options.items()
-        ])
+        dbc.Row(
+            [
+                dbc.Col(
+                    create_button(label, id, upload),
+                    width="auto",
+                )
+                for label, id in options.items()
+            ]
+        )
     )
 
 
@@ -37,18 +38,18 @@ def toggle_and_upload(
     triggered: dict,
     inputs: tuple,
     bank_options: list[str],
-    bank_selector: dict[str, Bank]
+    bank_selector: dict[str, Bank],
 ) -> tuple[bool, dict | Any, dict | Any, bool]:
     """Toggle modal and uploads the data to the tables accordingly."""
 
-    bank_name: str = triggered['prop_id'].split('.')[0].split('_')[0]
+    bank_name: str = triggered["prop_id"].split(".")[0].split("_")[0]
 
     is_open: bool = toggle_modal(inputs[:-2])
 
     if bank_name not in bank_options:
         return is_open, no_update, no_update, False
 
-    uploaded_contents: list[str] = triggered['value']
+    uploaded_contents: list[str] = triggered["value"]
     bank: Bank = bank_selector[bank_name]
 
     old_expenses: list[dict] = inputs[-2]
@@ -59,17 +60,11 @@ def toggle_and_upload(
     except ValueError:
         return False, no_update, no_update, True
     else:
-        add_exp = upload_data(old_expenses, new_expenses)
-        add_inc = upload_data(old_incomes, new_incomes)
+        add_exp: dict[str, Any] = upload_data(old_expenses, new_expenses)
+        add_inc: dict[str, Any] = upload_data(old_incomes, new_incomes)
 
     return is_open, add_exp, add_inc, False
 
 
 def footer(label: str, close_id: str) -> html.Div:
-    return html.Div(
-        dbc.Button(
-            label,
-            id=close_id,
-            className="ms-auto"
-        )
-    )
+    return html.Div(dbc.Button(label, id=close_id, className="ms-auto"))
