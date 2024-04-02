@@ -19,6 +19,16 @@ def render() -> html.Div:
     [Input(ids.EXPENSES_TABLE, "rowData"), Input(ids.INCOMES_TABLE, "rowData")],
 )
 def update_tab_content(expenses: list[dict], incomes: list[dict]) -> html.Div:
+    """
+    Generates the content for the monthly tab based on the provided expenses and incomes data.
+
+    Parameters:
+        expenses (list[dict]): A list of dictionaries representing the expenses data.
+        incomes (list[dict]): A list of dictionaries representing the incomes data.
+
+    Returns:
+        html.Div: The content for the monthly tab as a Div element.
+    """
     if not expenses and not incomes:
         return html.Div()
     return html.Div(

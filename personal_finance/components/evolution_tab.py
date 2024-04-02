@@ -21,6 +21,16 @@ def render() -> html.Div:
     [Input(ids.EXPENSES_TABLE, "rowData"), Input(ids.INCOMES_TABLE, "rowData")],
 )
 def update_tab(expenses: list[dict], incomes: list[dict]) -> html.Div:
+    """
+    A function to update the tab based on expenses and incomes data.
+
+    Parameters:
+    - expenses: a list of dictionaries representing expenses
+    - incomes: a list of dictionaries representing incomes
+
+    Returns:
+    - html.Div: a Div component representing the updated tab content
+    """
     if not expenses and not incomes:
         return html.Div(id=ids.EVOLUTION_TAB)
     return html.Div(

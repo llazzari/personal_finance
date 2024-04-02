@@ -1,4 +1,4 @@
-from dash import callback, html, dcc, Input, Output
+from dash import callback, html, dcc, Input, Output, State
 import i18n
 
 from components import ids
@@ -19,12 +19,13 @@ def render() -> html.Div:
 
 @callback(
     [
-        Output(ids.YEAR_DROPDOWN, 'options'),
-        Output(ids.YEAR_DROPDOWN, 'value'),
+        Output(ids.YEAR_DROPDOWN, "options"),
+        Output(ids.YEAR_DROPDOWN, "value"),
     ],
-    Input(ids.EXPENSES_TABLE, 'rowData')
+    Input(ids.EXPENSES_TABLE, "cellValueChanged"),
+    State(ids.EXPENSES_TABLE, "rowData"),
 )
-def update_dropdown(data: list[dict]) -> tuple[list[int], int]:
+def update_dropdown(_, data: list[dict]) -> tuple[list[int], int]:
     if not data:
         return [], 1
     source = DataSource(data)

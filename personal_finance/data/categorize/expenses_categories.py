@@ -3,7 +3,7 @@ CATEGORIES: dict[str, list[str]] = {
         "mortgage_rent",
         "home_maintenance",
         "property_taxes",
-        "home_purchases"
+        "home_purchases",
     ],
     "transportation": [
         "gas",
@@ -11,55 +11,34 @@ CATEGORIES: dict[str, list[str]] = {
         "auto_maintenance",
         "auto_taxes_and_fees",
         "public_transportation",
-        "ride_sharing"
+        "ride_sharing",
     ],
-    "utilities": [
-        "electricity",
-        "water",
-        "bank_fees",
-        "mobile_cell_phone",
-        "internet"
-    ],
-    "food": [
-        "groceries",
-        "dining_out"
-    ],
-    "savings_debt_payments": [
-        "savings",
-        "debt_payments",
-        "investments"
-    ],
+    "utilities": ["electricity", "water", "bank_fees", "mobile_cell_phone", "internet"],
+    "food": ["groceries", "dining_out"],
+    "savings_debt_payments": ["savings", "debt_payments", "investments"],
     "health": [
         "health_insurance",
         "health_plan",
         "medical_expenses",
         "fitness",
         "medications",
-        "supplements"
+        "supplements",
     ],
     "personal_spending": [
         "clothing",
         "beauty_and_personal_care",
         "hobbies_and_recreation",
         "subscriptions",
-        "studies"
+        "studies",
     ],
-    "entertainment": [
-        "movies_and_shows",
-        "events_and_activities",
-        "bars_pubs"
-    ],
-    "travel": [
-        "transportation_travel",
-        "lodging_travel",
-        "other_travel_costs"
-    ],
+    "entertainment": ["movies_and_shows", "events_and_activities", "bars_pubs"],
+    "travel": ["transportation_travel", "lodging_travel", "other_travel_costs"],
     "miscellaneous": [
         "gifts_and_donations",
         "miscellaneous_expenses",
         "vacations",
-        "pets"
-    ]
+        "pets",
+    ],
 }
 
 RECURRENT_SUBCATEGORIES: list[str] = [
@@ -75,5 +54,5 @@ RECURRENT_SUBCATEGORIES: list[str] = [
     "health_insurance",
     "fitness",
     "subscriptions",
-    "gas"
+    "gas",
 ]

@@ -1,10 +1,10 @@
+from pathlib import Path
 import os
+from dash import Dash
+from dash_bootstrap_templates import load_figure_template
 import i18n
 import pandas as pd
 import dash_bootstrap_components as dbc
-from dash import Dash
-from pathlib import Path
-from dash_bootstrap_templates import load_figure_template
 
 from components import layout
 from data.loader import load_data

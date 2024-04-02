@@ -7,17 +7,23 @@ from data.schema import DataSchema
 
 
 def set_income_columns() -> list[Column]:
-    inc_columns = set_columns()
+    """
+    Generate a list of income columns with specific modifications and return it.
+    """
+    inc_columns: list[Column] = set_columns()
     inc_columns.pop(4)  # remove subcategories
-    inc_categories = categories_according_to_locale()
-    inc_columns[4] = set_column_with_dropdown(
-        DataSchema.CATEGORY,
-        inc_categories
-    )
-    inc_columns[4]['minWidth'] = 200
-    inc_columns[4]['width'] = 200
+
+    inc_categories: list[str] = categories_according_to_locale()
+
+    inc_columns[4] = set_column_with_dropdown(DataSchema.CATEGORY, inc_categories)
+    inc_columns[4]["minWidth"] = 200
+    inc_columns[4]["width"] = 200
+
     return inc_columns
 
 
 def categories_according_to_locale() -> list[str]:
-    return [i18n.t(f'inc_category.{cat}') for cat in INC_CATEGORIES]
+    """
+    Returns a list of categories according to the locale.
+    """
+    return [i18n.t(f"inc_category.{cat}") for cat in INC_CATEGORIES]

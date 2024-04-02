@@ -1,6 +1,7 @@
 from dash import html
 import dash_bootstrap_components as dbc
 import i18n
+
 from components.tables import expenses_aggrid, incomes_aggrid
 from components.alerts import (
     input_table_alert,

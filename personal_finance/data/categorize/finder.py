@@ -1,8 +1,8 @@
 import functools
+from pathlib import Path
 import pandas as pd
 import yaml
 import i18n
-from pathlib import Path
 
 from data.categorize.expenses_categories import CATEGORIES, RECURRENT_SUBCATEGORIES
 from data.schema import DataSchema
@@ -12,6 +12,9 @@ PATH: Path = Path.cwd() / "locale" / "subcategory.pt.yml"
 
 @functools.lru_cache
 def set_subcategories_from_yaml() -> dict[str, str]:
+    """
+    A function to set subcategories from a YAML file and return them as a dictionary.
+    """
     with open(PATH, "r") as f:
         subcategories_yaml: dict[str, dict[str, str]] = yaml.safe_load(f)
     subcategories_pt: dict[str, str] = subcategories_yaml["pt"]

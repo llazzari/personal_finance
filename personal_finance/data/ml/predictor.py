@@ -1,8 +1,8 @@
+from typing import Protocol
 import joblib
 import numpy as np
 import pandas as pd
 from scipy.sparse import spmatrix
-from typing import Protocol
 
 from data.raw.cleaner import clean_descriptions
 from data.schema import DataSchema
@@ -27,7 +27,16 @@ def separate_data(df: pd.DataFrame) -> list[pd.DataFrame]:
 
 
 def predict_subcategories(uncategorized_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Perform subcategory prediction on the given DataFrame using a pre-trained ML model.
 
+    Parameters:
+    - uncategorized_df: pd.DataFrame, the DataFrame containing uncategorized data to predict
+    subcategories for.
+
+    Returns:
+    - pd.DataFrame, the DataFrame with predicted subcategories.
+    """
     df: pd.DataFrame = clean_descriptions([], uncategorized_df)
 
     model: MLModel = joblib.load(SUBCAT_MODEL_FILE)

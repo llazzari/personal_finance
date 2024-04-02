@@ -9,12 +9,12 @@ def render() -> html.Div:
     return html.Div(
         dbc.Modal(
             [
-                dbc.ModalBody(i18n.t('general.success_msg')),  # type: ignore
+                dbc.ModalBody(i18n.t("general.success_msg")),  # type: ignore
                 dbc.ModalFooter(
                     dbc.Button(
-                        i18n.t('general.close'),  # type: ignore
+                        i18n.t("general.close"),  # type: ignore
                         id=ids.CLOSE_SAVE_MODAL,
-                        className="ms-auto"
+                        className="ms-auto",
                     ),
                 ),
             ],

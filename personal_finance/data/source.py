@@ -11,7 +11,7 @@ from data.categorize.finder import find_category
 
 @dataclass
 class DataSource:
-    """Group of functions related to managing data for the callbacks."""
+    """Group of functions related to managing data during callbacks."""
 
     _data: list[dict]
 

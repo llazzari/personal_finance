@@ -19,6 +19,8 @@ from data.raw.cleaner import (
 
 
 class BBStatement:
+    """Statement manager for Banco do Brasil (BB)."""
+
     patterns: list[str] = [
         "\\d+/\\d+/\\d+",
         "([\\w|\\W]+:)\\d+",
@@ -65,6 +67,8 @@ class BBStatement:
 
 
 class BradescoStatement:
+    """Statement manager for Bradesco."""
+
     patterns: list[str] = []
 
     @property
@@ -125,6 +129,8 @@ class BradescoStatement:
 
 
 class NuStatement:
+    """Statement manager for Nubank."""
+
     patterns: list[str] = ["^.*?-", "-.*$"]
 
     @property
@@ -157,6 +163,8 @@ class NuStatement:
 
 
 class InterStatement:
+    """Statement manager for Inter."""
+
     patterns: list[str] = [
         "^.*?estabelecimento\\s{1}",
         "^Pix .*-",
@@ -198,6 +206,8 @@ class InterStatement:
 
 
 class CoraStatement:
+    """Statement manager for Cora."""
+
     @property
     def columns(self) -> Columns:
         return Columns(description="Identificação")
@@ -227,6 +237,8 @@ class CoraStatement:
 
 
 class C6CreditCard:
+    """Credit card bill manager for C6."""
+
     payment_description: str = "Inclusao de Pagamento    "
 
     @property
@@ -261,6 +273,8 @@ class C6CreditCard:
 
 
 class NuCreditCard:
+    """Credit card bill manager for Nubank."""
+
     patterns: list[str] = [
         "Pg \\*",
         "\\d+/\\d$",
@@ -304,6 +318,8 @@ class NuCreditCard:
 
 
 class SicrediCreditCard:
+    """Credit card bill manager for Sicredi."""
+
     payment_description: str = "PAGAMENTO DEBITO EM"
 
     @property
@@ -358,6 +374,8 @@ class SicrediCreditCard:
 
 
 class PersonalTable:
+    """Personal table manager."""
+
     @property
     def columns(self) -> Columns:
         return Columns(bank="Banco")

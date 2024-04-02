@@ -20,6 +20,18 @@ def render() -> html.Div:
     State(ids.INCOMES_TABLE, "rowData"),
 )
 def update_card(_, month: int, year: int, data: list[dict]) -> html.Div:
+    """
+    Update the income card with the total income for a given month and year.
+
+    Parameters:
+        _ (Any): Placeholder for the cell value that has changed, triggering the callback.
+        month (int): The month for which the income is calculated.
+        year (int): The year for which the income is calculated.
+        data (list[dict]): The row data from the incomes table.
+
+    Returns:
+        html.Div: The updated income card as a Div element.
+    """
     if not data:
         return html.Div(id=ids.INC_CARD)
     source = DataSource(data)

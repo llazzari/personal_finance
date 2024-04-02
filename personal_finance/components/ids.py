@@ -1,3 +1,5 @@
+"""An ids module that contains all the ids used in the app."""
+
 EXPENSES_TABLE = "expenses-table"
 INCOMES_TABLE = "incomes-table"
 

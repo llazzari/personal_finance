@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 import io
+from functools import reduce
+from typing import Callable, Optional, Protocol
 from unidecode import unidecode
 import i18n
 import pandas as pd
 import nltk
-from functools import reduce
-from typing import Callable, Optional, Protocol
 
 from data.schema import DataSchema
 
@@ -15,6 +15,8 @@ from data.schema import DataSchema
 
 @dataclass
 class Columns:
+    """Defines the columns of a DataFrame."""
+
     date: str = "Data"
     amount: str = "Valor"
     description: str = "Descrição"
@@ -31,6 +33,8 @@ Preprocessor = Callable[[pd.DataFrame], pd.DataFrame]
 
 
 class Bank(Protocol):
+    """Protocol interface for Bank classes."""
+
     @property
     def encoding(self) -> str: ...
 
@@ -44,6 +48,16 @@ class Bank(Protocol):
 
 
 def compose(*functions: Preprocessor) -> Preprocessor:
+    """
+    Composes multiple preprocessing functions into a single preprocessing function.
+
+    Args:
+        *functions (Preprocessor): Variable number of preprocessing functions to be composed.
+
+    Returns:
+        Preprocessor: A single preprocessing function that applies all the input preprocessing
+        functions in sequence.
+    """
     return reduce(lambda f, g: lambda x: g(f(x)), functions)
 
 
@@ -96,6 +110,18 @@ def tokenize(text: str) -> str:
 
 
 def clean_descriptions(patterns: list[str], df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans the descriptions in the DataFrame by lowercasing, stripping, removing accents,
+    applying specific patterns, removing punctuation, whitespaces, single letters,
+    numbers, and then tokenizing the text.
+
+    Parameters:
+    - patterns: A list of patterns to remove from the descriptions.
+    - df: A pandas DataFrame containing the descriptions.
+
+    Returns:
+    - A pandas DataFrame with the descriptions cleaned.
+    """
     df[DataSchema.CLEANED_DESCRIPTION] = (
         df[DataSchema.DESCRIPTION].str.lower().str.strip()
     ).astype(str)
@@ -111,7 +137,7 @@ def clean_descriptions(patterns: list[str], df: pd.DataFrame) -> pd.DataFrame:
             DataSchema.CLEANED_DESCRIPTION
         ].str.replace(p, "", regex=True, case=False)
 
-    general_patterns = [
+    general_patterns: list[str] = [
         "[^a-z0-9 ]+",  # removes punctuation
         "[ ]{2,}",  # removes 2 or more whitespaces
         "\\s{1}\\w{1}(\\s{0}$|\\s{1})",  # removes single letter
@@ -140,6 +166,16 @@ def correct_amount_sign(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def rename_columns(columns: Columns, df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Renames the columns of a DataFrame based on the provided mapping.
+
+    Args:
+        columns (Columns): An object that contains the current column names.
+        df (pd.DataFrame): The DataFrame to be modified.
+
+    Returns:
+        pd.DataFrame: The modified DataFrame with renamed columns.
+    """
     df.rename(
         columns={
             columns.amount: DataSchema.AMOUNT,

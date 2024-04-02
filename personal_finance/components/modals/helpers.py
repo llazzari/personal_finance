@@ -8,10 +8,10 @@ from components.tables.uploader import upload_data
 
 
 def buttons_row(options: dict[str, str], upload: bool = False) -> html.Div:
-    def create_button(label: str, id: str, upload: bool) -> html.Div:
+    def create_button(label: str, id_: str, upload: bool) -> html.Div:
         if upload:
-            return html.Div(dcc.Upload(dbc.Button(label), id=id, multiple=True))
-        return html.Div(dbc.Button(label, id=id))
+            return html.Div(dcc.Upload(dbc.Button(label), id=id_, multiple=True))
+        return html.Div(dbc.Button(label, id=id_))
 
     return html.Div(
         dbc.Row(

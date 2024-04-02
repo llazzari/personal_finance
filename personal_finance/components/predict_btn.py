@@ -29,6 +29,20 @@ def render() -> html.Div:
     prevent_initial_call=True,
 )
 def on_click(_, expenses: list[dict]) -> tuple[list[dict] | Any, bool]:
+    """
+    A callback function that processes expenses data when the predict button is clicked.
+
+    Parameters:
+        _: Placeholder for the button click that triggers the callback.
+        expenses (list[dict]): The list of expenses data to process.
+
+    Returns:
+        tuple[list[dict] | Any, bool]: A tuple containing the updated expenses data and a flag
+        indicating if an error alert should be shown.
+
+    If there is no data to be categorized, the function returns `no_update` and `True` to
+    indicate that an error alert should be shown.
+    """
     source_expenses = DataSource(expenses)
     if source_expenses.is_empty:
         return no_update, True
@@ -43,7 +57,7 @@ def on_click(_, expenses: list[dict]) -> tuple[list[dict] | Any, bool]:
         find_categories,
         find_recurrences,
     )
-    newly_categorized_df = categorizer(uncategorized_df)
+    newly_categorized_df: pd.DataFrame = categorizer(uncategorized_df)
 
     df: pd.DataFrame = pd.concat([newly_categorized_df, categorized_df])
 

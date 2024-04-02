@@ -73,6 +73,9 @@ def render() -> html.Div:
 def input_table(
     contents: list[str], old_expenses: list[dict], old_incomes: list[dict]
 ) -> tuple[dict[str, Any] | Any, dict[str, Any] | Any, bool]:
+    """
+    A function that processes the input table contents and updates the expenses and incomes tables. It takes the table contents, old expenses, and old incomes as input parameters and returns a tuple of updated expenses, updated incomes, and a boolean indicating if an alert should be shown.
+    """
     bank = PersonalTable()
     try:
         new_expenses, new_incomes = upload_bank_data(bank, contents)
