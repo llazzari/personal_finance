@@ -13,29 +13,27 @@ from data.ml.trainer import (
 
 
 class MLModel(Protocol):
-    def predict(self, X: np.ndarray | spmatrix) -> np.ndarray:
-        ...
+    def predict(self, X: np.ndarray | spmatrix) -> np.ndarray: ...
 
 
 class Vectorizer(Protocol):
-    def transform(self, X: np.ndarray) -> spmatrix:
-        ...
+    def transform(self, X: np.ndarray) -> spmatrix: ...
 
 
 def separate_data(df: pd.DataFrame) -> list[pd.DataFrame]:
-    categorized_df = df.loc[df[DataSchema.SUBCATEGORY].notna(), :]
-    uncategorized_df = df.loc[df[DataSchema.SUBCATEGORY].isna(), :]
+    categorized_df: pd.DataFrame = df.loc[df[DataSchema.SUBCATEGORY].notna(), :]
+    uncategorized_df: pd.DataFrame = df.loc[df[DataSchema.SUBCATEGORY].isna(), :]
     return [categorized_df, uncategorized_df]
 
 
 def predict_subcategories(uncategorized_df: pd.DataFrame) -> pd.DataFrame:
 
-    df = clean_descriptions([], uncategorized_df)
+    df: pd.DataFrame = clean_descriptions([], uncategorized_df)
 
     model: MLModel = joblib.load(SUBCAT_MODEL_FILE)
     vectorizer: Vectorizer = joblib.load(SUBCAT_VECTORIZER_FILE)
     X_vectorized: spmatrix = vectorizer.transform(
-        df[DataSchema.CLEANED_DESCRIPTION].to_numpy(dtype='<U50')
+        df[DataSchema.CLEANED_DESCRIPTION].to_numpy(dtype="<U50")
     )
     df.loc[:, DataSchema.SUBCATEGORY] = model.predict(X_vectorized)
 
