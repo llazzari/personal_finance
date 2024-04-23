@@ -1,4 +1,7 @@
 .venv
+.vscode
+.pytest_cache
+.hypothesis
 
 poetry.lock
 pyproject.toml
