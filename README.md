@@ -34,7 +34,7 @@ Planned future enhancements for this application include:
 3. Run the application:
 
    ```bash
-   python app.py
+   python main.py
    ```
 
 4. Access the application in your web browser at `http://localhost:8050`.
