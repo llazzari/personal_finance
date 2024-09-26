@@ -1,0 +1,13 @@
+pt:
+  date: Data
+  amount: Valor (R$)
+  category: Categoria
+  subcategory: Subcategoria
+  description: Descrição
+  installment: Parcela
+  year: Ano
+  month: Mês
+  bank: Banco
+  recurrent: Recorrente
+  type: Tipo
+

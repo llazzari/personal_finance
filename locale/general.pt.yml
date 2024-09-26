@@ -1,0 +1,47 @@
+---
+pt:
+  app_title: Finanças pessoais
+  no_data: Sem dados disponíveis. Importe os seus extratos ou faturas dos bancos disponíveis ou adicione despesas manualmente.
+  upload: Upload
+  add: Adicionar
+  add_manually: Selecione o número de despesas/receitas que deseja adicionar
+  filter: filtre os dados...
+  save: Salvar
+  confirm: Você tem certeza que deseja salvar os dados? Esta ação não pode ser desfeita.
+  success_msg: Dados salvos com sucesso!
+  close: Fechar
+  decimal_sep: '.'
+  statement: Extrato
+  credit-card-bill: Fatura
+  manual-add-exp-btn: Despesas
+  manual-add-inc-btn: Receitas
+  insert_data_manually: Ok
+  input_table: Sua tabela
+  select_bank_statement: Selecione um banco do qual deseja importar seu(s) extrato(s)
+  select_bank_ccbill: Selecione um banco do qual deseja importar sua(s) fatura(s)
+  recurrent_no: Não
+  recurrent_yes: Sim
+  predict: Prever categorias e subcategorias com IA
+  month: Selecione um mês
+  year: Selecione um ano
+  total_monthly_exp: Despesas totais do mês
+  total_monthly_inc: Receitas totais do mês
+  money: R$
+  monthly_expenses: Receitas e despesas do mês separadas por categorias
+  expenses_evolution: Evolução das receitas e despesas
+  delete_rows: Remover dados selecionados
+  bank_error: Dados incompatíveis! Talvez você tenha selecionado o banco errado...
+  prediction_error: Não há dados para categorizar.
+  remove_data_error: Nenhum dado foi selecionado para remoção.
+  expenses: Despesas
+  incomes: Receitas
+  input_table_error: Formato da tabela inválido. Espera-se as colunas 'Data', 'Valor', 'Banco' e 'Descrição'.
+  tables: Tabelas
+  monthly_dashboard: Dashboard mensal
+  evolution_dashboard: Dashboard evolutivo
+  incomes_source: Fontes de receitas
+  balance: Saldo
+  monthly: Mensal
+  yearly: Anual
+  expenses_evolution_per_category: Evolução das despesas por categoria
+  yearly_evolution: Evolução anual das receitas e despesas

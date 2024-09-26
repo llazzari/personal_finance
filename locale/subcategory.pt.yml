@@ -1,0 +1,43 @@
+pt:
+  mortgage_rent: Hipoteca/Aluguel
+  home_maintenance: Manutenção Residencial
+  property_taxes: Impostos sobre a Propriedade
+  gas: Gasolina
+  auto_insurance: Seguro do automóvel
+  auto_maintenance: Manutenção do automóvel
+  auto_taxes_and_fees: Impostos e taxas do automóvel
+  public_transportation: Transporte Público
+  ride_sharing: Compartilhamento de Carro
+  electricity: Eletricidade
+  water: Água
+  bank_fees: Taxas Bancárias
+  mobile_cell_phone: Celular/Telefone Móvel
+  internet: Internet
+  groceries: Mantimentos
+  dining_out: Comer Fora
+  snacks_and_beverages: Petiscos e Bebidas
+  savings: Poupança
+  debt_payments: Pagamentos de Dívidas
+  investments: Investimentos
+  health_insurance: Seguro Saúde
+  medical_expenses: Despesas Médicas
+  fitness: Fitness
+  clothing: Vestuário
+  beauty_and_personal_care: Beleza e Cuidados Pessoais
+  hobbies_and_recreation: Hobbies e Recreação
+  movies_and_shows: Filmes e Shows
+  events_and_activities: Eventos e Atividades
+  gifts_and_donations: Presentes e Doações
+  miscellaneous_expenses: Despesas Diversas
+  vacations: Férias
+  pets: Animais de estimação
+  subscriptions: Assinaturas
+  bars_pubs: Bares/Pubs
+  home_purchases: Compras para casa
+  health_plan: Plano de saúde
+  transportation_travel: Transporte
+  lodging_travel: Acomodação
+  other_travel_costs: Outras despesas
+  medications: Medicações
+  supplements: Suplementos
+  studies: Estudos

@@ -1,0 +1,47 @@
+---
+en:
+  app_title: Personal finances
+  no_data: No data! Upload your statements or credit card bills from the available banks or add your data manually.
+  upload: Upload
+  add: Add
+  add_manually: Select the number of expenses/incomes you want to add
+  filter: filter data...
+  save: Save
+  confirm: Are you sure you want to save the data? This action cannot be undone. 
+  success_msg: Data saved successfully!
+  close: Close
+  decimal_sep: '.'
+  statement: Statement
+  credit-card-bill: Credit Card Bill
+  manual-add-exp-btn: Expenses
+  manual-add-inc-btn: Incomes
+  insert_data_manually: Ok
+  input_table: Your table
+  select_bank_statement: Choose a bank from which you want to import your statement(s)
+  select_bank_ccbill: Choose a bank from which you want to import your credit card bill(s)
+  recurrent_no: No
+  recurrent_yes: Yes
+  predict: Predict categories and subcategories with AI
+  month: Select a month
+  year: Select a year
+  total_monthly_exp: Total monthly expenses
+  total_monthly_inc: Total monthly incomes
+  money: $
+  monthly_expenses: Month incomes and expenses by category
+  expenses_evolution: Incomes and expenses evolution
+  delete_rows: Remove selected data
+  bank_error: Incompatible data!
+  prediction_error: No data to categorize.
+  remove_data_error: No data selected to be removed.
+  expenses: Expenses
+  incomes: Incomes
+  input_table_error: Table format not compatible. Expected columns are 'Date', 'Amount', 'Bank', 'Description'.
+  tables: Tables
+  monthly_dashboard: Monthly dashboard
+  evolution_dashboard: Evolution dashboard
+  income_source: Income source
+  balance: Balance
+  monthly: Monthly
+  yearly: Yearly
+  expenses_evolution_per_category: Expenses evolution per category
+  yearly_evolution: Yearly evolution of expenses and incomes

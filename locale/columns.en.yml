@@ -1,0 +1,12 @@
+en:
+  date: Date
+  amount: Amount ($)
+  category: Category
+  subcategory: Subcategory
+  description: Description
+  installment: Installment
+  year: Year
+  month: Month
+  bank: Bank
+  recurrent: Recurrent
+  type: Type
