@@ -1,6 +1,6 @@
 # Personal Finance Dashboard
 
-A web-based personal finance dashboard that helps users track, categorize, and analyze their expenses. Built with machine learning models for automatic expense categorization and equipped with visualizations for comprehensive financial insights.
+A web-based personal finance dashboard that helps users track, categorize, and analyze their expenses and incomes. Built with machine learning models for automatic expense categorization and equipped with visualizations for comprehensive financial insights.
 
 ## Features
 
@@ -39,7 +39,7 @@ A web-based personal finance dashboard that helps users track, categorize, and a
 
 4. **Run the application**:
    \`\`\`bash
-   python app.py
+   python main.py
    \`\`\`
 
 5. **Access the dashboard**:  
@@ -47,7 +47,7 @@ A web-based personal finance dashboard that helps users track, categorize, and a
 
 ## Usage
 
-1. Add your expenses by navigating to the "Add Expense" section.
+1. Add your expenses and incomes.
 2. Expenses will be automatically categorized into one of the following categories:
    - **Food & Dining**
    - **Transport**
@@ -61,7 +61,7 @@ A web-based personal finance dashboard that helps users track, categorize, and a
    - **Investments**
    - **Miscellaneous**
 3. Visualize your spending habits through interactive graphs.
-4. Analyze monthly spending trends and see forecasts for upcoming months.
+4. Analyze monthly spending trends.
 
 ## Contributing
 
