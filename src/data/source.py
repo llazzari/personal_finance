@@ -95,7 +95,7 @@ class DataSource:
 
     def evolution_per_category(self, year: int) -> pd.DataFrame:
         df: pd.DataFrame = self.filter_year(year)
-        dff: pd.DataFrame = df.groupby(by=[DataSchema.CATEGORY, DataSchema.MONTH]).sum(
+        dff: pd.DataFrame = df.groupby(by=[DataSchema.MONTH, DataSchema.CATEGORY]).sum(
             numeric_only=True
         )
         dff.reset_index(inplace=True)

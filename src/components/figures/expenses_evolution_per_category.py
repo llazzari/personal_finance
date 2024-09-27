@@ -38,6 +38,22 @@ def update_chart(_, year: int, expenses: list[dict]) -> html.Div:
         title=i18n.t("general.expenses_evolution_per_category"),
         color_discrete_sequence=px.colors.qualitative.Vivid,
         markers=True,
+        category_orders={
+            DataSchema.MONTH: [
+                "Jan",
+                "Fev",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Set",
+                "Out",
+                "Nov",
+                "Dez",
+            ]
+        },
         labels={
             DataSchema.MONTH: i18n.t(f"columns.{DataSchema.MONTH}"),
             DataSchema.AMOUNT: i18n.t(f"columns.{DataSchema.AMOUNT}"),
