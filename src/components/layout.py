@@ -10,7 +10,8 @@ from .modals import statement_modal, credit_card_modal, save_modal
 def render(app: Dash, expenses: list[dict], incomes: list[dict]) -> dbc.Container:
     return dbc.Container(
         [
-            html.H3(html.B(app.title)),
+            html.H3(html.B(app.title), style={"margin-top": "20px"}),
+            html.Hr(),
             dmc.Tabs(
                 [
                     dmc.TabsList(
