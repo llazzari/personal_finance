@@ -13,7 +13,7 @@ from . import confirm_dialog, predict_btn, remove_rows_btn, save_btn
 from .dropdowns.menus import upload_dd_menu
 
 
-def render(incomes: list[dict], expenses: list[dict]) -> dbc.Container:
+def render(expenses: list[dict], incomes: list[dict]) -> dbc.Container:
     return dbc.Container(
         [
             input_table_alert.render(),

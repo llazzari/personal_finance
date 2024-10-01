@@ -3,17 +3,12 @@ import os
 from dash import Dash
 from dash_bootstrap_templates import load_figure_template
 import i18n
-import pandas as pd
 import dash_bootstrap_components as dbc
 
+from src.components.layout import User
 from src.components import layout
-from src.data.loader import load_data
+from src.data.user import Profile, HouseholdProfile
 
-
-EXPENSES_PATH: Path = Path.cwd() / "database" / "expenses.csv"
-os.environ["EXPENSES_PATH"] = str(EXPENSES_PATH)
-INCOMES_PATH: Path = Path.cwd() / "database" / "incomes.csv"
-os.environ["INCOMES_PATH"] = str(INCOMES_PATH)
 
 LOCALE = "pt"
 os.environ["LOCALE"] = LOCALE
@@ -27,11 +22,14 @@ def main() -> None:
     locale_path: Path = Path.cwd() / "locale"
     i18n.load_path.append(locale_path)  # type: ignore
 
-    # load expenses and incomes
-    df_exp: pd.DataFrame = load_data(EXPENSES_PATH)
-    expenses: list[dict] = df_exp.to_dict("records")
-    df_inc: pd.DataFrame = load_data(INCOMES_PATH)
-    incomes: list[dict] = df_inc.to_dict("records")
+    # Creating individual profiles
+    user1_profile = Profile("Lucas", "fontisto:male")
+    user2_profile = Profile("Nic", "fontisto:famale")
+
+    # Creating combined household profile
+    household_profile = HouseholdProfile(user1_profile, user2_profile)
+
+    users: list[User] = [user1_profile, user2_profile, household_profile]
 
     dbc_css = (
         "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
@@ -41,7 +39,7 @@ def main() -> None:
         __name__, external_stylesheets=[dbc_css, dbc.themes.DARKLY, dbc.icons.BOOTSTRAP]
     )
     app.title = i18n.t("general.app_title")  # type: ignore
-    app.layout = layout.render(app, expenses, incomes)
+    app.layout = layout.render(app, users)
     app.config["suppress_callback_exceptions"] = True
     app.scripts.config.serve_locally = True
     # server = app.server

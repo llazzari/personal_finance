@@ -1,29 +1,31 @@
-from dash import callback, Output, Input, State, callback_context
+from typing import Protocol, Any
+import pandas as pd
+from dash import callback, Output, Input, State, callback_context, no_update
 import dash_mantine_components as dmc
 from dash_iconify import DashIconify
 import i18n
 
-from .. import ids
-
-PROFILES_SIZES = 50
-PROFILE_BUTTONS_ICONS: dict[str, str] = {
-    ids.PROFILE_BTN: "mdi:account",
-    ids.USER_ONE_BTN: "fontisto:male",
-    ids.USER_TWO_BTN: "fontisto:famale",
-    ids.USER_HOUSEHOLD_BTN: "fontisto:home",
-}
+from .. import ids, tabs
 
 
-def create_icon(id_: str) -> DashIconify:
-    return DashIconify(
-        icon=PROFILE_BUTTONS_ICONS[id_], width=PROFILES_SIZES, height=PROFILES_SIZES
-    )
+class User(Protocol):
+    name: str
+    icon: str
+    expenses: pd.DataFrame
+    incomes: pd.DataFrame
 
 
-def create_action_icon(id_: str) -> dmc.ActionIcon:
+ICON_SIZE = 50
+
+
+def create_icon(icon: str) -> DashIconify:
+    return DashIconify(icon=icon, width=ICON_SIZE, height=ICON_SIZE)
+
+
+def create_action_icon(user: User) -> dmc.ActionIcon:
     return dmc.ActionIcon(
-        create_icon(id_),
-        id=id_,
+        create_icon(user.icon),
+        id=user.name,
         size="xl",
         radius="xl",
         variant="subtle",
@@ -31,43 +33,41 @@ def create_action_icon(id_: str) -> dmc.ActionIcon:
     )
 
 
-def render() -> dmc.Modal:
+def render(users: list[User]) -> dmc.Modal:
+    USER_INPUTS = [Input(user.name, "n_clicks") for user in users]
+    USERS = {user.name: user for user in users}
+
+    @callback(
+        Output(ids.PROFILE_MODAL, "opened"),
+        Output(ids.PROFILE_BTN, "children"),
+        Output(ids.MAINBODY, "children"),
+        Input(ids.PROFILE_BTN, "n_clicks"),
+        *USER_INPUTS,
+        State(ids.PROFILE_MODAL, "opened"),
+        prevent_initial_call=True,
+    )
+    def toggle_modal(*inputs) -> tuple[bool, DashIconify, Any]:
+        is_open = inputs[-1]
+
+        triggered = callback_context.triggered[0]
+        button_id = triggered["prop_id"].split(".")[0]
+        user: User | str = USERS.get(button_id, ids.PROFILE_BTN)
+
+        if isinstance(user, str):
+            return not is_open, create_icon("mdi:account"), no_update
+
+        return not is_open, create_icon(user.icon), tabs.render(user)
+
     return dmc.Modal(
         title=i18n.t("general.profile"),
         id=ids.PROFILE_MODAL,
         size="35%",
+        opened=True,
         children=[
             dmc.Group(
-                [
-                    create_action_icon(ids.USER_ONE_BTN),
-                    create_action_icon(ids.USER_TWO_BTN),
-                    create_action_icon(ids.USER_HOUSEHOLD_BTN),
-                ],
+                [create_action_icon(user) for user in users],
                 position="center",
                 grow=True,
             )
         ],
-    )
-
-
-@callback(
-    Output(ids.PROFILE_MODAL, "opened"),
-    Output(ids.PROFILE_BTN, "children"),
-    Input(ids.PROFILE_BTN, "n_clicks"),
-    Input(ids.USER_ONE_BTN, "n_clicks"),
-    Input(ids.USER_TWO_BTN, "n_clicks"),
-    Input(ids.USER_HOUSEHOLD_BTN, "n_clicks"),
-    State(ids.PROFILE_MODAL, "opened"),
-    prevent_initial_call=True,
-)
-def toggle_modal(
-    n1: int, n2: int, n3: int, n4: int, is_open: bool
-) -> tuple[bool, DashIconify]:
-    triggered = callback_context.triggered[0]
-    button_id = triggered["prop_id"].split(".")[0]
-
-    return not is_open, DashIconify(
-        icon=PROFILE_BUTTONS_ICONS[button_id],
-        width=PROFILES_SIZES,
-        height=PROFILES_SIZES,
     )

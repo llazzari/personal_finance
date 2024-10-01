@@ -1,5 +1,8 @@
 """An ids module that contains all the ids used in the app."""
 
+MAINBODY = "mainbody"
+USERS = "users"
+
 PROFILE_BTN = "profile-button"
 PROFILE_MODAL = "profile-modal"
 USER_ONE_BTN = "user-one-button"
