@@ -10,7 +10,7 @@ pt:
   confirm: Você tem certeza que deseja salvar os dados? Esta ação não pode ser desfeita.
   success_msg: Dados salvos com sucesso!
   close: Fechar
-  decimal_sep: '.'
+  decimal_sep: "."
   statement: Extrato
   credit-card-bill: Fatura
   manual-add-exp-btn: Despesas
@@ -45,3 +45,4 @@ pt:
   yearly: Anual
   expenses_evolution_per_category: Evolução das despesas por categoria
   yearly_evolution: Evolução anual das receitas e despesas
+  profile: Selecione um perfil de usuário

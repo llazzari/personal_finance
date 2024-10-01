@@ -7,10 +7,10 @@ en:
   add_manually: Select the number of expenses/incomes you want to add
   filter: filter data...
   save: Save
-  confirm: Are you sure you want to save the data? This action cannot be undone. 
+  confirm: Are you sure you want to save the data? This action cannot be undone.
   success_msg: Data saved successfully!
   close: Close
-  decimal_sep: '.'
+  decimal_sep: "."
   statement: Statement
   credit-card-bill: Credit Card Bill
   manual-add-exp-btn: Expenses
@@ -45,3 +45,4 @@ en:
   yearly: Yearly
   expenses_evolution_per_category: Expenses evolution per category
   yearly_evolution: Yearly evolution of expenses and incomes
+  profile: Select a user profile
