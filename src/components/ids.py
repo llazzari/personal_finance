@@ -1,5 +1,11 @@
 """An ids module that contains all the ids used in the app."""
 
+PROFILE_BTN = "profile-button"
+PROFILE_MODAL = "profile-modal"
+USER_ONE_BTN = "user-one-button"
+USER_TWO_BTN = "user-two-button"
+USER_HOUSEHOLD_BTN = "user-household-button"
+
 EXPENSES_TABLE = "expenses-table"
 INCOMES_TABLE = "incomes-table"
 

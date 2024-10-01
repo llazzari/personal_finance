@@ -3,14 +3,14 @@ import dash_bootstrap_components as dbc
 import dash_mantine_components as dmc
 import i18n
 
-from . import tables_tab, monthly_tab, evolution_tab
-from .modals import statement_modal, credit_card_modal, save_modal
+from . import tables_tab, monthly_tab, evolution_tab, title_bar
+from .modals import statement_modal, credit_card_modal, save_modal, profile_modal
 
 
 def render(app: Dash, expenses: list[dict], incomes: list[dict]) -> dbc.Container:
     return dbc.Container(
         [
-            html.H3(html.B(app.title), style={"margin-top": "20px"}),
+            title_bar.render(app.title),
             html.Hr(),
             dmc.Tabs(
                 [
@@ -44,6 +44,7 @@ def render(app: Dash, expenses: list[dict], incomes: list[dict]) -> dbc.Containe
             save_modal.render(),
             statement_modal.render(),
             credit_card_modal.render(),
+            profile_modal.render(),
             html.Div(style={"margin": "20px"}),
         ],
         class_name="dbc dbc-container tabs-container",
