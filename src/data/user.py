@@ -65,14 +65,6 @@ class Profile:
         )
         return df
 
-    # def save_data(self) -> None:
-    #     """Save the profile's data back to CSV."""
-    #     if not self.data.empty:
-    #         self.data.to_csv(self.file_path, index=False, float_format="%.2f")
-    #     else:
-    #         if self.file_path.exists():
-    #             Path(self.file_path).unlink()  # Delete the file if no data
-
 
 class HouseholdProfile:
     def __init__(self, profile1: Profile, profile2: Profile) -> None:

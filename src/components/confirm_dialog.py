@@ -1,7 +1,7 @@
-import os
 import i18n
 from dash import html, Input, Output, State, dcc, callback
 
+from src.data.user import DATABASE_PATH
 from src.data.source import DataSource
 from . import ids
 
@@ -25,11 +25,17 @@ def render() -> html.Div:
         State(ids.SAVE_MODAL, "is_open"),
         State(ids.EXPENSES_TABLE, "rowData"),
         State(ids.INCOMES_TABLE, "rowData"),
+        State(ids.ACTIVE_USER, "data"),
     ],
     prevent_initial_call=True,
 )
 def save(
-    n1: int, n2: int, is_open: bool, expenses: list[dict], incomes: list[dict]
+    n1: int,
+    n2: int,
+    is_open: bool,
+    expenses: list[dict],
+    incomes: list[dict],
+    active_user: str,
 ) -> bool:
     """
     This function is a callback that handles the opening and closing of the save modal. It takes in three inputs: `n1`, `n2`, and `is_open`. `n1` and `n2` are the submit and close click counts respectively, while `is_open` is a boolean indicating whether the save modal is open or not. The function also takes in two states: `expenses` and `incomes`, which are lists of dictionaries representing expense and income data respectively.
@@ -40,9 +46,9 @@ def save(
     """
     if n1:
         source_exp = DataSource(expenses)
-        source_exp.save_data(os.environ["EXPENSES_PATH"])
+        source_exp.save_data(f"{DATABASE_PATH}/{active_user.lower()}_expenses.csv")
         source_inc = DataSource(incomes)
-        source_inc.save_data(os.environ["INCOMES_PATH"])
+        source_inc.save_data(f"{DATABASE_PATH}/{active_user.lower()}_incomes.csv")
         return not is_open
     if n2:
         return not is_open
