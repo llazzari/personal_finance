@@ -29,7 +29,7 @@ def main() -> None:
     # Creating combined household profile
     household_profile = HouseholdProfile(user1_profile, user2_profile)
 
-    users: list[User] = [user1_profile, user2_profile, household_profile]
+    users: list[User] = [user1_profile]  # , user2_profile, household_profile]
 
     dbc_css = (
         "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"

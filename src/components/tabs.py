@@ -35,7 +35,7 @@ def render(user) -> dmc.Tabs:
             dmc.TabsPanel(monthly_tab.render(), value="monthly-dashboard"),
             dmc.TabsPanel(evolution_tab.render(), value="evolution-dashboard"),
         ],
-        orientation="vertical",
+        orientation="horizontal",
         placement="left",
         value="tables",
     )

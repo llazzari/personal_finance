@@ -80,6 +80,6 @@ def update_tab_content(expenses: list[dict], incomes: list[dict]) -> html.Div:
                 justify="end",
             ),
         ],
-        style={"margin": "10px"},
+        style={"margin": "5px"},
         id=ids.MONTHLY_TAB,
     )

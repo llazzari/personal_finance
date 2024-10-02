@@ -19,7 +19,7 @@ def standardize(fig: go.Figure) -> None:
     fig.update_yaxes(title_font=dict(size=18), tickfont=dict(size=16))
 
     fig.update_layout(legend=dict(font=dict(size=16)))
-    fig.update_layout(height=350, width=470, margin=dict(l=10, r=10, t=40, b=40))
+    fig.update_layout(height=400, width=550, margin=dict(l=10, r=10, t=40, b=40))
 
 
 categories_palette: dict[str, str] = {
