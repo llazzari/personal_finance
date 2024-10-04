@@ -6,11 +6,13 @@ from unidecode import unidecode
 import i18n
 import pandas as pd
 import nltk
+from nltk.stem import RSLPStemmer
 
 from ..schema import DataSchema
 
 nltk.download("punkt")
 nltk.download("stopwords")
+nltk.download("rslp")
 
 
 @dataclass
@@ -62,14 +64,17 @@ def compose(*functions: Preprocessor) -> Preprocessor:
 
 
 def tokenize(text: str) -> str:
-    """Tokenizes text into a list of tokens (words)."""
+    """Tokenizes, stems, and cleans text into a list of tokens (words)."""
+
+    # Initialize the stemmer for Portuguese
+    stemmer = RSLPStemmer()
 
     # Tokenize into words
     words: list[str] = nltk.word_tokenize(text)
 
-    def set_unimportant_words() -> list[str]:
-        stop_words: list[str] = nltk.corpus.stopwords.words("portuguese")
-        unimportant_words: list[str] = [
+    # Set of unimportant words for fast lookup
+    unimportant_words = set(
+        [
             "pix",
             "enviado",
             "enviada",
@@ -79,8 +84,6 @@ def tokenize(text: str) -> str:
             "pacote",
             "servicos",
             "pagamento",
-            # 'fatura',
-            "boleto",
             "banco",
             "bol",
             "ltda",
@@ -100,12 +103,17 @@ def tokenize(text: str) -> str:
             "6produto",
             "br",
         ]
-        for word in stop_words:
-            unimportant_words.append(word)
-        return unimportant_words
+        + nltk.corpus.stopwords.words("portuguese")
+    )
 
-    words = [word for word in words if word not in set_unimportant_words()]
-    unique_words = list(dict.fromkeys(words))
+    # Remove unimportant words and apply stemming
+    stemmed_words = [
+        stemmer.stem(word) for word in words if word not in unimportant_words
+    ]
+
+    # Remove duplicates while preserving order
+    unique_words = list(dict.fromkeys(stemmed_words))
+
     return " ".join(unique_words)
 
 
@@ -114,47 +122,48 @@ def clean_descriptions(patterns: list[str], df: pd.DataFrame) -> pd.DataFrame:
     Cleans the descriptions in the DataFrame by lowercasing, stripping, removing accents,
     applying specific patterns, removing punctuation, whitespaces, single letters,
     numbers, and then tokenizing the text.
-
-    Parameters:
-    - patterns: A list of patterns to remove from the descriptions.
-    - df: A pandas DataFrame containing the descriptions.
-
-    Returns:
-    - A pandas DataFrame with the descriptions cleaned.
     """
     df[DataSchema.CLEANED_DESCRIPTION] = (
-        df[DataSchema.DESCRIPTION].str.lower().str.strip()
-    ).astype(str)
+        df[DataSchema.DESCRIPTION].str.lower().str.strip().astype(str)
+    )
 
-    df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
-        DataSchema.CLEANED_DESCRIPTION
-    ].apply(
+    # Remove accents
+    df[DataSchema.CLEANED_DESCRIPTION] = df[DataSchema.CLEANED_DESCRIPTION].apply(
         unidecode
-    )  # removes accents from description
+    )
 
+    # Apply user-defined patterns
     for p in patterns:
-        df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
+        df[DataSchema.CLEANED_DESCRIPTION] = df[
             DataSchema.CLEANED_DESCRIPTION
         ].str.replace(p, "", regex=True, case=False)
 
-    general_patterns: list[str] = [
-        "[^a-z0-9 ]+",  # removes punctuation
-        "[ ]{2,}",  # removes 2 or more whitespaces
-        "\\s{1}\\w{1}(\\s{0}$|\\s{1})",  # removes single letter
-        "\\s{0,}\\d{3,}\\s{1}",  # removes 3 or more numbers
+    # General patterns
+    general_patterns = [
+        "\\b\\d{1,2}[-/.]\\d{1,2}[-/.]\\d{2,4}\\b",  # Remove dates
+        "[^a-z0-9 ]+",  # Remove punctuation
+        "[ ]{2,}",  # Remove extra whitespaces
+        "\\b\\w{1}\\b",  # Remove single letters
+        "\\b\\d+\\b",  # Remove isolated numbers
+        "\\s{0,}\\d{3,}\\s{0,}",  # Remove long numbers (like transaction IDs)
+        "\\b(r\$|usd|brl)\\b",  # Remove currency symbols
+        "([\\w|\\W]+:)\\d+",
+        "\\d{2}[\\w|\\W]+\\s{1}\\d{2}h\\d{2}min",
+        "^.*?estabelecimento\\s{1}",
+        "^Pix .*-",
+        "-.*$",
+        "\\d{1,}gb mensal",
+        "redes sociais",
     ]
     for gp in general_patterns:
-        df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
+        df[DataSchema.CLEANED_DESCRIPTION] = df[
             DataSchema.CLEANED_DESCRIPTION
         ].str.replace(gp, " ", regex=True)
 
-    df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
-        DataSchema.CLEANED_DESCRIPTION
-    ].str.strip()
-
-    df.loc[:, DataSchema.CLEANED_DESCRIPTION] = df[
-        DataSchema.CLEANED_DESCRIPTION
-    ].apply(tokenize)
+    # Final cleanup and tokenization
+    df[DataSchema.CLEANED_DESCRIPTION] = (
+        df[DataSchema.CLEANED_DESCRIPTION].str.strip().apply(tokenize)
+    )
 
     return df
 

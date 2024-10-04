@@ -21,13 +21,6 @@ from .cleaner import (
 class BBStatement:
     """Statement manager for Banco do Brasil (BB)."""
 
-    patterns: list[str] = [
-        "\\d+/\\d+/\\d+",
-        "([\\w|\\W]+:)\\d+",
-        "\\d+\\s{1}",
-        "\\d{2}[\\w|\\W]+\\s{1}\\d{2}h\\d{2}min",
-    ]
-
     @property
     def encoding(self) -> str:
         return "latin-1"
@@ -61,7 +54,7 @@ class BBStatement:
             partial(create_bank_column, "Banco do Brasil"),
             partial(
                 clean_descriptions,
-                self.patterns,
+                [],
             ),
         )
 
@@ -169,7 +162,7 @@ class InterStatement:
         "^.*?estabelecimento\\s{1}",
         "^Pix .*-",
         "-.*$",
-        "inter pre \\d{1,}gb mensal",
+        "\\d{1,}gb mensal",
         "redes sociais",
     ]
 
@@ -269,6 +262,7 @@ class C6CreditCard:
             partial(correct_installments_date, self.payment_description),
             partial(remove_ccbill_payment, self.payment_description),
             partial(create_bank_column, "C6"),
+            partial(clean_descriptions, []),
         )
 
 
@@ -394,7 +388,7 @@ class PersonalTable:
     def reader(self, data: io.StringIO) -> pd.DataFrame:
         columns: Columns = self.columns
         dtype: dict[str, type] = columns.dtype()
-        dtype[columns.bank] = str
+        dtype[columns.bank] = str  # type: ignore
         return pd.read_csv(
             data,
             dayfirst=True,
