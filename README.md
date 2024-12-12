@@ -26,7 +26,7 @@ A web-based personal finance dashboard that helps users track, categorize, and a
    cd personal_finance
    ```
 
-2. **Create a virtual environment and activate it**:
+2. **Create a virtual environment and activate it** (you can also use Poetry or uv):
    ```bash
    python -m venv venv
    source venv/bin/activate # For Windows use: venv\Scripts\activate
