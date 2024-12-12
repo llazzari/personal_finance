@@ -43,7 +43,7 @@ A web-based personal finance dashboard that helps users track, categorize, and a
    ```
 
 5. **Access the dashboard**:  
-   Open your browser and navigate to [http://127.0.0.1:5000](http://127.0.0.1:5000).
+   Open your browser and navigate to [http://127.0.0.1:5000](http://127.0.0.1:8050).
 
 ## Usage
 
