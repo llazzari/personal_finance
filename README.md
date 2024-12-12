@@ -21,26 +21,26 @@ A web-based personal finance dashboard that helps users track, categorize, and a
 ## Setup and Installation
 
 1. **Clone the repository**:
-   \`\`\`bash
+   ```bash
    git clone https://github.com/llazzari/personal_finance.git
    cd personal_finance
-   \`\`\`
+   ```
 
 2. **Create a virtual environment and activate it**:
-   \`\`\`bash
+   ```bash
    python -m venv venv
    source venv/bin/activate # For Windows use: venv\Scripts\activate
-   \`\`\`
+   ```
 
 3. **Install the required dependencies**:
-   \`\`\`bash
+   ```bash
    pip install -r requirements.txt
-   \`\`\`
+   ```
 
 4. **Run the application**:
-   \`\`\`bash
+   ```bash
    python main.py
-   \`\`\`
+   ```
 
 5. **Access the dashboard**:  
    Open your browser and navigate to [http://127.0.0.1:5000](http://127.0.0.1:5000).
