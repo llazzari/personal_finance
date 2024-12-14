@@ -47,20 +47,27 @@ def update_card(
     return html.Div(
         dbc.Card(
             [
-                dbc.CardHeader(
-                    [
-                        html.I(
-                            className="bi bi-cash-coin",
-                        ),
-                        html.B(i18n.t("general.balance")),
-                    ],
-                    class_name="bal-card-header",
-                ),
+                # dbc.CardHeader(
+                #     [
+                #         html.I(
+                #             className="bi bi-cash-coin",
+                #         ),
+                #         html.B(i18n.t("general.balance")),
+                #     ],
+                #     class_name="bal-card-header",
+                # ),
                 dbc.CardBody(
-                    html.P(html.B(f"{i18n.t('general.money')} {balance:.2f}"))
+                    [
+                        html.P(i18n.t("general.balance"), className="card-title"),
+                        html.H6(
+                            f"{i18n.t('general.money')} {balance:.2f}",
+                            className="card-body",
+                        ),
+                    ]
                 ),
             ],
             outline=True,
             color="primary",
+            className="monthly-card",
         )
     )

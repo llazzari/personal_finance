@@ -18,7 +18,7 @@ def render() -> html.Div:
     [
         Input(ids.EXPENSES_TABLE, "cellValueChanged"),
         Input(ids.INCOMES_TABLE, "cellValueChanged"),
-        Input(ids.YEAR_DROPDOWN_EVOLUTION, "value"),
+        Input(ids.YEAR_DROPDOWN, "value"),
     ],
     [
         State(ids.EXPENSES_TABLE, "rowData"),
@@ -59,9 +59,20 @@ def update_chart(
         },
         color_discrete_sequence=px.colors.qualitative.Set1,
         barmode="group",
+        # title="Comparação da evolução mensal entre despesas e receitas",
     )
-    fig.update_layout(xaxis_type="category")
-    return html.Div(
-        dcc.Graph(figure=fig),
-        id=ids.BAR_CHART,
+    fig.update_layout(
+        height=200,
+        yaxis={"title": None},
+        xaxis={"tickangle": 0, "type": "category", "title": None},
+        margin={"l": 0, "r": 0, "t": 30, "b": 0},
+        paper_bgcolor="rgba(0,0,0,0)",
+        legend={
+            "orientation": "h",
+            "yanchor": "bottom",
+            "y": 1.02,
+            "xanchor": "right",
+            "x": 1,
+        },
     )
+    return html.Div(dcc.Graph(figure=fig), id=ids.BAR_CHART)

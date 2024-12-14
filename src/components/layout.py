@@ -10,7 +10,6 @@ def render(app: Dash, users: list[User]) -> dbc.Container:
     return dbc.Container(
         [
             title_bar.render(app.title),
-            html.Hr(),
             html.Div(id=ids.MAINBODY),
             save_modal.render(),
             statement_modal.render(),

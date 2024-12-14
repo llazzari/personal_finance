@@ -1,98 +1,123 @@
 .bi {
-    margin-right: 5px;
-    display: inline-block;
+  margin-right: 5px;
+  display: inline-block;
 }
 
-.right-header {
-    text-align: end;
+.graphs-header {
+  text-align: left;
 }
 
 .main_buttons {
-    background-color: var(--bs-secondary);
-    border-color: var(--bs-secondary);
+  background-color: var(--bs-secondary);
+  border-color: var(--bs-secondary);
 }
 
 .buttons_row {
-    margin-bottom: 10px;
-    margin-top: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .btn:hover {
-    background-color: var(--bs-primary);
-    border-color: var(--bs-primary)
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
 }
 
-.dbc-row-selectable input[type=checkbox],
-.dbc-row-selectable input[type=radio] {
-    border: 1px solid rgb(100, 100, 100);
-    color: var(--bs-body-color);
-    font-weight: bold;
-    background-color: inherit;
-    width: 1em;
-    height: 1em;
-    outline: 0;
-    padding: 0;
-    float: left;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    margin-right: 5px;
+.dbc-row-selectable input[type="checkbox"],
+.dbc-row-selectable input[type="radio"] {
+  border: 1px solid rgb(100, 100, 100);
+  color: var(--bs-body-color);
+  font-weight: bold;
+  background-color: inherit;
+  width: 1em;
+  height: 1em;
+  outline: 0;
+  padding: 0;
+  float: left;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin-right: 5px;
 }
 
-.dbc-row-selectable input[type=radio] {
-    border-radius: 50%;
-    position: relative;
+.dbc-row-selectable input[type="radio"] {
+  border-radius: 50%;
+  position: relative;
 }
 
-.dbc-row-selectable input[type=radio]:checked:before {
-    content: "";
-    background-color: var(--bs-primary);
-    float: left;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    transform: scale(0.65);
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
+.dbc-row-selectable input[type="radio"]:checked:before {
+  content: "";
+  background-color: var(--bs-primary);
+  float: left;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transform: scale(0.65);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
 }
 
-.dbc-row-selectable input[type=checkbox]:checked:before {
-    content: "✓";
-    float: left;
-    width: 1em;
-    height: 1em;
-    line-height: 1em;
-    text-align: center;
+.dbc-row-selectable input[type="checkbox"]:checked:before {
+  content: "✓";
+  float: left;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
 }
 
-.tabs,
+.Select--single > .Select-control .Select-value,
+.Select-placeholder {
+  justify-content: start;
+  display: flex;
+}
 .tabs:not(:focus-visible) {
-    color: var(--bs-white);
-    font-weight: bold;
+  color: var(--bs-white);
+  font-weight: bold;
 }
 .tabs:hover {
-    background-color: var(--bs-primary);
+  background-color: var(--bs-primary);
 }
 
 .tabs-container {
-    height: 25%;
+  height: 25%;
 }
 
 .monthly-card {
-    color: var(--bs-white);
-    font-weight: bold;
-    margin-left: 10px;
-    background-color: var(--bs-success);
+  color: var(--bs-white);
+  margin: 0px;
+  background-color: var(--bs-success);
+  height: fit-content;
+  background-color: var(--bs-primary);
 }
 
-.inc-card-header {
-    background-color: var(--bs-success);
+.card-title {
+  font-size: 14px;
+  margin: 0px;
+  text-align: start;
 }
 
-.exp-card-header {
-    background-color: var(--bs-danger);
+.card-body {
+  text-align: end;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0px;
+  padding: 10px;
 }
 
-.bal-card-header {
-    background-color: var(--bs-primary);
+.major-card {
+  color: var(--bs-primary);
+}
+
+.vertical-line {
+  width: 1px;
+  border: 1px solid white;
+  height: 80%;
+  margin-top: 5px;
+  /* background-color: white; */
+}
+
+.evolution-part {
+  /* display: flex; */
+  /* justify-content: end; */
+  justify-items: end;
 }

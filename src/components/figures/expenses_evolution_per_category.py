@@ -7,6 +7,7 @@ from plotly.graph_objs._figure import Figure
 from src.components import ids
 from src.data.source import DataSource
 from src.data.schema import DataSchema
+from src.components.figures.monthly_expenses_sunburst_chart import set_color_palette
 
 
 def render() -> html.Div:
@@ -17,7 +18,7 @@ def render() -> html.Div:
     Output(ids.EXPENSES_EVOLUTION_PER_CATEGORY, "children"),
     [
         Input(ids.EXPENSES_TABLE, "cellValueChanged"),
-        Input(ids.YEAR_DROPDOWN_EVOLUTION, "value"),
+        Input(ids.YEAR_DROPDOWN, "value"),
     ],
     [State(ids.EXPENSES_TABLE, "rowData")],
 )
@@ -36,7 +37,8 @@ def update_chart(_, year: int, expenses: list[dict]) -> html.Div:
         color=DataSchema.CATEGORY,
         symbol=DataSchema.CATEGORY,
         title=i18n.t("general.expenses_evolution_per_category"),
-        color_discrete_sequence=px.colors.qualitative.Vivid,
+        # color_discrete_sequence=px.colors.qualitative.Vivid,
+        color_discrete_map=set_color_palette(),
         markers=True,
         category_orders={
             DataSchema.MONTH: [
@@ -60,6 +62,22 @@ def update_chart(_, year: int, expenses: list[dict]) -> html.Div:
             DataSchema.CATEGORY: i18n.t(f"columns.{DataSchema.CATEGORY}"),
         },
     )
+    fig.update_layout(
+        height=250,
+        showlegend=True,
+        yaxis={"title": None},
+        xaxis={"tickangle": 0, "type": "category", "title": None},
+        margin={"l": 0, "r": 0, "t": 30, "b": 30},
+        paper_bgcolor="rgba(0,0,0,0)",
+        legend={
+            "orientation": "h",
+            "yanchor": "top",
+            "y": -0.25,
+            "xanchor": "left",
+            "x": 0,
+        },
+    )
+
     fig.update_traces(textposition="bottom center", marker={"size": 12})
 
     return html.Div(dcc.Graph(figure=fig), id=ids.EXPENSES_EVOLUTION_PER_CATEGORY)

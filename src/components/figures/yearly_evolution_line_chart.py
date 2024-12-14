@@ -46,9 +46,22 @@ def update_chart(_, __, expenses: list[dict], incomes: list[dict]) -> html.Div:
             DataSchema.YEAR: i18n.t(f"columns.{DataSchema.YEAR}"),
             DataSchema.TYPE: i18n.t(f"columns.{DataSchema.TYPE}"),
         },
-        title=i18n.t("general.yearly_evolution"),
+        # title=i18n.t("general.yearly_evolution"),
         markers=True,
     )
-    fig.update_layout(xaxis_type="category")
+    fig.update_layout(
+        xaxis={"tickangle": 0, "type": "category", "title": None},
+        height=200,
+        yaxis={"title": None},
+        margin={"l": 0, "r": 0, "t": 30, "b": 0},
+        paper_bgcolor="rgba(0,0,0,0)",
+        legend={
+            "orientation": "h",
+            "yanchor": "bottom",
+            "y": 1.02,
+            "xanchor": "right",
+            "x": 1,
+        },
+    )
 
     return html.Div(dcc.Graph(figure=fig), id=ids.YEARLY_EVOLUTION_LINE_CHART)

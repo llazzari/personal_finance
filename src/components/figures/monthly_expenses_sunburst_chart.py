@@ -46,20 +46,23 @@ def update_chart(_, month: int, year: int, data: list[dict]) -> html.Div:
         values=DataSchema.AMOUNT,
         color=DataSchema.CATEGORY,
         title=i18n.t("general.expenses"),
-        # color_discrete_sequence=px.colors.qualitative.Vivid,
     )
-
-    styles.standardize(fig)
 
     AMOUNT_LABEL: str = i18n.t(f"columns.{DataSchema.AMOUNT}")
     SUBCATEGORY_LABEL: str = i18n.t(f"columns.{DataSchema.SUBCATEGORY}")
     CATEGORY_LABEL: str = i18n.t(f"columns.{DataSchema.CATEGORY}")
 
     color_palette: dict[str, str] = set_color_palette()
+    fig.update_layout(
+        height=200,
+        showlegend=False,
+        margin={"l": 0, "r": 0, "t": 30, "b": 0},
+        paper_bgcolor="rgba(0,0,0,0)",
+    )
     fig.update_traces(
         textinfo="label+percent parent",
         insidetextorientation="horizontal",
-        marker_colors=[color_palette[cat] for cat in fig.data[-1].labels],
+        marker_colors=[color_palette[cat] for cat in fig.data[-1].labels],  # type: ignore
     )
     fig.update_traces(
         hovertemplate=f"<b>{AMOUNT_LABEL}: %{{value:.2f}} </b>"

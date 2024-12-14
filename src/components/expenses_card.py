@@ -40,19 +40,29 @@ def update_card(_, month: int, year: int, data: list[dict]) -> html.Div:
     return html.Div(
         dbc.Card(
             [
-                dbc.CardHeader(
-                    [
-                        html.I(className="bi bi-coin"),
-                        html.B(i18n.t("general.expenses")),
-                    ],
-                    class_name="exp-card-header",
-                ),
+                # dbc.CardHeader(
+                #     [
+                #         html.I(className="bi bi-coin"),
+                #         html.B(i18n.t("general.expenses")),
+                #     ],
+                #     class_name="exp-card-header",
+                # ),
                 dbc.CardBody(
-                    html.P(html.B(f"{i18n.t('general.money')} {expenses:.2f}"))
+                    [
+                        html.P(
+                            i18n.t("general.expenses"),
+                            className="card-title",
+                        ),
+                        html.H6(
+                            f"{i18n.t('general.money')} {expenses:.2f}",
+                            className="card-body",
+                        ),
+                    ]
                 ),
             ],
             outline=True,
-            color="danger",
+            color="primary",
+            className="monthly-card",
         ),
         id=ids.EXP_CARD,
         style={"margin-bottom": "5px"},

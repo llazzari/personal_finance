@@ -1,7 +1,9 @@
 import dash_mantine_components as dmc
 import i18n
 
-from ..components import tables_tab, monthly_tab, evolution_tab
+from . import dashboard_tab
+
+from ..components import tables_tab
 
 
 def render(user) -> dmc.Tabs:
@@ -10,18 +12,13 @@ def render(user) -> dmc.Tabs:
             dmc.TabsList(
                 [
                     dmc.Tab(
+                        "Dashboard",
+                        value="dashboard",
+                        className="tabs",
+                    ),
+                    dmc.Tab(
                         i18n.t("general.tables"),
                         value="tables",
-                        className="tabs",
-                    ),
-                    dmc.Tab(
-                        i18n.t("general.monthly_dashboard"),
-                        value="monthly-dashboard",
-                        className="tabs",
-                    ),
-                    dmc.Tab(
-                        i18n.t("general.evolution_dashboard"),
-                        value="evolution-dashboard",
                         className="tabs",
                     ),
                 ]
@@ -32,10 +29,9 @@ def render(user) -> dmc.Tabs:
                 ),
                 value="tables",
             ),
-            dmc.TabsPanel(monthly_tab.render(), value="monthly-dashboard"),
-            dmc.TabsPanel(evolution_tab.render(), value="evolution-dashboard"),
+            dmc.TabsPanel(dashboard_tab.render(), value="dashboard"),
         ],
         orientation="horizontal",
-        placement="left",
-        value="tables",
+        placement="center",
+        value="dashboard",
     )
