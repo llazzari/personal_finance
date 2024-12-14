@@ -9,15 +9,15 @@ def render(title: str) -> dmc.Grid:
     return dmc.Grid(
         [
             dmc.Col(
-                html.H3(html.B(title), style={"margin-top": "20px"}),
+                html.H5(html.B(title), style={"margin-top": "10px"}),
                 span="content",
             ),
             dmc.Col(
                 dmc.ActionIcon(
-                    DashIconify(icon="mdi:account", width=50, height=50),
+                    DashIconify(icon="mdi:account", width=30, height=30),
                     variant="subtle",
                     radius="xl",
-                    size=60,
+                    size=30,
                     style={"margin-top": "10px"},
                     id=ids.PROFILE_BTN,
                 ),
