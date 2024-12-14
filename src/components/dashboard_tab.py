@@ -1,8 +1,9 @@
 from dash import html, callback, Output, Input
 import dash_bootstrap_components as dbc
 
-from . import ids, incomes_card, expenses_card, balance_card
-from .dropdowns import years_dropdown, months_dropdown
+from .cards import balance_card, expenses_card, incomes_card, dropdowns_card
+
+from . import ids
 from .figures import (
     monthly_expenses_sunburst_chart,
     monthly_incomes_bar_chart,
@@ -37,45 +38,50 @@ def update_tab_content(expenses: list[dict], incomes: list[dict]) -> html.Div:
         dbc.Row(
             [
                 dbc.Col(
-                    dbc.Card(
-                        [
-                            dbc.Row(
-                                [
-                                    dbc.Col(
-                                        [
-                                            years_dropdown.render(),
-                                            months_dropdown.render(),
-                                        ],
-                                        width=4,
-                                    ),
-                                    dbc.Col(
+                    [
+                        dbc.Row(
+                            [
+                                dbc.Col(
+                                    dropdowns_card.render(),
+                                    width=4,
+                                ),
+                                dbc.Col(
+                                    dbc.Card(
                                         monthly_expenses_sunburst_chart.render(),
-                                        width=8,
+                                        body=True,
+                                        outline=True,
+                                        # class_name="",
+                                        # color="primary",
                                     ),
-                                ],
-                                justify="start",
-                            ),
-                            dbc.Row(
-                                [
-                                    dbc.Col(
+                                    width=8,
+                                ),
+                            ],
+                            justify="start",
+                            align="top",
+                        ),
+                        dbc.Row(
+                            [
+                                dbc.Col(
+                                    dbc.Card(
                                         monthly_incomes_bar_chart.render(),
-                                        width=12,
+                                        body=True,
+                                        outline=True,
+                                        class_name="dbc dbc-card mt-2 mb-2",
                                     ),
-                                ],
-                                justify="center",
-                                className="mt-2",
-                            ),
-                            dbc.Row(
-                                [
-                                    dbc.Col(incomes_card.render(), width=4),
-                                    dbc.Col(expenses_card.render(), width=4),
-                                    dbc.Col(balance_card.render(), width=4),
-                                ],
-                                justify="space-between",
-                            ),
-                        ],
-                        body=True,
-                    ),
+                                    width=12,
+                                ),
+                            ],
+                            justify="center",
+                        ),
+                        dbc.Row(
+                            [
+                                dbc.Col(incomes_card.render(), width=4),
+                                dbc.Col(expenses_card.render(), width=4),
+                                dbc.Col(balance_card.render(), width=4),
+                            ],
+                            justify="space-between",
+                        ),
+                    ],
                     width=5,
                 ),
                 dbc.Col(
@@ -86,7 +92,7 @@ def update_tab_content(expenses: list[dict], incomes: list[dict]) -> html.Div:
                                     dbc.CardBody(
                                         expenses_evolution_per_category.render()
                                     ),
-                                    class_name="mt-2 mb-2",
+                                    class_name="mb-2",
                                 ),
                                 width="spam",
                             )

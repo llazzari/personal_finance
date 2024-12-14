@@ -63,7 +63,7 @@ def update_chart(_, year: int, expenses: list[dict]) -> html.Div:
         },
     )
     fig.update_layout(
-        height=250,
+        height=275,
         showlegend=True,
         yaxis={"title": None},
         xaxis={"tickangle": 0, "type": "category", "title": None},

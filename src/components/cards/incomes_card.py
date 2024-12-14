@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 import i18n
 
 from src.data.source import DataSource
-from . import ids
+from .. import ids
 
 
 def render() -> html.Div:
@@ -40,14 +40,6 @@ def update_card(_, month: int, year: int, data: list[dict]) -> html.Div:
     return html.Div(
         dbc.Card(
             [
-                # dbc.CardHeader(
-                # [
-                # html.I(
-                #     className="bi bi-cash",
-                # ),
-                # ],
-                # class_name="inc-card-header",
-                # ),
                 dbc.CardBody(
                     [
                         html.P(

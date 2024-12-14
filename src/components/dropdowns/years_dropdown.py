@@ -12,6 +12,7 @@ def render() -> html.Div:
             dcc.Dropdown(
                 id=ids.YEAR_DROPDOWN,
                 placeholder=i18n.t("general.year"),  # type: ignore
+                className="mb-2",
             ),
         ],
     )
