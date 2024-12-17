@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import io
-from functools import reduce
+from functools import reduce, partial
 from typing import Callable, Optional, Protocol
 from unidecode import unidecode
 import i18n
@@ -32,6 +32,7 @@ class Columns:
 
 
 Preprocessor = Callable[[pd.DataFrame], pd.DataFrame]
+SeriesPreprocessor = Callable[[pd.Series], pd.Series]
 
 
 class Bank(Protocol):
@@ -66,13 +67,10 @@ def compose(*functions: Preprocessor) -> Preprocessor:
 def tokenize(text: str) -> str:
     """Tokenizes, stems, and cleans text into a list of tokens (words)."""
 
-    # Initialize the stemmer for Portuguese
     stemmer = RSLPStemmer()
 
-    # Tokenize into words
     words: list[str] = nltk.word_tokenize(text)
 
-    # Set of unimportant words for fast lookup
     unimportant_words = set(
         [
             "pix",
@@ -106,7 +104,6 @@ def tokenize(text: str) -> str:
         + nltk.corpus.stopwords.words("portuguese")
     )
 
-    # Remove unimportant words and apply stemming
     stemmed_words = [
         stemmer.stem(word) for word in words if word not in unimportant_words
     ]
@@ -123,46 +120,53 @@ def clean_descriptions(patterns: list[str], df: pd.DataFrame) -> pd.DataFrame:
     applying specific patterns, removing punctuation, whitespaces, single letters,
     numbers, and then tokenizing the text.
     """
-    df[DataSchema.CLEANED_DESCRIPTION] = (
-        df[DataSchema.DESCRIPTION].str.lower().str.strip().astype(str)
+
+    def create_cleaned_description_column(descriptions: pd.Series) -> pd.Series:
+        return descriptions.str.lower().str.strip().astype(str)
+
+    def remove_accents(descriptions: pd.Series) -> pd.Series:
+        return descriptions.apply(unidecode)
+
+    def apply_user_defined_regex_patterns(
+        patterns: list[str], descriptions: pd.Series
+    ) -> pd.Series:
+        for p in patterns:
+            descriptions = descriptions.str.replace(p, "", regex=True, case=False)
+        return descriptions
+
+    def apply_general_regex_patterns(descriptions: pd.Series) -> pd.Series:
+        general_patterns = [
+            "\\b\\d{1,2}[-/.]\\d{1,2}[-/.]\\d{2,4}\\b",  # Remove dates
+            "[^a-z0-9 ]+",  # Remove punctuation
+            "[ ]{2,}",  # Remove extra whitespaces
+            "\\b\\w{1}\\b",  # Remove single letters
+            "\\b\\d+\\b",  # Remove isolated numbers
+            "\\s{0,}\\d{3,}\\s{0,}",  # Remove long numbers (like transaction IDs)
+            "\\b(r\$|usd|brl)\\b",  # Remove currency symbols
+            "([\\w|\\W]+:)\\d+",
+            "\\d{2}[\\w|\\W]+\\s{1}\\d{2}h\\d{2}min",
+            "^.*?estabelecimento\\s{1}",
+            "^Pix .*-",
+            "-.*$",
+            "\\d{1,}gb mensal",
+            "redes sociais",
+        ]
+        for gp in general_patterns:
+            descriptions = descriptions.str.replace(gp, " ", regex=True)
+        return descriptions
+
+    def tokenize_(descriptions: pd.Series) -> pd.Series:
+        return descriptions.str.strip().apply(tokenize)
+
+    clean_descriptions_preprocessor = compose(
+        create_cleaned_description_column,
+        remove_accents,
+        partial(apply_user_defined_regex_patterns, patterns),
+        apply_general_regex_patterns,
+        tokenize_,
     )
-
-    # Remove accents
-    df[DataSchema.CLEANED_DESCRIPTION] = df[DataSchema.CLEANED_DESCRIPTION].apply(
-        unidecode
-    )
-
-    # Apply user-defined patterns
-    for p in patterns:
-        df[DataSchema.CLEANED_DESCRIPTION] = df[
-            DataSchema.CLEANED_DESCRIPTION
-        ].str.replace(p, "", regex=True, case=False)
-
-    # General patterns
-    general_patterns = [
-        "\\b\\d{1,2}[-/.]\\d{1,2}[-/.]\\d{2,4}\\b",  # Remove dates
-        "[^a-z0-9 ]+",  # Remove punctuation
-        "[ ]{2,}",  # Remove extra whitespaces
-        "\\b\\w{1}\\b",  # Remove single letters
-        "\\b\\d+\\b",  # Remove isolated numbers
-        "\\s{0,}\\d{3,}\\s{0,}",  # Remove long numbers (like transaction IDs)
-        "\\b(r\$|usd|brl)\\b",  # Remove currency symbols
-        "([\\w|\\W]+:)\\d+",
-        "\\d{2}[\\w|\\W]+\\s{1}\\d{2}h\\d{2}min",
-        "^.*?estabelecimento\\s{1}",
-        "^Pix .*-",
-        "-.*$",
-        "\\d{1,}gb mensal",
-        "redes sociais",
-    ]
-    for gp in general_patterns:
-        df[DataSchema.CLEANED_DESCRIPTION] = df[
-            DataSchema.CLEANED_DESCRIPTION
-        ].str.replace(gp, " ", regex=True)
-
-    # Final cleanup and tokenization
-    df[DataSchema.CLEANED_DESCRIPTION] = (
-        df[DataSchema.CLEANED_DESCRIPTION].str.strip().apply(tokenize)
+    df[DataSchema.CLEANED_DESCRIPTION] = clean_descriptions_preprocessor(
+        df[DataSchema.DESCRIPTION]
     )
 
     return df
