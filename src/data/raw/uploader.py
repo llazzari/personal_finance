@@ -30,7 +30,7 @@ def upload_bank_data(bank: Bank, contents: list[str]) -> tuple[pd.DataFrame, ...
     """
     Uploads bank data as a tuple of pandas DataFrames containing expenses and incomes.
 
-    Parameters:
+    Args:
         bank (Bank): The bank object representing the bank from which the data is being uploaded.
         contents (list[str]): A list of strings containing the contents of the bank data.
 
