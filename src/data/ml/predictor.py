@@ -6,10 +6,9 @@ from scipy.sparse import spmatrix
 
 from ..raw.cleaner import clean_descriptions
 from ..schema import DataSchema
-from .trainer import (
-    SUBCAT_MODEL_FILE,
-    SUBCAT_VECTORIZER_FILE,
-)
+
+SUBCAT_MODEL_FILE = "./database/ml/subcat_model.joblib"
+SUBCAT_VECTORIZER_FILE = "./database/ml/subcat_vectorizer.joblib"
 
 
 class MLModel(Protocol):
