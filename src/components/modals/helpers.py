@@ -59,9 +59,8 @@ def toggle_and_upload(
         new_expenses, new_incomes = upload_bank_data(bank, uploaded_contents)
     except ValueError:
         return False, no_update, no_update, True
-    else:
-        add_exp: dict[str, Any] = upload_data(old_expenses, new_expenses)
-        add_inc: dict[str, Any] = upload_data(old_incomes, new_incomes)
+    add_exp: dict[str, Any] = upload_data(old_expenses, new_expenses)
+    add_inc: dict[str, Any] = upload_data(old_incomes, new_incomes)
 
     return is_open, add_exp, add_inc, False
 
