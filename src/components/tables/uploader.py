@@ -33,7 +33,7 @@ def upload_data(old_data: list[dict], new_df: pd.DataFrame) -> dict[str, Any]:
             - "add": A list of dictionaries representing the new data.
             - "addIndex": An integer representing the index at which the new data should be added.
     """
-    old_data_id: int = get_old_data_id(old_data)
-    new_df["id"] = range(old_data_id + 1, old_data_id + 1 + len(new_df))
+    old_data_id: int = get_old_data_id(old_data) + 1
+    new_df["id"] = range(old_data_id, old_data_id + len(new_df))
 
     return {"add": new_df.to_dict("records"), "addIndex": 0}
