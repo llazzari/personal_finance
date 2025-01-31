@@ -1,12 +1,13 @@
 import dash_mantine_components as dmc
 import i18n
 
-from . import dashboard_tab
+from src.data.schema import Transaction
 
 from ..components import tables_tab
+from . import dashboard_tab
 
 
-def render(user) -> dmc.Tabs:
+def render(transactions: list[Transaction]) -> dmc.Tabs:
     return dmc.Tabs(
         [
             dmc.TabsList(
@@ -24,9 +25,7 @@ def render(user) -> dmc.Tabs:
                 ]
             ),
             dmc.TabsPanel(
-                tables_tab.render(
-                    user.expenses.to_dict("records"), user.incomes.to_dict("records")
-                ),
+                tables_tab.render(transactions),
                 value="tables",
             ),
             dmc.TabsPanel(dashboard_tab.render(), value="dashboard"),

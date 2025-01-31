@@ -1,0 +1,1 @@
+SELECT description, amount, year, month, bank FROM transactions;

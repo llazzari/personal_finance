@@ -10,6 +10,9 @@ pyproject.toml
 *.png
 .env
 
+.python-version
+uv.lock
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -63,3 +66,4 @@ docs/_build/
 
 test.ipynb
 ideas.txt
+*.db

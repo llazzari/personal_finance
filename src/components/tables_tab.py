@@ -1,19 +1,32 @@
-from dash import html
 import dash_bootstrap_components as dbc
 import i18n
+from dash import html
 
-from .tables import expenses_aggrid, incomes_aggrid
+from src.data.schema import Transaction
+
+from . import confirm_dialog, predict_btn, remove_rows_btn, save_btn
 from .alerts import (
-    input_table_alert,
     bank_error_alert,
+    input_table_alert,
     prediction_alert,
     remove_rows_alert,
 )
-from . import confirm_dialog, predict_btn, remove_rows_btn, save_btn
 from .dropdowns.menus import upload_dd_menu
+from .tables import expenses_aggrid, incomes_aggrid
 
 
-def render(expenses: list[dict], incomes: list[dict]) -> dbc.Container:
+def render(transactions: list[Transaction]) -> dbc.Container:
+    expenses: list[dict] = [
+        transaction.model_dump()
+        for transaction in transactions
+        if transaction.amount < 0
+    ]
+    incomes: list[dict] = [
+        transaction.model_dump()
+        for transaction in transactions
+        if transaction.amount > 0
+    ]
+
     return dbc.Container(
         [
             input_table_alert.render(),

@@ -1,12 +1,13 @@
+import os
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-import os
+
 import babel.dates
 import pandas as pd
 
-from .schema import DataSchema
 from .categorize.finder import find_category
+from .schema import DataSchema
 
 
 @dataclass

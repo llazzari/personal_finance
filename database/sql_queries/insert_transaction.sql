@@ -1,0 +1,1 @@
+INSERT INTO transactions (description, amount, year, month, bank) VALUES (?, ?, ?, ?, ?);

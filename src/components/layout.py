@@ -1,12 +1,18 @@
-from dash import html, Dash
 import dash_bootstrap_components as dbc
+from dash import Dash, html
 
-from . import title_bar, ids
-from .modals import statement_modal, credit_card_modal, save_modal, profile_modal
-from .modals.profile_modal import User
+from src.components import tabs
+from src.data.schema import Transaction
+
+from . import ids, title_bar
+from .modals import (
+    credit_card_modal,
+    save_modal,
+    statement_modal,
+)
 
 
-def render(app: Dash, users: list[User]) -> dbc.Container:
+def render(app: Dash, transactions: list[Transaction]) -> dbc.Container:
     return dbc.Container(
         [
             title_bar.render(app.title),
@@ -14,7 +20,7 @@ def render(app: Dash, users: list[User]) -> dbc.Container:
             save_modal.render(),
             statement_modal.render(),
             credit_card_modal.render(),
-            profile_modal.render(users),
+            tabs.render(transactions),
             html.Div(style={"margin": "20px"}),
         ],
         class_name="dbc dbc-container tabs-container",
