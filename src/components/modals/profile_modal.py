@@ -1,9 +1,10 @@
-from typing import Protocol, Any
-import pandas as pd
-from dash import callback, Output, Input, State, callback_context, no_update, dcc
+from typing import Any, Protocol
+
 import dash_mantine_components as dmc
-from dash_iconify import DashIconify
 import i18n
+import pandas as pd
+from dash import Input, Output, State, callback, callback_context, dcc, no_update
+from dash_iconify import DashIconify
 
 from .. import ids, tabs
 
@@ -39,25 +40,59 @@ def render(users: list[User]) -> dmc.Modal:
 
     @callback(
         Output(ids.PROFILE_MODAL, "opened"),
-        Output(ids.PROFILE_BTN, "children"),
-        Output(ids.MAINBODY, "children"),
-        Output(ids.ACTIVE_USER, "data"),
         Input(ids.PROFILE_BTN, "n_clicks"),
         *USER_INPUTS,
         State(ids.PROFILE_MODAL, "opened"),
         prevent_initial_call=True,
     )
-    def toggle_modal(*inputs) -> tuple[bool, DashIconify, Any, Any]:
+    def toggle_modal_opened(*inputs) -> bool:
         is_open = inputs[-1]
+        return not is_open
 
+    @callback(
+        Output(ids.PROFILE_BTN, "children"),
+        Input(ids.PROFILE_BTN, "n_clicks"),
+        *USER_INPUTS,
+        prevent_initial_call=True,
+    )
+    def update_profile_button(*_) -> DashIconify:
         triggered = callback_context.triggered[0]
         button_id = triggered["prop_id"].split(".")[0]
         user: User | None = USERS.get(button_id, None)
 
         if user is None:
-            return not is_open, create_icon("mdi:account"), no_update, no_update
+            return create_icon("mdi:account")
+        return create_icon(user.icon)
 
-        return (not is_open, create_icon(user.icon), tabs.render(user), user.name)
+    @callback(
+        Output(ids.MAINBODY, "children"),
+        Input(ids.PROFILE_BTN, "n_clicks"),
+        *USER_INPUTS,
+        prevent_initial_call=True,
+    )
+    def update_main_body(*_) -> Any:
+        triggered = callback_context.triggered[0]
+        button_id = triggered["prop_id"].split(".")[0]
+        user: User | None = USERS.get(button_id, None)
+
+        if user is None:
+            return no_update
+        return tabs.render(user)
+
+    @callback(
+        Output(ids.ACTIVE_USER, "data"),
+        Input(ids.PROFILE_BTN, "n_clicks"),
+        *USER_INPUTS,
+        prevent_initial_call=True,
+    )
+    def update_active_user(*_) -> Any:
+        triggered = callback_context.triggered[0]
+        button_id = triggered["prop_id"].split(".")[0]
+        user: User | None = USERS.get(button_id, None)
+
+        if user is None:
+            return no_update
+        return user.name
 
     return dmc.Modal(
         title=i18n.t("general.profile"),
